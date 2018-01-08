@@ -1,4 +1,4 @@
-package com.react.baidumap.mapview
+package cn.qiuxiang.react.baidumap.mapview
 
 import android.content.Context
 import android.widget.FrameLayout

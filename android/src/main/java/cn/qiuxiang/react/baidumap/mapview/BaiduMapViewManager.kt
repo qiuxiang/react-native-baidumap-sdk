@@ -1,4 +1,4 @@
-package com.react.baidumap.mapview
+package cn.qiuxiang.react.baidumap.mapview
 
 import com.baidu.mapapi.SDKInitializer
 import com.facebook.react.uimanager.ThemedReactContext
