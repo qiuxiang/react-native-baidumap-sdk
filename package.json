@@ -1,21 +1,25 @@
 {
   "name": "react-native-baidumap-sdk",
-  "version": "0.0.1",
-  "description": "react-native BaiduMap SDK",
-  "author": "7c00 <i@7c00.cc>",
-  "license": "MIT",
+  "description": "React Native BaiduMap SDK",
   "keywords": [
     "react-native",
     "maps",
     "mapview",
     "baidumap"
   ],
-  "main": "src",
+  "version": "0.0.1",
+  "author": "7c00 <i@7c00.cc>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qiuxiang/react-native-baidumap-sdk"
+  },
+  "license": "MIT",
   "files": [
     "src",
     "android/src",
     "android/build.gradle"
   ],
+  "main": "src",
   "peerDependencies": {
     "react-native": ">=0.47"
   }
