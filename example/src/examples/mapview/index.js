@@ -1,7 +1,12 @@
 import Satellite from './satellite'
+import Basic from './basic'
 
 export default {
-  satellite: {
+  mapViewBasic: {
+    title: Basic.navigationOptions.title,
+    screen: Basic,
+  },
+  mapViewSatellite: {
     title: Satellite.navigationOptions.title,
     screen: Satellite,
   },
