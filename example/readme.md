@@ -1,4 +1,4 @@
-Do not use `npm`.
+Do not use npm!
 
 ```bash
 $ yarn

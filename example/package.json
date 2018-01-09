@@ -9,7 +9,8 @@
   "dependencies": {
     "react": "16.0.0",
     "react-native": "0.51.0",
-    "react-native-baidumap-sdk": "file:.."
+    "react-native-baidumap-sdk": "file:..",
+    "react-navigation": "^1.0.0-beta.23"
   },
   "devDependencies": {
     "babel-preset-react-native": "4.0.0"

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import PropTypes from 'prop-types'
 import { requireNativeComponent, ViewPropTypes } from 'react-native'
 import Component from './component'
 
@@ -8,6 +9,8 @@ export default class MapView extends Component<{}> {
 
   static propTypes = {
     ...ViewPropTypes,
+
+    satellite: PropTypes.bool,
   }
 
   render() {

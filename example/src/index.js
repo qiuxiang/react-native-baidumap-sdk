@@ -1,5 +1,11 @@
-import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
-import { MapView } from 'react-native-baidumap-sdk'
+import { StackNavigator } from 'react-navigation'
+import examples from './examples'
 
-export default () => <MapView style={StyleSheet.absoluteFill} />
+export default StackNavigator(examples, {
+  navigationOptions: {
+    headerTintColor: '#fff',
+    headerStyle: {
+      backgroundColor: '#f5533d',
+    },
+  },
+})
