@@ -4,7 +4,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
     "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
-    "log-android": "node node_modules/react-native/local-cli/cli.js log-android"
+    "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
+    "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release"
   },
   "dependencies": {
     "react": "16.0.0",
