@@ -1,4 +1,4 @@
-package cn.qiuxiang.react.baidumap.mapview
+package cn.qiuxiang.react.baidumap.map
 
 import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_NORMAL

@@ -1,4 +1,4 @@
-import MapView from './components/mapview'
+import MapView from './components/map-view'
 
 export default {
   MapView,

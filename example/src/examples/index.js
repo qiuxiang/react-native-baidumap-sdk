@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { SectionList, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import mapview from './mapview'
+import mapView from './map-view'
 
 const ListItem = withNavigation(({ title, routeName, navigation }) =>
   <TouchableNativeFeedback onPress={() => navigation.navigate(routeName)}>
@@ -24,7 +24,7 @@ class Examples extends Component {
   }
 
   sections = [
-    { title: 'MapView', data: mapComponents(mapview) },
+    { title: 'MapView', data: mapComponents(mapView) },
   ]
 
   render() {
@@ -59,5 +59,5 @@ const style = StyleSheet.create({
 
 export default {
   examples: { screen: Examples },
-  ...mapview,
+  ...mapView,
 }
