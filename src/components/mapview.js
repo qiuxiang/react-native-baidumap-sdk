@@ -2,15 +2,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { requireNativeComponent, ViewPropTypes } from 'react-native'
-import Component from './component'
 import { LatLng } from '../prop-types'
+import Component from './component'
+
+export type MapStatus = {
+  zoomLevel?: number,
+  coordinate?: LatLng,
+  overlook?: number,
+  rotation?: number,
+}
 
 export default class MapView extends Component<{}> {
   nativeComponentName = 'BaiduMapView'
 
   static propTypes = {
     ...ViewPropTypes,
-
     satellite: PropTypes.bool,
     trafficEnabled: PropTypes.bool,
     baiduHeatMapEnabled: PropTypes.bool,
@@ -25,6 +31,10 @@ export default class MapView extends Component<{}> {
     zoomLevel: PropTypes.number,
     rotation: PropTypes.number,
     overlook: PropTypes.number,
+  }
+
+  animateTo(target: MapStatus, duration?: number = 500) {
+    this.call('animateTo', [target, duration])
   }
 
   render() {

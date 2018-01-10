@@ -6,6 +6,7 @@ import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_SATELLITE
 import com.baidu.mapapi.map.MapStatus
 import com.baidu.mapapi.map.MapStatusUpdateFactory
 import com.baidu.mapapi.model.LatLng
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
@@ -25,6 +26,20 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
     override fun onDropViewInstance(mapView: BaiduMapView) {
         super.onDropViewInstance(mapView)
         mapView.destroy()
+    }
+
+    companion object {
+        val ANIMATE_TO = 1
+    }
+
+    override fun getCommandsMap(): Map<String, Int> {
+        return mapOf("animateTo" to ANIMATE_TO)
+    }
+
+    override fun receiveCommand(mapView: BaiduMapView, commandId: Int, args: ReadableArray?) {
+        when (commandId) {
+            ANIMATE_TO -> mapView.animateTo(args)
+        }
     }
 
     @ReactProp(name = "satellite")

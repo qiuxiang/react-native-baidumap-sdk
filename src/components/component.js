@@ -12,10 +12,10 @@ export default class Component<T> extends PureComponent<T> {
    */
   nativeComponentName: string
 
-  run(command: string, params?: any[]) {
+  call(command: string, params?: any[]) {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this),
-      UIManager[this.name].Commands[command],
+      UIManager[this.nativeComponentName].Commands[command],
       params,
     )
   }
