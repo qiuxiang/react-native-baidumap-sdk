@@ -5,7 +5,7 @@ export default StackNavigator(examples, {
   navigationOptions: {
     headerTintColor: '#fff',
     headerStyle: {
-      backgroundColor: '#f5533d',
+      backgroundColor: '#292c36',
     },
   },
 })

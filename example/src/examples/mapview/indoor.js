@@ -3,22 +3,27 @@ import { StyleSheet } from 'react-native'
 import { MapView } from 'react-native-baidumap-sdk'
 import { SwitchComponent } from '../common'
 
-export default class Satellite extends SwitchComponent {
+export default class Indoor extends SwitchComponent {
   static navigationOptions = {
     ...SwitchComponent.navigationOptions,
-    title: 'Satellite Map',
+    title: 'Indoor Map',
   }
 
-  state = { satellite: true }
+  state = { indoorEnabled: true }
 
-  onSwitch(satellite) {
-    this.setState({ satellite })
+  onSwitch(indoorEnabled) {
+    this.setState({ indoorEnabled })
   }
 
   render() {
     return <MapView
       style={StyleSheet.absoluteFill}
-      satellite={this.state.satellite}
+      coordinate={{
+        latitude: 39.90980,
+        longitude: 116.37296,
+      }}
+      zoomLevel={18}
+      indoorEnabled={this.state.indoorEnabled}
     />
   }
 }

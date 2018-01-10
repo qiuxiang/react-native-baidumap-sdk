@@ -4,7 +4,7 @@ import { MapView } from 'react-native-baidumap-sdk'
 
 export default class Satellite extends Component {
   static navigationOptions = {
-    title: 'Simple',
+    title: 'Basic usage',
   }
 
   render() {

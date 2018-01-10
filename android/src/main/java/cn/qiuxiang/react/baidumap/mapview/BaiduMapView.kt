@@ -3,10 +3,10 @@ package cn.qiuxiang.react.baidumap.mapview
 import android.content.Context
 import android.widget.FrameLayout
 import com.baidu.mapapi.map.BaiduMap
-import com.baidu.mapapi.map.MapView
+import com.baidu.mapapi.map.TextureMapView
 
 class BaiduMapView(context: Context) : FrameLayout(context) {
-    private val mapView = MapView(context)
+    val mapView = TextureMapView(context)
     val map: BaiduMap by lazy { mapView.map }
 
     init {
