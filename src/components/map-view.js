@@ -27,6 +27,7 @@ type Props = {
   zoomLevel?: number,
   rotation?: number,
   overlook?: number,
+  onReady?: () => {},
   onPress?: LatLng => {},
   onLongPress?: LatLng => {},
   onStatusChange?: LatLng => {},
@@ -63,7 +64,7 @@ export default class MapView extends Component<Props> {
   render() {
     const props = {
       ...this.props,
-      ...this.handlers(['onPress', 'onLongPress', 'onStatusChange']),
+      ...this.handlers(['onReady', 'onPress', 'onLongPress', 'onStatusChange']),
     }
     return <BaiduMapView {...props} />
   }

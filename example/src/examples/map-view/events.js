@@ -39,21 +39,26 @@ export default class EventsExample extends Component {
 
   state = { logs: [] }
 
-  logger = event => data => this.setState({
-    logs: [
-      {
-        event,
-        key: Math.random(),
-        time: new Date().toLocaleString(),
-        data: JSON.stringify(data, null, 2),
-      },
-      ...this.state.logs,
-    ],
-  })
+  onReady = this.logger('onReady')
+  onPress = this.logger('onPress')
+  onLongPress = this.logger('onLongPress')
+  onStatusChange = this.logger('onStatusChange')
 
-  logPressEvent = this.logger('onPress')
-  logLongPressEvent = this.logger('onLongPress')
-  logStatusChangeEvent = this.logger('onStatusChange')
+  logger(event) {
+    return data => {
+      this.setState({
+        logs: [
+          {
+            event,
+            key: Math.random(),
+            time: new Date().toLocaleString(),
+            data: JSON.stringify(data, null, 2),
+          },
+          ...this.state.logs,
+        ],
+      })
+    }
+  }
 
   renderItem = ({ item }) => (
     <View style={style.item}>
@@ -61,7 +66,7 @@ export default class EventsExample extends Component {
         <Text style={style.time}>{item.time}</Text>
         <Text style={style.label}>{item.event}</Text>
       </View>
-      <Text style={style.data}>{item.data}</Text>
+      {item.data !== '{}' && <Text style={style.data}>{item.data}</Text>}
     </View>
   )
 
@@ -70,9 +75,10 @@ export default class EventsExample extends Component {
       <View style={style.full}>
         <MapView
           style={style.full}
-          onPress={this.logPressEvent}
-          onLongPress={this.logLongPressEvent}
-          onStatusChange={this.logStatusChangeEvent}
+          onReady={this.onReady}
+          onPress={this.onPress}
+          onLongPress={this.onLongPress}
+          onStatusChange={this.onStatusChange}
         />
         <FlatList
           style={style.logs}

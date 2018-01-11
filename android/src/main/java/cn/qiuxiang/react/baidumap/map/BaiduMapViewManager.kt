@@ -31,6 +31,7 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         return MapBuilder.of(
+            "onReady", MapBuilder.of("registrationName", "onBaiduMapReady"),
             "onPress", MapBuilder.of("registrationName", "onBaiduMapPress"),
             "onLongPress", MapBuilder.of("registrationName", "onBaiduMapLongPress"),
             "onStatusChange", MapBuilder.of("registrationName", "onBaiduMapStatusChange")

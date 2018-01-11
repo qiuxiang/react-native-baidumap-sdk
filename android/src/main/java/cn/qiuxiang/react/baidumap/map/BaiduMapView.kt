@@ -69,6 +69,10 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 emit(id, "onStatusChange", data)
             }
         })
+
+        map.setOnMapLoadedCallback {
+            emit(id, "onReady")
+        }
     }
 
     fun destroy() {
