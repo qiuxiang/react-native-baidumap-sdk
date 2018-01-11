@@ -3,8 +3,12 @@ jobs:
     - stage: "test js"
       language: node_js
       node_js: node
-      cache:
-        directories: [~/.npm]
+      cache: yarn
+      script:
+        - cd example
+        - yarn
+        - cd ..
+        - yarn test
 
 stages:
   - "test js"
