@@ -65,7 +65,6 @@ export default class MapView extends Component<Props> {
       ...this.props,
       ...this.handlers(['onPress', 'onLongPress', 'onStatusChange']),
     }
-    console.log('mapView render')
     return <BaiduMapView {...props} />
   }
 }
