@@ -1,6 +1,6 @@
 package cn.qiuxiang.react.baidumap
 
-import cn.qiuxiang.react.baidumap.map.BaiduMapViewManager
+import cn.qiuxiang.react.baidumap.mapview.BaiduMapViewManager
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
