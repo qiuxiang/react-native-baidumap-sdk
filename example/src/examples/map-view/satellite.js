@@ -16,9 +16,11 @@ export default class Satellite extends SwitchComponent {
   }
 
   render() {
-    return <MapView
-      style={StyleSheet.absoluteFill}
-      satellite={this.state.satellite}
-    />
+    return (
+      <MapView
+        style={StyleSheet.absoluteFill}
+        satellite={this.state.satellite}
+      />
+    )
   }
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import MapStatus from './map-status'
 
 export default class AnimatedMapStatus extends MapStatus {

@@ -13,8 +13,6 @@ export type MapStatus = {
 }
 
 export default class MapView extends Component<{}> {
-  nativeComponentName = 'BaiduMapView'
-
   static propTypes = {
     ...ViewPropTypes,
     satellite: PropTypes.bool,
@@ -32,6 +30,8 @@ export default class MapView extends Component<{}> {
     rotation: PropTypes.number,
     overlook: PropTypes.number,
   }
+
+  nativeComponentName = 'BaiduMapView'
 
   animateTo(target: MapStatus, duration?: number = 500) {
     this.call('animateTo', [target, duration])

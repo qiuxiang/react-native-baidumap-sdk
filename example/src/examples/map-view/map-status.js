@@ -2,54 +2,6 @@ import React, { Component } from 'react'
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { MapView } from 'react-native-baidumap-sdk'
 
-export default class MapStatus extends Component {
-  static navigationOptions = {
-    title: 'Map status',
-  }
-
-  ZGC = {
-    overlook: -45,
-    rotation: 90,
-    zoomLevel: 20,
-    center: {
-      latitude: 39.97837,
-      longitude: 116.31363,
-    }
-  }
-
-  TAM = {
-    overlook: 0,
-    rotation: 0,
-    zoomLevel: 12,
-    center: {
-      latitude: 39.90864,
-      longitude: 116.39745,
-    }
-  }
-
-
-  toZGC = () => this.setState(this.ZGC)
-  toTAM = () => this.setState(this.TAM)
-
-  render() {
-    return <View style={styles.full}>
-      <MapView style={styles.full} ref={ref => this.mapView = ref} {...this.state} />
-      <View style={styles.buttons}>
-        <View style={styles.button}>
-          <TouchableOpacity onPress={this.toZGC}>
-            <Text style={styles.text}>中关村</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.button}>
-          <TouchableOpacity onPress={this.toTAM}>
-            <Text style={styles.text}>天安门</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  }
-}
-
 const styles = StyleSheet.create({
   full: {
     flex: 1,
@@ -74,3 +26,53 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 })
+
+export default class MapStatus extends Component {
+  static navigationOptions = {
+    title: 'Map status',
+  }
+
+  ZGC = {
+    overlook: -45,
+    rotation: 90,
+    zoomLevel: 20,
+    center: {
+      latitude: 39.97837,
+      longitude: 116.31363,
+    },
+  }
+
+  TAM = {
+    overlook: 0,
+    rotation: 0,
+    zoomLevel: 12,
+    center: {
+      latitude: 39.90864,
+      longitude: 116.39745,
+    },
+  }
+
+
+  toZGC = () => this.setState(this.ZGC)
+  toTAM = () => this.setState(this.TAM)
+
+  render() {
+    return (
+      <View style={styles.full}>
+        <MapView style={styles.full} ref={ref => this.mapView = ref} {...this.state} />
+        <View style={styles.buttons}>
+          <View style={styles.button}>
+            <TouchableOpacity onPress={this.toZGC}>
+              <Text style={styles.text}>中关村</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.button}>
+            <TouchableOpacity onPress={this.toTAM}>
+              <Text style={styles.text}>天安门</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    )
+  }
+}

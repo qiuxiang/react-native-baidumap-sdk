@@ -16,14 +16,16 @@ export default class Indoor extends SwitchComponent {
   }
 
   render() {
-    return <MapView
-      style={StyleSheet.absoluteFill}
-      center={{
-        latitude: 39.90980,
-        longitude: 116.37296,
-      }}
-      zoomLevel={18}
-      indoorEnabled={this.state.indoorEnabled}
-    />
+    return (
+      <MapView
+        style={StyleSheet.absoluteFill}
+        center={{
+          latitude: 39.90980,
+          longitude: 116.37296,
+        }}
+        zoomLevel={18}
+        indoorEnabled={this.state.indoorEnabled}
+      />
+    )
   }
 }

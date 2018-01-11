@@ -20,7 +20,21 @@
     "android/build.gradle"
   ],
   "main": "src",
+  "scripts": {
+    "test": "eslint src example/src && flow"
+  },
   "peerDependencies": {
     "react-native": ">=0.47"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "flow-bin": "^0.63.1",
+    "react": "^16.2.0",
+    "react-native": "^0.52.0"
   }
 }

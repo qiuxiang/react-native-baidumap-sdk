@@ -1,10 +1,16 @@
+/* eslint-disable import/no-unresolved, import/extensions, react/no-multi-comp */
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
-import { MapView } from 'react-native-baidumap-sdk'
 import EventEmitter from 'EventEmitter'
 import Switch from './switch'
 
 const event = new EventEmitter()
+
+const style = StyleSheet.create({
+  switch: {
+    marginRight: 16,
+  },
+})
 
 class SwitchButton extends Component {
   state = { value: true }
@@ -15,7 +21,13 @@ class SwitchButton extends Component {
   }
 
   render() {
-    return <Switch style={style.switch} value={this.state.value} onValueChange={this.onValueChange} />
+    return (
+      <Switch
+        style={style.switch}
+        value={this.state.value}
+        onValueChange={this.onValueChange}
+      />
+    )
   }
 }
 
@@ -33,8 +45,3 @@ export default class SwitchComponent extends Component {
   }
 }
 
-const style = StyleSheet.create({
-  switch: {
-    marginRight: 16,
-  },
-})
