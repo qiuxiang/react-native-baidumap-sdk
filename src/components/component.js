@@ -19,4 +19,15 @@ export default class Component<T> extends PureComponent<T> {
       params,
     )
   }
+
+  handlers(events: string[]) {
+    return events.reduce((handlers, name) => {
+      handlers[name.replace(/^on/, 'onBaiduMap')] = event => {
+        if (this.props[name]) {
+          this.props[name](event.nativeEvent)
+        }
+      }
+      return handlers
+    }, {})
+  }
 }

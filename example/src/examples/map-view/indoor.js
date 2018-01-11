@@ -20,10 +20,10 @@ export default class Indoor extends SwitchComponent {
       <MapView
         style={StyleSheet.absoluteFill}
         center={{
-          latitude: 39.90980,
-          longitude: 116.37296,
+          latitude: 39.916932,
+          longitude: 116.379333,
         }}
-        zoomLevel={18}
+        zoomLevel={19}
         indoorEnabled={this.state.indoorEnabled}
       />
     )

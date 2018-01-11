@@ -8,6 +8,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
@@ -26,6 +27,14 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
     override fun onDropViewInstance(mapView: BaiduMapView) {
         super.onDropViewInstance(mapView)
         mapView.destroy()
+    }
+
+    override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
+        return MapBuilder.of(
+            "onPress", MapBuilder.of("registrationName", "onBaiduMapPress"),
+            "onLongPress", MapBuilder.of("registrationName", "onBaiduMapLongPress"),
+            "onStatusChange", MapBuilder.of("registrationName", "onBaiduMapStatusChange")
+        )
     }
 
     companion object {

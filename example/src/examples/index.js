@@ -42,9 +42,7 @@ const mapComponents = components => Object.keys(components).map(key => ({
 }))
 
 class Examples extends Component<{}> {
-  static navigationOptions = {
-    title: 'Examples',
-  }
+  static navigationOptions = { title: 'Examples' }
 
   sections = [
     { title: 'MapView', data: mapComponents(mapView) },

@@ -5,14 +5,34 @@ import { requireNativeComponent, ViewPropTypes } from 'react-native'
 import { LatLng } from '../prop-types'
 import Component from './component'
 
-export type MapStatus = {
+type MapStatus = {
   zoomLevel?: number,
   center?: LatLng,
   overlook?: number,
   rotation?: number,
 }
 
-export default class MapView extends Component<{}> {
+type Props = {
+  satellite?: boolean,
+  trafficEnabled?: boolean,
+  baiduHeatMapEnabled?: boolean,
+  indoorEnabled?: boolean,
+  buildingsDisabled?: boolean,
+  minZoomLevel?: number,
+  maxZoomLevel?: number,
+  compassDisabled?: boolean,
+  zoomControlsDisabled?: boolean,
+  scaleBarDisabled?: boolean,
+  center?: LatLng,
+  zoomLevel?: number,
+  rotation?: number,
+  overlook?: number,
+  onPress?: LatLng => {},
+  onLongPress?: LatLng => {},
+  onStatusChange?: LatLng => {},
+}
+
+export default class MapView extends Component<Props> {
   static propTypes = {
     ...ViewPropTypes,
     satellite: PropTypes.bool,
@@ -29,6 +49,9 @@ export default class MapView extends Component<{}> {
     zoomLevel: PropTypes.number,
     rotation: PropTypes.number,
     overlook: PropTypes.number,
+    onBaiduMapPress: PropTypes.func,
+    onBaiduMapLongPress: PropTypes.func,
+    onBaiduMapStatusChange: PropTypes.func,
   }
 
   nativeComponentName = 'BaiduMapView'
@@ -38,7 +61,12 @@ export default class MapView extends Component<{}> {
   }
 
   render() {
-    return <BaiduMapView {...this.props} removeClippedSubviews />
+    const props = {
+      ...this.props,
+      ...this.handlers(['onPress', 'onLongPress', 'onStatusChange']),
+    }
+    console.log('mapView render')
+    return <BaiduMapView {...props} />
   }
 }
 

@@ -28,9 +28,7 @@ const styles = StyleSheet.create({
 })
 
 export default class MapStatus extends Component {
-  static navigationOptions = {
-    title: 'Map status',
-  }
+  static navigationOptions = { title: 'Map status' }
 
   ZGC = {
     overlook: -45,
