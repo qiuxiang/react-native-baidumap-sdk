@@ -2,6 +2,8 @@ package cn.qiuxiang.react.baidumap.map
 
 import android.content.Context
 import android.widget.FrameLayout
+import cn.qiuxiang.react.baidumap.createWritableMapFromLatLng
+import cn.qiuxiang.react.baidumap.toLatLng
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.Arguments
@@ -24,44 +26,31 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
         map.setOnMapClickListener(object : BaiduMap.OnMapClickListener {
             override fun onMapPoiClick(poi: MapPoi): Boolean {
-                val data = Arguments.createMap()
+                val data = createWritableMapFromLatLng(poi.position)
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
-                data.putDouble("latitude", poi.position.latitude)
-                data.putDouble("longitude", poi.position.longitude)
                 emit(id, "onPress", data)
                 return true
             }
 
             override fun onMapClick(latLng: LatLng) {
-                val data = Arguments.createMap()
-                data.putDouble("latitude", latLng.latitude)
-                data.putDouble("longitude", latLng.longitude)
-                emit(id, "onPress", data)
+                emit(id, "onPress", createWritableMapFromLatLng(latLng))
             }
         })
 
         map.setOnMapLongClickListener { latLng ->
-            val data = Arguments.createMap()
-            data.putDouble("latitude", latLng.latitude)
-            data.putDouble("longitude", latLng.longitude)
-            emit(id, "onLongPress", data)
+            emit(id, "onLongPress", createWritableMapFromLatLng(latLng))
         }
 
         map.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
             override fun onMapStatusChangeStart(stataus: MapStatus) {}
-
             override fun onMapStatusChangeStart(status: MapStatus, reason: Int) {}
-
             override fun onMapStatusChange(status: MapStatus) {}
-
             override fun onMapStatusChangeFinish(status: MapStatus) {
-                val data = Arguments.createMap()
+                val data = createWritableMapFromLatLng(status.target)
                 data.putDouble("zoomLevel", status.zoom.toDouble())
                 data.putDouble("overlook", status.overlook.toDouble())
                 data.putDouble("rotation", status.rotate.toDouble())
-                data.putDouble("latitude", status.target.latitude)
-                data.putDouble("longitude", status.target.longitude)
                 data.putDouble("latitudeDelta", Math.abs(
                     status.bound.southwest.latitude - status.bound.northeast.latitude))
                 data.putDouble("longitudeDelta", Math.abs(
@@ -84,15 +73,12 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
     }
 
     fun animateTo(args: ReadableArray?) {
-        val target = args?.getMap(0)!!
+        val target = args!!.getMap(0)
         val duration = args.getInt(1)
         val mapStatusBuilder = MapStatus.Builder()
 
         if (target.hasKey("center")) {
-            val json = target.getMap("center")
-            mapStatusBuilder.target(LatLng(
-                json.getDouble("latitude"),
-                json.getDouble("longitude")))
+            mapStatusBuilder.target(target.getMap("center").toLatLng())
         }
 
         if (target.hasKey("zoomLevel")) {

@@ -1,9 +1,5 @@
-import MapView from './components/map-view'
+import MapView from './map'
+import Utils from './utils'
 
-export default {
-  MapView,
-}
-
-export {
-  MapView,
-}
+export default { MapView, Utils }
+export { MapView, Utils }

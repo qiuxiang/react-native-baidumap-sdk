@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { requireNativeComponent, ViewPropTypes } from 'react-native'
 import { LatLng } from '../prop-types'
-import Component from './component'
+import Component from '../component'
 
 type MapStatus = {
   zoomLevel?: number,

@@ -50,7 +50,6 @@ export default class MapStatus extends Component {
     },
   }
 
-
   toZGC = () => this.setState(this.ZGC)
   toTAM = () => this.setState(this.TAM)
 

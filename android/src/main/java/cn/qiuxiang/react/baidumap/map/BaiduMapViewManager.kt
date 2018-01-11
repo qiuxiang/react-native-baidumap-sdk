@@ -1,11 +1,11 @@
 package cn.qiuxiang.react.baidumap.map
 
+import cn.qiuxiang.react.baidumap.toLatLng
 import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_NORMAL
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_SATELLITE
 import com.baidu.mapapi.map.MapStatus
 import com.baidu.mapapi.map.MapStatusUpdateFactory
-import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -94,10 +94,7 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
 
     @ReactProp(name = "center")
     fun setCenter(mapView: BaiduMapView, center: ReadableMap) {
-        mapView.map.setMapStatus(MapStatusUpdateFactory.newLatLng(LatLng(
-            center.getDouble("latitude"),
-            center.getDouble("longitude")
-        )))
+        mapView.map.setMapStatus(MapStatusUpdateFactory.newLatLng(center.toLatLng()))
     }
 
     @ReactProp(name = "zoomLevel")

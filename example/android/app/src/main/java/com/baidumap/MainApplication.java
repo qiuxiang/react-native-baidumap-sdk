@@ -11,7 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.qiuxiang.react.baidumap.BaiduMap3DPackage;
+import cn.qiuxiang.react.baidumap.BaiduMapPackage;
 
 public class MainApplication extends Application implements ReactApplication {
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -23,8 +23,8 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.asList(
-                    new MainReactPackage(),
-                    new BaiduMap3DPackage()
+                new MainReactPackage(),
+                new BaiduMapPackage()
             );
         }
 
