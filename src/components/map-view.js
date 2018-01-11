@@ -7,7 +7,7 @@ import Component from './component'
 
 export type MapStatus = {
   zoomLevel?: number,
-  coordinate?: LatLng,
+  center?: LatLng,
   overlook?: number,
   rotation?: number,
 }

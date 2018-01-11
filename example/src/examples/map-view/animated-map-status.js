@@ -5,6 +5,6 @@ export default class AnimatedMapStatus extends MapStatus {
     title: 'Animated map status',
   }
 
-  toZGC = () => this.mapView.animateTo({ ...this.ZGC, coordinate: this.ZGC.center }, 2000)
-  toTAM = () => this.mapView.animateTo({ ...this.TAM, coordinate: this.TAM.center }, 2000)
+  toZGC = () => this.mapView.animateTo(this.ZGC, 2000)
+  toTAM = () => this.mapView.animateTo(this.TAM, 2000)
 }

@@ -27,8 +27,8 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         val duration = args.getInt(1)
         val mapStatusBuilder = MapStatus.Builder()
 
-        if (target.hasKey("coordinate")) {
-            val json = target.getMap("coordinate")
+        if (target.hasKey("center")) {
+            val json = target.getMap("center")
             mapStatusBuilder.target(LatLng(
                 json.getDouble("latitude"),
                 json.getDouble("longitude")))
