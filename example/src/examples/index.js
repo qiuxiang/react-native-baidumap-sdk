@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { SectionList, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import mapView from './map-view'
+import location from './location'
 
 const style = StyleSheet.create({
   item: {
@@ -46,6 +47,7 @@ class Examples extends Component<{}> {
 
   sections = [
     { title: 'MapView', data: mapComponents(mapView) },
+    { title: 'Location', data: mapComponents(location) },
   ]
 
   render() {
@@ -63,4 +65,5 @@ class Examples extends Component<{}> {
 export default {
   examples: { screen: Examples },
   ...mapView,
+  ...location,
 }

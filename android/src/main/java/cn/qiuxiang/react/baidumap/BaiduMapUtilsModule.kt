@@ -5,7 +5,7 @@ import com.baidu.mapapi.utils.SpatialRelationUtil
 import com.facebook.react.bridge.*
 
 @Suppress("unused")
-class BaiduMapUtilsModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class BaiduMapUtilsModule(context: ReactApplicationContext) : ReactContextBaseJavaModule(context) {
     override fun getName(): String {
         return "BaiduMapUtils"
     }
