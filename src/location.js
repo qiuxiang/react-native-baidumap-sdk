@@ -6,19 +6,22 @@ const eventEmitter = new NativeEventEmitter(BaiduMapLocation)
 
 type Options = {
   coordinateType: 'gcj02' | 'bd09' | 'bd09ll',
-  androidScanSpan: number,
-  distanceFilter: number,
+  locationMode: 'Hight_Accuracy' | 'Battery_Saving' | 'Device_Sensors',
+  scanSpan: number,
+  minDistance: number,
   detailed: boolean,
   autoMode: boolean,
 }
 
 type Listener = (listener: {
+  time: string,
   coordinateType: string,
   accuracy: number,
   latitude: number,
   longitude: number,
   altitude: number,
   speed: number,
+  direction: number,
   country: string,
   countryCode: string,
   province: string,
@@ -29,7 +32,7 @@ type Listener = (listener: {
   streetNumber: string,
   adCode: string,
   description: string,
-  errorCode: number,
+  locationType: number,
 }) => {}
 
 export default {

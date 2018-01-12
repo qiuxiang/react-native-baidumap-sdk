@@ -3,6 +3,7 @@ package cn.qiuxiang.react.baidumap
 import com.baidu.location.BDAbstractLocationListener
 import com.baidu.location.BDLocation
 import com.baidu.location.LocationClient
+import com.baidu.location.LocationClientOption.LocationMode
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 
@@ -15,12 +16,14 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
         locationClient.registerLocationListener(object : BDAbstractLocationListener() {
             override fun onReceiveLocation(location: BDLocation) {
                 val data = Arguments.createMap()
+                data.putString("time", location.time)
                 data.putString("coordinateType", location.coorType)
                 data.putDouble("accuracy", location.radius.toDouble())
                 data.putDouble("latitude", location.latitude)
                 data.putDouble("longitude", location.longitude)
                 data.putDouble("altitude", location.altitude)
                 data.putDouble("speed", location.speed.toDouble())
+                data.putDouble("direction", location.direction.toDouble())
                 data.putString("country", location.country)
                 data.putString("countryCode", location.countryCode)
                 data.putString("province", location.province)
@@ -31,7 +34,7 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
                 data.putString("streetNumber", location.streetNumber)
                 data.putString("adCode", location.adCode)
                 data.putString("description", location.locationDescribe)
-                data.putInt("errorCode", location.locType)
+                data.putInt("locationType", location.locType) // todo: to string
                 emitter.emit("baiduMapLocation", data)
             }
         })
@@ -42,27 +45,32 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
     }
 
     @ReactMethod
-    fun setOptions(option: ReadableMap) {
-        if (option.hasKey("coordinateType")) {
-            locationClient.locOption.coorType = option.getString("coordinateType")
+    fun setOptions(options: ReadableMap) {
+        if (options.hasKey("locationMode")) {
+            locationClient.locOption.locationMode = LocationMode.valueOf(options.getString("locationMode"))
         }
 
-        if (option.hasKey("androidScanSpan")) {
-            locationClient.locOption.scanSpan = option.getInt("androidScanSpan")
+        if (options.hasKey("coordinateType")) {
+            locationClient.locOption.coorType = options.getString("coordinateType")
         }
 
-        if (option.hasKey("detailed")) {
-            val detailed = option.getBoolean("detailed")
+        if (options.hasKey("scanSpan")) {
+            locationClient.locOption.scanSpan = options.getInt("scanSpan")
+        }
+
+        if (options.hasKey("detailed")) {
+            val detailed = options.getBoolean("detailed")
             locationClient.locOption.setIsNeedAddress(detailed)
             locationClient.locOption.setIsNeedLocationDescribe(detailed)
         }
 
-        if (option.hasKey("distanceFilter")) {
-            locationClient.locOption.autoNotifyMinDistance = option.getInt("distanceFilter")
+        if (options.hasKey("minDistance")) {
+            locationClient.locOption.autoNotifyMinDistance = options.getInt("minDistance")
+            locationClient.locOption.setOpenAutoNotifyMode(0, 0, 0)
         }
 
-        if (option.hasKey("autoMode")) {
-            if (option.getBoolean("autoMode")) {
+        if (options.hasKey("autoMode")) {
+            if (options.getBoolean("autoMode")) {
                 locationClient.locOption.setOpenAutoNotifyMode()
             }
         }

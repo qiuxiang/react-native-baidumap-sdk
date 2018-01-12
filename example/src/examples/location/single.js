@@ -19,6 +19,7 @@ export default class Single extends Component<{}> {
 
   componentDidMount() {
     Location.addLocationListener(location => {
+      console.log(location)
       ToastAndroid.show(`${location.latitude}, ${location.longitude}`, ToastAndroid.SHORT)
       if (this.mapView) {
         this.mapView.animateTo({
