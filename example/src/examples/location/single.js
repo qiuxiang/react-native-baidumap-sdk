@@ -6,7 +6,6 @@ import icon from '../../images/ic_my_location.png'
 import { IconButton } from '../common'
 
 const requestLocation = () => {
-  Location.start()
   Location.request()
   ToastAndroid.show('Request location...', ToastAndroid.SHORT)
 }
@@ -18,7 +17,7 @@ export default class Single extends Component<{}> {
   }
 
   componentDidMount() {
-    Location.addLocationListener(location => {
+    this.listener = Location.addLocationListener(location => {
       console.log(location)
       ToastAndroid.show(`${location.latitude}, ${location.longitude}`, ToastAndroid.SHORT)
       if (this.mapView) {
@@ -27,10 +26,16 @@ export default class Single extends Component<{}> {
           zoomLevel: 14,
         })
       }
-    }, 2000)
+    })
+  }
+
+  componentWillUnmount() {
+    Location.stop()
+    this.listener.remove()
   }
 
   mapView: MapView
+  listener: any
 
   render() {
     return <MapView style={StyleSheet.absoluteFill} ref={ref => this.mapView = ref} />

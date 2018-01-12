@@ -46,34 +46,38 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
 
     @ReactMethod
     fun setOptions(options: ReadableMap) {
+        val option = locationClient.locOption
+
         if (options.hasKey("locationMode")) {
-            locationClient.locOption.locationMode = LocationMode.valueOf(options.getString("locationMode"))
+            option.locationMode = LocationMode.valueOf(options.getString("locationMode"))
         }
 
         if (options.hasKey("coordinateType")) {
-            locationClient.locOption.coorType = options.getString("coordinateType")
+            option.coorType = options.getString("coordinateType")
         }
 
         if (options.hasKey("scanSpan")) {
-            locationClient.locOption.scanSpan = options.getInt("scanSpan")
+            option.scanSpan = options.getInt("scanSpan")
         }
 
         if (options.hasKey("detailed")) {
             val detailed = options.getBoolean("detailed")
-            locationClient.locOption.setIsNeedAddress(detailed)
-            locationClient.locOption.setIsNeedLocationDescribe(detailed)
+            option.setIsNeedAddress(detailed)
+            option.setIsNeedLocationDescribe(detailed)
         }
 
         if (options.hasKey("minDistance")) {
-            locationClient.locOption.autoNotifyMinDistance = options.getInt("minDistance")
-            locationClient.locOption.setOpenAutoNotifyMode(0, 0, 0)
+            option.autoNotifyMinDistance = options.getInt("minDistance")
+            option.setOpenAutoNotifyMode(0, 0, 0)
         }
 
         if (options.hasKey("autoMode")) {
             if (options.getBoolean("autoMode")) {
-                locationClient.locOption.setOpenAutoNotifyMode()
+                option.setOpenAutoNotifyMode()
             }
         }
+
+        locationClient.locOption = option
     }
 
     @ReactMethod
@@ -88,6 +92,10 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
 
     @ReactMethod
     fun request() {
-        locationClient.requestLocation()
+        if (locationClient.isStarted) {
+            locationClient.requestLocation()
+        } else {
+            locationClient.start()
+        }
     }
 }
