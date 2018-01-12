@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unresolved, import/extensions, react/no-multi-comp */
+// @flow
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import EventEmitter from 'EventEmitter'
@@ -12,7 +13,7 @@ const style = StyleSheet.create({
   },
 })
 
-class SwitchButton extends Component {
+class SwitchButton extends Component<{}, { value : boolean }> {
   state = { value: true }
 
   onValueChange = () => {
@@ -31,17 +32,17 @@ class SwitchButton extends Component {
   }
 }
 
-export default class SwitchComponent extends Component {
+export default class SwitchComponent extends Component<{}> {
   static navigationOptions = {
     headerRight: <SwitchButton />,
-  }
-
-  componentDidMount() {
-    this.listener = event.addListener('change', value => this.onSwitch(value))
   }
 
   componentWillUnmount() {
     this.listener.remove()
   }
+
+  onSwitch: (value: boolean) => {}
+
+  listener = event.addListener('change', value => this.onSwitch(value))
 }
 
