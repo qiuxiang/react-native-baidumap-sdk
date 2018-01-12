@@ -6,7 +6,7 @@ import { SwitchScreen } from '../common'
 export default class Satellite extends SwitchScreen {
   static navigationOptions = {
     ...SwitchScreen.navigationOptions,
-    title: 'Satellite Map',
+    title: 'Satellite map',
   }
 
   state = { satellite: true }

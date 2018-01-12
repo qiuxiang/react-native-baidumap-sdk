@@ -6,7 +6,7 @@ import { SwitchScreen } from '../common'
 export default class Indoor extends SwitchScreen {
   static navigationOptions = {
     ...SwitchScreen.navigationOptions,
-    title: 'Indoor Map',
+    title: 'Indoor map',
   }
 
   state = { indoorEnabled: true }

@@ -6,7 +6,7 @@ import { SwitchScreen } from '../common'
 export default class BaiduHeatMap extends SwitchScreen {
   static navigationOptions = {
     ...SwitchScreen.navigationOptions,
-    title: 'Baidu heat Map',
+    title: 'Baidu heat map',
   }
 
   state = { baiduHeatMapEnabled: true }
