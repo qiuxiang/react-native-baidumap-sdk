@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { MapView } from 'react-native-baidumap-sdk'
-import { SwitchComponent } from '../common'
+import { SwitchScreen } from '../common'
 
-export default class Satellite extends SwitchComponent {
+export default class Satellite extends SwitchScreen {
   static navigationOptions = {
-    ...SwitchComponent.navigationOptions,
+    ...SwitchScreen.navigationOptions,
     title: 'Satellite Map',
   }
 

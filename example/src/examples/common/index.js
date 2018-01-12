@@ -1,5 +1,5 @@
 import Switch from './switch'
-import SwitchComponent from './switch-component'
+import SwitchScreen from './switch-screen'
+import IconButton from './icon-button'
 
-export default { Switch, SwitchComponent }
-export { Switch, SwitchComponent }
+export { Switch, SwitchScreen, IconButton }

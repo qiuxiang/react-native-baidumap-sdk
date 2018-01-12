@@ -77,4 +77,9 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
     fun stop() {
         locationClient.stop()
     }
+
+    @ReactMethod
+    fun request() {
+        locationClient.requestLocation()
+    }
 }

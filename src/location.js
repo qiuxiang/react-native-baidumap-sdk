@@ -35,6 +35,7 @@ type Listener = (listener: {
 export default {
   start: () => BaiduMapLocation.start(),
   stop: () => BaiduMapLocation.stop(),
+  request: () => BaiduMapLocation.request(),
   setOptions: (options: Options) => BaiduMapLocation.setOptions(options),
   addLocationListener: (listener: Listener) => eventEmitter.addListener('baiduMapLocation', listener),
 }

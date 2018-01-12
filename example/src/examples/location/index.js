@@ -1,8 +1,8 @@
 // @flow
-import Basic from './basic'
+import Single from './single'
 
 const route = screen => ({ screen, title: screen.navigationOptions.title })
 
 export default {
-  mapViewBasic: route(Basic),
+  mapViewSingle: route(Single),
 }

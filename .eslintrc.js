@@ -6,7 +6,7 @@ module.exports = {
     'arrow-parens': ['error', 'as-needed'],
     'no-console': ['warn'],
     'no-return-assign': 'off',
-    'no-param-reassign': ['error', { props: false }],
+    'no-param-reassign': 'off',
     'react/jsx-filename-extension': 'off',
     'react/require-default-props': 'off',
     'import/no-extraneous-dependencies': 'off',

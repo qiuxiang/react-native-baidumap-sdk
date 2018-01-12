@@ -32,7 +32,7 @@ class SwitchButton extends Component<{}, { value : boolean }> {
   }
 }
 
-export default class SwitchComponent extends Component<{}> {
+export default class SwitchScreen extends Component<{}> {
   static navigationOptions = {
     headerRight: <SwitchButton />,
   }
