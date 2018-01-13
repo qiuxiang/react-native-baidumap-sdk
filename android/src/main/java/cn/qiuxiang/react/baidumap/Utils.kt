@@ -1,10 +1,20 @@
 package cn.qiuxiang.react.baidumap
 
+import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
+import com.facebook.react.uimanager.ThemedReactContext
+
+var isInitialized = false
+
+fun initialize(context: ThemedReactContext) {
+    if (!isInitialized) {
+        SDKInitializer.initialize(context.applicationContext)
+    }
+}
 
 fun createWritableMapFromLatLng(latLng: LatLng): WritableMap {
     val writableMap = Arguments.createMap()

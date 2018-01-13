@@ -1,6 +1,8 @@
+/* eslint-disable import/no-unresolved, import/extensions, react/no-multi-comp */
 // @flow
 import React, { Component } from 'react'
 import { StyleSheet, ToastAndroid } from 'react-native'
+import EventSubscription from 'EventSubscription'
 import { MapView, Location } from 'react-native-baidumap-sdk'
 import icon from '../../images/ic_my_location.png'
 import { IconButton } from '../common'
@@ -35,7 +37,7 @@ export default class Single extends Component<{}> {
   }
 
   mapView: MapView
-  listener: any
+  listener: EventSubscription
 
   render() {
     return <MapView style={StyleSheet.absoluteFill} ref={ref => this.mapView = ref} />

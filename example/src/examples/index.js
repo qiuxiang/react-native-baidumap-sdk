@@ -1,8 +1,8 @@
-// @flow
 import React, { Component } from 'react'
 import { SectionList, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import mapView from './map-view'
+import marker from './marker'
 import location from './location'
 
 const style = StyleSheet.create({
@@ -47,6 +47,7 @@ class Examples extends Component<{}> {
 
   sections = [
     { title: 'MapView', data: mapComponents(mapView) },
+    { title: 'Marker', data: mapComponents(marker) },
     { title: 'Location', data: mapComponents(location) },
   ]
 
@@ -65,5 +66,6 @@ class Examples extends Component<{}> {
 export default {
   examples: { screen: Examples },
   ...mapView,
+  ...marker,
   ...location,
 }

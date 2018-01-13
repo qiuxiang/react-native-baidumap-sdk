@@ -1,7 +1,8 @@
 package cn.qiuxiang.react.baidumap.mapview
 
+import android.view.View
+import cn.qiuxiang.react.baidumap.initialize
 import cn.qiuxiang.react.baidumap.toLatLng
-import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_NORMAL
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_SATELLITE
 import com.baidu.mapapi.map.MapStatus
@@ -19,14 +20,24 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
         return "BaiduMapView"
     }
 
-    override fun createViewInstance(reactContext: ThemedReactContext): BaiduMapView {
-        SDKInitializer.initialize(reactContext.applicationContext)
-        return BaiduMapView(reactContext)
+    override fun createViewInstance(context: ThemedReactContext): BaiduMapView {
+        initialize(context)
+        return BaiduMapView(context)
     }
 
     override fun onDropViewInstance(mapView: BaiduMapView) {
         super.onDropViewInstance(mapView)
         mapView.destroy()
+    }
+
+    override fun addView(mapView: BaiduMapView, view: View, index: Int) {
+        mapView.add(view)
+        super.addView(mapView, view, index)
+    }
+
+    override fun removeViewAt(mapView: BaiduMapView, index: Int) {
+        mapView.remove(mapView.getChildAt(index))
+        super.removeViewAt(mapView, index)
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
@@ -85,7 +96,7 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
 
     @ReactProp(name = "compassDisabled")
     fun setCompassEnabled(mapView: BaiduMapView, disabled: Boolean) {
-        mapView.map.uiSettings.isCompassEnabled = !disabled
+        mapView.map.setCompassEnable(!disabled)
     }
 
     @ReactProp(name = "zoomControlsDisabled")

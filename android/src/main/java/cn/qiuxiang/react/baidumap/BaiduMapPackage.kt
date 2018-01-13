@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.baidumap
 
+import cn.qiuxiang.react.baidumap.mapview.BaiduMapMarkerManager
 import cn.qiuxiang.react.baidumap.mapview.BaiduMapViewManager
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
@@ -12,6 +13,6 @@ class BaiduMapPackage : ReactPackage {
     }
 
     override fun createViewManagers(context: ReactApplicationContext): List<ViewManager<*, *>> {
-        return listOf(BaiduMapViewManager())
+        return listOf(BaiduMapViewManager(), BaiduMapMarkerManager())
     }
 }

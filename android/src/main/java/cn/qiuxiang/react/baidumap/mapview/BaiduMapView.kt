@@ -1,6 +1,7 @@
 package cn.qiuxiang.react.baidumap.mapview
 
 import android.content.Context
+import android.view.View
 import android.widget.FrameLayout
 import cn.qiuxiang.react.baidumap.createWritableMapFromLatLng
 import cn.qiuxiang.react.baidumap.toLatLng
@@ -23,6 +24,10 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         mapView.layoutParams = LayoutParams(
             LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         super.addView(mapView)
+
+        map.setOnMapLoadedCallback {
+            emit(id, "onLoaded")
+        }
 
         map.setOnMapClickListener(object : BaiduMap.OnMapClickListener {
             override fun onMapPoiClick(poi: MapPoi): Boolean {
@@ -47,7 +52,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         }
 
         map.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
-            override fun onMapStatusChangeStart(stataus: MapStatus) {}
+            override fun onMapStatusChangeStart(status: MapStatus) {}
             override fun onMapStatusChangeStart(status: MapStatus, reason: Int) {}
             override fun onMapStatusChange(status: MapStatus) {}
             override fun onMapStatusChangeFinish(status: MapStatus) {
@@ -63,8 +68,9 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             }
         })
 
-        map.setOnMapLoadedCallback {
-            emit(id, "onLoaded")
+        map.setOnMarkerClickListener { marker ->
+            emit(marker.extraInfo?.getInt("id"), "onMarkerClick")
+            true
         }
     }
 
@@ -99,5 +105,17 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
         map.animateMapStatus(
             MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
+    }
+
+    fun add(view: View) {
+        if (view is BaiduMapOverlay) {
+            view.addTo(map)
+        }
+    }
+
+    fun remove(view: View) {
+        if (view is BaiduMapOverlay) {
+            view.remove()
+        }
     }
 }
