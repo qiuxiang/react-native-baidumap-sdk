@@ -29,17 +29,21 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 val data = createWritableMapFromLatLng(poi.position)
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
-                emit(id, "onPress", data)
+                emit(id, "onClick", data)
                 return true
             }
 
             override fun onMapClick(latLng: LatLng) {
-                emit(id, "onPress", createWritableMapFromLatLng(latLng))
+                emit(id, "onClick", createWritableMapFromLatLng(latLng))
             }
         })
 
+        map.setOnMapDoubleClickListener { latLng ->
+            emit(id, "onDoubleClick", createWritableMapFromLatLng(latLng))
+        }
+
         map.setOnMapLongClickListener { latLng ->
-            emit(id, "onLongPress", createWritableMapFromLatLng(latLng))
+            emit(id, "onLongClick", createWritableMapFromLatLng(latLng))
         }
 
         map.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
@@ -60,7 +64,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         })
 
         map.setOnMapLoadedCallback {
-            emit(id, "onReady")
+            emit(id, "onLoaded")
         }
     }
 

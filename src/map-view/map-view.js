@@ -27,9 +27,10 @@ type Props = {
   zoomLevel?: number,
   rotation?: number,
   overlook?: number,
-  onReady?: () => {},
-  onPress?: LatLng => {},
-  onLongPress?: LatLng => {},
+  onLoaded?: () => {},
+  onClick?: LatLng => {},
+  onLongClick?: LatLng => {},
+  onDoubleClick?: LatLng => {},
   onStatusChange?: LatLng => {},
 }
 
@@ -50,8 +51,9 @@ export default class MapView extends Component<Props> {
     zoomLevel: PropTypes.number,
     rotation: PropTypes.number,
     overlook: PropTypes.number,
-    onBaiduMapPress: PropTypes.func,
-    onBaiduMapLongPress: PropTypes.func,
+    onBaiduMapClick: PropTypes.func,
+    onBaiduMapLongClick: PropTypes.func,
+    onBaiduMapDoubleClick: PropTypes.func,
     onBaiduMapStatusChange: PropTypes.func,
   }
 
@@ -64,7 +66,13 @@ export default class MapView extends Component<Props> {
   render() {
     const props = {
       ...this.props,
-      ...this.handlers(['onReady', 'onPress', 'onLongPress', 'onStatusChange']),
+      ...this.handlers([
+        'onLoaded',
+        'onClick',
+        'onLongClick',
+        'onDoubleClick',
+        'onStatusChange',
+      ]),
     }
     return <BaiduMapView {...props} />
   }

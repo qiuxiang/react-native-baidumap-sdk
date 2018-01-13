@@ -39,9 +39,10 @@ export default class EventsExample extends Component {
 
   state = { logs: [] }
 
-  onReady = this.logger('onReady')
-  onPress = this.logger('onPress')
-  onLongPress = this.logger('onLongPress')
+  onLoaded = this.logger('onLoaded')
+  onClick = this.logger('onClick')
+  onLongClick = this.logger('onLongClick')
+  onDoubleClick = this.logger('onDoubleClick')
   onStatusChange = this.logger('onStatusChange')
 
   logger(event) {
@@ -75,9 +76,10 @@ export default class EventsExample extends Component {
       <View style={style.full}>
         <MapView
           style={style.full}
-          onReady={this.onReady}
-          onPress={this.onPress}
-          onLongPress={this.onLongPress}
+          onLoaded={this.onLoaded}
+          onClick={this.onClick}
+          onLongClick={this.onLongClick}
+          onDoubleClick={this.onDoubleClick}
           onStatusChange={this.onStatusChange}
         />
         <FlatList
