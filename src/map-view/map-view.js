@@ -27,12 +27,12 @@ type Props = {
   zoomLevel?: number,
   rotation?: number,
   overlook?: number,
-  onLoaded?: () => {},
+  onLoad?: () => {},
   onClick?: LatLng => {},
   onLongClick?: LatLng => {},
   onDoubleClick?: LatLng => {},
   onStatusChange?: LatLng => {},
-}
+} & ViewPropTypes
 
 export default class MapView extends Component<Props> {
   static propTypes = {
@@ -51,10 +51,6 @@ export default class MapView extends Component<Props> {
     zoomLevel: PropTypes.number,
     rotation: PropTypes.number,
     overlook: PropTypes.number,
-    onBaiduMapClick: PropTypes.func,
-    onBaiduMapLongClick: PropTypes.func,
-    onBaiduMapDoubleClick: PropTypes.func,
-    onBaiduMapStatusChange: PropTypes.func,
   }
 
   nativeComponentName = 'BaiduMapView'
@@ -67,7 +63,7 @@ export default class MapView extends Component<Props> {
     const props = {
       ...this.props,
       ...this.handlers([
-        'onLoaded',
+        'onLoad',
         'onClick',
         'onLongClick',
         'onDoubleClick',

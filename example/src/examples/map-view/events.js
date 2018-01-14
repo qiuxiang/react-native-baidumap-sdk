@@ -39,7 +39,7 @@ export default class EventsExample extends Component {
 
   state = { logs: [] }
 
-  onLoaded = this.logger('onLoaded')
+  onLoad = this.logger('onLoad')
   onClick = this.logger('onClick')
   onLongClick = this.logger('onLongClick')
   onDoubleClick = this.logger('onDoubleClick')
@@ -76,7 +76,7 @@ export default class EventsExample extends Component {
       <View style={style.full}>
         <MapView
           style={style.full}
-          onLoaded={this.onLoaded}
+          onLoad={this.onLoad}
           onClick={this.onClick}
           onLongClick={this.onLongClick}
           onDoubleClick={this.onDoubleClick}

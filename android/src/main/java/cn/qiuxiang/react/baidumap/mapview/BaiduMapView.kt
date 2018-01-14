@@ -26,7 +26,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         super.addView(mapView)
 
         map.setOnMapLoadedCallback {
-            emit(id, "onLoaded")
+            emit(id, "onLoad")
         }
 
         map.setOnMapClickListener(object : BaiduMap.OnMapClickListener {
@@ -35,11 +35,13 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
                 emit(id, "onClick", data)
+                map.hideInfoWindow()
                 return true
             }
 
             override fun onMapClick(latLng: LatLng) {
                 emit(id, "onClick", createWritableMapFromLatLng(latLng))
+                map.hideInfoWindow()
             }
         })
 
@@ -69,7 +71,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         })
 
         map.setOnMarkerClickListener { marker ->
-            emit(marker.extraInfo?.getInt("id"), "onMarkerClick")
+            emit(marker.extraInfo?.getInt("id"), "onPress")
             true
         }
     }
@@ -109,7 +111,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
     fun add(view: View) {
         if (view is BaiduMapOverlay) {
-            view.addTo(map)
+            view.addTo(this)
         }
     }
 

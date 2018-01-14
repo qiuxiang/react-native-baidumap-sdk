@@ -1,17 +1,22 @@
 package cn.qiuxiang.react.baidumap.mapview
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import android.widget.ImageView
-import cn.qiuxiang.react.baidumap.R
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.views.view.ReactViewGroup
+import cn.qiuxiang.react.baidumap.R
 
 class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverlay {
     private val options = MarkerOptions()
     private var marker: Marker? = null
     private val imageView = ImageView(context)
+    private var callout: BaiduMapCallout? = null
+    private var infoWindow: InfoWindow? = null
+    private var mapView: BaiduMapView? = null
 
     init {
         imageView.setImageResource(R.drawable.marker)
@@ -43,8 +48,34 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         setIcon(BitmapDescriptorFactory.fromResource(drawable))
     }
 
-    override fun addTo(map: BaiduMap) {
-        marker = map.addOverlay(options) as Marker
+    private fun updateInfoWindow() {
+        callout?.let {
+            val bitmap = Bitmap.createBitmap(it.width, it.height, Bitmap.Config.ARGB_8888)
+            it.draw(Canvas(bitmap))
+            val bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
+            infoWindow = InfoWindow(bitmapDescriptor, marker?.position, -imageView.height, {
+                mapView?.emit(it.id, "onPress")
+            })
+        }
+    }
+
+    fun setInfoWindow(callout: BaiduMapCallout) {
+        this.callout = callout
+        callout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            updateInfoWindow()
+            android.os.Handler().postDelayed({ updateInfoWindow() }, 200)
+        }
+    }
+
+    fun select() {
+        updateInfoWindow()
+        mapView?.map?.showInfoWindow(infoWindow)
+        mapView?.map?.animateMapStatus(MapStatusUpdateFactory.newLatLng(marker?.position))
+    }
+
+    override fun addTo(mapView: BaiduMapView) {
+        this.mapView = mapView
+        marker = mapView.map.addOverlay(options) as Marker
 
         val bundle = Bundle()
         bundle.putInt("id", id)

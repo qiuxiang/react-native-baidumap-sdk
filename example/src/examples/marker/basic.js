@@ -10,10 +10,10 @@ export default class Basic extends Component<{}> {
     return (
       <MapView style={StyleSheet.absoluteFill}>
         <MapView.Marker
-          onClick={() => Alert.alert('onClick')}
+          onPress={() => Alert.alert('You pressed the marker!')}
           coordinate={{
-            latitude: 39.916932,
-            longitude: 116.379333,
+            latitude: 39.914884,
+            longitude: 116.403883,
           }}
         />
       </MapView>
