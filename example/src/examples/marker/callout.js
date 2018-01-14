@@ -5,11 +5,11 @@ import image from '../../images/ic_my_location.png'
 
 const style = StyleSheet.create({
   callout: {
-    backgroundColor: '#8bc34a',
+    backgroundColor: '#3498db',
     padding: 8,
     borderRadius: 8,
     borderWidth: 2,
-    borderColor: '#689F38',
+    borderColor: '#2980b9',
     flexDirection: 'row',
     width: 160,
   },
@@ -20,6 +20,7 @@ const style = StyleSheet.create({
   },
   text: {
     flex: 1,
+    color: '#fff',
   },
 })
 
