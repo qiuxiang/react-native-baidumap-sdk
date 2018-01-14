@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.baidumap
 
+import android.content.res.Resources
 import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.Arguments
@@ -30,3 +31,6 @@ fun ReadableMap.toLatLng(): LatLng {
 fun ReadableArray.toLatLngList(): List<LatLng> {
     return (0..(this.size() - 1)).map { this.getMap(it).toLatLng() }
 }
+
+val Float.px: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()

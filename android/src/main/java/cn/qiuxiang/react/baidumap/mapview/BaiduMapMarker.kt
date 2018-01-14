@@ -3,12 +3,11 @@ package cn.qiuxiang.react.baidumap.mapview
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.os.Bundle
 import android.widget.ImageView
+import cn.qiuxiang.react.baidumap.R
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.views.view.ReactViewGroup
-import cn.qiuxiang.react.baidumap.R
 
 class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverlay {
     private val options = MarkerOptions()
@@ -25,13 +24,13 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     }
 
     fun setPosition(position: LatLng) {
-        marker?.position = position
         options.position(position)
+        marker?.position = position
     }
 
     fun setTitle(title: String) {
-        marker?.title = title
         options.title(title)
+        marker?.title = title
     }
 
     private fun setIcon(icon: BitmapDescriptor) {
@@ -62,6 +61,12 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
 
     fun setInfoWindow(callout: BaiduMapCallout) {
         this.callout = callout
+
+        // We need to updateInfoWindow before showInfoWindow
+        // because callout view may contain Image.
+        //
+        // But notice that if Image source is remote URI,
+        // This hack will not work.
         callout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateInfoWindow()
             android.os.Handler().postDelayed({ updateInfoWindow() }, 200)

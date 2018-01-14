@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { SectionList, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import mapView from './map-view'
-import marker from './marker'
 import location from './location'
+import marker from './marker'
+import overlays from './overlays'
 
 const style = StyleSheet.create({
   item: {
@@ -47,8 +48,9 @@ class Examples extends Component<{}> {
 
   sections = [
     { title: 'MapView', data: mapComponents(mapView) },
-    { title: 'Marker', data: mapComponents(marker) },
     { title: 'Location', data: mapComponents(location) },
+    { title: 'Marker', data: mapComponents(marker) },
+    { title: 'Overlays', data: mapComponents(overlays) },
   ]
 
   render() {
@@ -66,6 +68,7 @@ class Examples extends Component<{}> {
 export default {
   examples: { screen: Examples },
   ...mapView,
-  ...marker,
   ...location,
+  ...marker,
+  ...overlays,
 }

@@ -40,7 +40,7 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
-                "select" to SELECT
+            "select" to SELECT
         )
     }
 
