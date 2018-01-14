@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { requireNativeComponent, ViewPropTypes } from 'react-native'
+import PropTypes from 'prop-types'
 import { LatLng } from '../prop-types'
 import Component from '../component'
 

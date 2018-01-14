@@ -1,7 +1,7 @@
 package cn.qiuxiang.react.baidumap.mapview
 
-import cn.qiuxiang.react.baidumap.px
 import cn.qiuxiang.react.baidumap.toLatLngList
+import cn.qiuxiang.react.baidumap.toPx
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -34,6 +34,6 @@ class BaiduMapPolygonManager : SimpleViewManager<BaiduMapPolygon>() {
 
     @ReactProp(name = "strokeWidth")
     fun setStrokeWidth(polygon: BaiduMapPolygon, strokeWidth: Float) {
-        polygon.strokeWidth = strokeWidth.px
+        polygon.strokeWidth = strokeWidth.toPx()
     }
 }

@@ -1,9 +1,6 @@
 package cn.qiuxiang.react.baidumap
 
-import cn.qiuxiang.react.baidumap.mapview.BaiduMapCalloutManager
-import cn.qiuxiang.react.baidumap.mapview.BaiduMapMarkerManager
-import cn.qiuxiang.react.baidumap.mapview.BaiduMapPolygonManager
-import cn.qiuxiang.react.baidumap.mapview.BaiduMapViewManager
+import cn.qiuxiang.react.baidumap.mapview.*
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
@@ -19,7 +16,8 @@ class BaiduMapPackage : ReactPackage {
             BaiduMapViewManager(),
             BaiduMapMarkerManager(),
             BaiduMapCalloutManager(),
-            BaiduMapPolygonManager()
+            BaiduMapPolygonManager(),
+            BaiduMapTextManager()
         )
     }
 }

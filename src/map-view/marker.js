@@ -7,15 +7,15 @@ import Component from '../component'
 
 type Props = {
   coordinate: LatLng,
-  color: ColorPropType,
-  image: string,
-  title: string,
+  color?: ColorPropType,
+  image?: string,
+  title?: string,
 } & ViewPropTypes
 
 export default class Marker extends Component<Props> {
   static propTypes = {
     ...ViewPropTypes,
-    coordinate: LatLng,
+    coordinate: LatLng.isRequired,
     color: ColorPropType,
     image: PropTypes.string,
     title: PropTypes.string,

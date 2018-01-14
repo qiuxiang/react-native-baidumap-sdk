@@ -32,5 +32,6 @@ fun ReadableArray.toLatLngList(): List<LatLng> {
     return (0..(this.size() - 1)).map { this.getMap(it).toLatLng() }
 }
 
-val Float.px: Int
-    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
+fun Float.toPx(): Int {
+    return (this * Resources.getSystem().displayMetrics.density).toInt()
+}

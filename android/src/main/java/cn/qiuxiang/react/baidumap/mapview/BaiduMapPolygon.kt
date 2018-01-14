@@ -2,7 +2,7 @@ package cn.qiuxiang.react.baidumap.mapview
 
 import android.content.Context
 import android.graphics.Color
-import cn.qiuxiang.react.baidumap.px
+import cn.qiuxiang.react.baidumap.toPx
 import com.baidu.mapapi.map.Polygon
 import com.baidu.mapapi.map.PolygonOptions
 import com.baidu.mapapi.map.Stroke
@@ -19,7 +19,7 @@ class BaiduMapPolygon(context: Context) : ReactViewGroup(context), BaiduMapOverl
             polygon?.let { it.stroke = Stroke(it.stroke.strokeWidth, value) }
         }
 
-    var strokeWidth: Int = 1f.px
+    var strokeWidth: Int = 1f.toPx()
         set(value) {
             field = value
             polygon?.let { it.stroke = Stroke(value, it.stroke.color) }
