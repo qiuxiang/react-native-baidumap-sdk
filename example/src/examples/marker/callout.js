@@ -30,12 +30,11 @@ export default class CalloutExample extends Component {
   static navigationOptions = { title: 'Marker with callout' }
 
   onPress = () => Alert.alert('You pressed the callout!')
-  select = () => this.marker.select()
 
   render() {
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <Marker ref={ref => this.marker = ref} coordinate={coordinate} onPress={this.select}>
+        <Marker coordinate={coordinate}>
           <Callout onPress={this.onPress}>
             <View style={style.callout}>
               <Image source={image} style={style.image} />

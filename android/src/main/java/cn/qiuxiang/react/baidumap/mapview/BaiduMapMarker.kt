@@ -12,11 +12,12 @@ import cn.qiuxiang.react.baidumap.R
 
 class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverlay {
     private val options = MarkerOptions()
-    private var marker: Marker? = null
     private val imageView = ImageView(context)
     private var callout: BaiduMapCallout? = null
     private var infoWindow: InfoWindow? = null
     private var mapView: BaiduMapView? = null
+
+    var marker: Marker? = null
 
     init {
         imageView.setImageResource(R.drawable.marker)
@@ -76,10 +77,6 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     override fun addTo(mapView: BaiduMapView) {
         this.mapView = mapView
         marker = mapView.map.addOverlay(options) as Marker
-
-        val bundle = Bundle()
-        bundle.putInt("id", id)
-        marker?.extraInfo = bundle
     }
 
     override fun remove() {

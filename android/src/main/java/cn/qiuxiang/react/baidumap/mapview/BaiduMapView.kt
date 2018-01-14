@@ -16,6 +16,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 class BaiduMapView(context: Context) : FrameLayout(context) {
     private val emitter: RCTEventEmitter = (context as ThemedReactContext)
         .getJSModule(RCTEventEmitter::class.java)
+    private val markers = HashMap<String, BaiduMapMarker>()
 
     val mapView = TextureMapView(context)
     val map: BaiduMap by lazy { mapView.map }
@@ -71,7 +72,9 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         })
 
         map.setOnMarkerClickListener { marker ->
-            emit(marker.extraInfo?.getInt("id"), "onPress")
+            val markerView = markers[marker.id]
+            markerView?.select()
+            emit(markerView?.id, "onPress")
             true
         }
     }
@@ -112,12 +115,18 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
     fun add(view: View) {
         if (view is BaiduMapOverlay) {
             view.addTo(this)
+            when (view) {
+                is BaiduMapMarker -> markers.put(view.marker?.id!!, view)
+            }
         }
     }
 
     fun remove(view: View) {
         if (view is BaiduMapOverlay) {
             view.remove()
+            when (view) {
+                is BaiduMapMarker -> markers.remove(view.marker?.id)
+            }
         }
     }
 }
