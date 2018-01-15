@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved, import/extensions, react/no-multi-comp */
-// @flow
 import React, { Component } from 'react'
 import { StyleSheet, ToastAndroid } from 'react-native'
 import EventSubscription from 'EventSubscription'
@@ -12,16 +11,20 @@ const requestLocation = () => {
   ToastAndroid.show('Request location...', ToastAndroid.SHORT)
 }
 
-export default class Single extends Component<{}> {
+export default class Single extends Component {
   static navigationOptions = {
     title: 'Single location',
     headerRight: <IconButton source={icon} onPress={requestLocation} />,
   }
 
+  state = {}
+
   componentDidMount() {
+    Location.setOptions({ coordinateType: 'bd09ll' })
     this.listener = Location.addLocationListener(location => {
       console.log(location)
       ToastAndroid.show(`${location.latitude}, ${location.longitude}`, ToastAndroid.SHORT)
+      this.setState(location)
       if (this.mapView) {
         this.mapView.animateTo({
           center: location,
@@ -40,6 +43,12 @@ export default class Single extends Component<{}> {
   listener: EventSubscription
 
   render() {
-    return <MapView style={StyleSheet.absoluteFill} ref={ref => this.mapView = ref} />
+    return (
+      <MapView style={StyleSheet.absoluteFill} ref={ref => this.mapView = ref}>
+        {this.state.latitude && (
+          <MapView.Marker coordinate={this.state} title="My location" selected />
+        )}
+      </MapView>
+    )
   }
 }

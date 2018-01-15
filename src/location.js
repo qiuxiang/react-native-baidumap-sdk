@@ -6,11 +6,12 @@ const eventEmitter = new NativeEventEmitter(BaiduMapLocation)
 
 type Options = {
   coordinateType: 'gcj02' | 'bd09' | 'bd09ll',
-  locationMode: 'Hight_Accuracy' | 'Battery_Saving' | 'Device_Sensors',
+  mode: 'Hight_Accuracy' | 'Battery_Saving' | 'Device_Sensors',
+  gps: boolean,
   scanSpan: number,
   minDistance: number,
-  detailed: boolean,
-  autoMode: boolean,
+  reGeocode: boolean,
+  auto: boolean,
 }
 
 type Listener = (listener: {

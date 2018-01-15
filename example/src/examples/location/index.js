@@ -1,10 +1,10 @@
 // @flow
 import Single from './single'
-import Detailed from './detailed'
+import ReGeocode from './re-geocode'
 
 const route = screen => ({ screen, title: screen.navigationOptions.title })
 
 export default {
   locationSingle: route(Single),
-  locationDetailed: route(Detailed),
+  locationReGeocode: route(ReGeocode),
 }

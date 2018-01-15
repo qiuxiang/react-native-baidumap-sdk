@@ -1,11 +1,15 @@
 package cn.qiuxiang.react.baidumap.mapview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import cn.qiuxiang.react.baidumap.R
+import cn.qiuxiang.react.baidumap.toPx
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.views.view.ReactViewGroup
@@ -14,7 +18,6 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     private val options = MarkerOptions()
     private val imageView = ImageView(context)
     private var callout: BaiduMapCallout? = null
-    private var defaultCallout: Button? = null
     private var infoWindow: InfoWindow? = null
     private var mapView: BaiduMapView? = null
 
@@ -38,18 +41,15 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
 
     fun setPosition(position: LatLng) {
         options.position(position)
-        marker?.position = position
+        marker?.let {
+            it.position = position
+            updateInfoWindow()
+        }
     }
 
     fun setTitle(title: String) {
         options.title(title)
         marker?.title = title
-
-        if (defaultCallout == null) {
-            defaultCallout = Button(context)
-            defaultCallout?.transformationMethod = null
-            defaultCallout?.setBackgroundResource(R.drawable.callout)
-        }
     }
 
     private fun setIcon(icon: BitmapDescriptor) {
@@ -78,7 +78,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         callout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateCustomInfoWindow()
             android.os.Handler().postDelayed({ updateCustomInfoWindow() }, 100)
-            android.os.Handler().postDelayed({ active = active }, 350)
+            android.os.Handler().postDelayed({ active = active }, 500)
         }
     }
 
@@ -87,13 +87,21 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         mapView?.map?.showInfoWindow(infoWindow)
     }
 
+    private fun updateInfoWindow() {
+        updateDefaultInfoWindow()
+        active = active
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun updateDefaultInfoWindow() {
-        defaultCallout?.let {
-            it.text = marker?.title
-            infoWindow = InfoWindow(BitmapDescriptorFactory.fromView(it), marker?.position, -imageView.height, {
-                mapView?.emit(id, "onCalloutPress")
-            })
-        }
+        val callout = Button(context)
+        callout.text = " " + marker?.title + " "
+        callout.transformationMethod = null
+        callout.setBackgroundResource(R.drawable.callout)
+        val bitmapDescriptor = BitmapDescriptorFactory.fromView(callout)
+        infoWindow = InfoWindow(bitmapDescriptor, marker?.position, -imageView.height, {
+            mapView?.emit(id, "onCalloutPress")
+        })
     }
 
     private fun updateCustomInfoWindow() {
@@ -113,8 +121,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     override fun addTo(mapView: BaiduMapView) {
         this.mapView = mapView
         marker = mapView.map.addOverlay(options) as Marker
-        updateDefaultInfoWindow()
-        active = active
+        updateInfoWindow()
     }
 
     override fun remove() {

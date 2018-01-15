@@ -48,8 +48,8 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
     fun setOptions(options: ReadableMap) {
         val option = locationClient.locOption
 
-        if (options.hasKey("locationMode")) {
-            option.locationMode = LocationMode.valueOf(options.getString("locationMode"))
+        if (options.hasKey("mode")) {
+            option.locationMode = LocationMode.valueOf(options.getString("mode"))
         }
 
         if (options.hasKey("coordinateType")) {
@@ -60,10 +60,14 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
             option.scanSpan = options.getInt("scanSpan")
         }
 
-        if (options.hasKey("detailed")) {
-            val detailed = options.getBoolean("detailed")
-            option.setIsNeedAddress(detailed)
-            option.setIsNeedLocationDescribe(detailed)
+        if (options.hasKey("gps")) {
+            option.isOpenGps = options.getBoolean("gps")
+        }
+
+        if (options.hasKey("reGeocode")) {
+            val enabled = options.getBoolean("reGeocode")
+            option.setIsNeedAddress(enabled)
+            option.setIsNeedLocationDescribe(enabled)
         }
 
         if (options.hasKey("minDistance")) {
@@ -71,8 +75,8 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
             option.setOpenAutoNotifyMode(0, 0, 0)
         }
 
-        if (options.hasKey("autoMode")) {
-            if (options.getBoolean("autoMode")) {
+        if (options.hasKey("auto")) {
+            if (options.getBoolean("auto")) {
                 option.setOpenAutoNotifyMode()
             }
         }
