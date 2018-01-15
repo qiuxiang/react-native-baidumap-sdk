@@ -34,7 +34,7 @@ export default class CalloutExample extends Component {
 
   render() {
     return (
-      <MapView style={StyleSheet.absoluteFill}>
+      <MapView style={StyleSheet.absoluteFill} zoomLevel={11}>
         <Marker coordinate={coordinate}>
           <Callout onPress={this.onPress}>
             <View style={style.callout}>

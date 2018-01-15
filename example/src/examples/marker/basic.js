@@ -8,7 +8,7 @@ export default class Basic extends Component<{}> {
 
   render() {
     return (
-      <MapView style={StyleSheet.absoluteFill}>
+      <MapView style={StyleSheet.absoluteFill} zoomLevel={11}>
         <MapView.Marker
           onPress={() => Alert.alert('You pressed the marker!')}
           coordinate={{
