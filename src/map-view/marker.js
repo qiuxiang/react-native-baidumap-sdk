@@ -10,6 +10,7 @@ type Props = {
   color?: ColorPropType,
   image?: string,
   title?: string,
+  selected?: boolean,
 } & ViewPropTypes
 
 export default class Marker extends Component<Props> {
@@ -19,6 +20,7 @@ export default class Marker extends Component<Props> {
     color: ColorPropType,
     image: PropTypes.string,
     title: PropTypes.string,
+    selected: PropTypes.bool,
   }
 
   nativeComponentName = 'BaiduMapMarker'
@@ -30,7 +32,7 @@ export default class Marker extends Component<Props> {
   render() {
     const props = {
       ...this.props,
-      ...this.handlers(['onPress']),
+      ...this.handlers(['onPress', 'onCalloutPress']),
     }
     return <BaiduMapMarker {...props} />
   }

@@ -17,6 +17,7 @@ const style = StyleSheet.create({
     width: 48,
     height: 48,
     marginRight: 8,
+    tintColor: '#f39c12',
   },
   text: {
     flex: 1,
@@ -28,14 +29,14 @@ const { Marker, Callout } = MapView
 const coordinate = { latitude: 39.914884, longitude: 116.403883 }
 
 export default class CalloutExample extends Component {
-  static navigationOptions = { title: 'Marker with callout' }
+  static navigationOptions = { title: 'Custom callout' }
 
   onPress = () => Alert.alert('You pressed the callout!')
 
   render() {
     return (
       <MapView style={StyleSheet.absoluteFill} zoomLevel={11}>
-        <Marker coordinate={coordinate}>
+        <Marker coordinate={coordinate} selected>
           <Callout onPress={this.onPress}>
             <View style={style.callout}>
               <Image source={image} style={style.image} />

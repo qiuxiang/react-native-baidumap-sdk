@@ -30,7 +30,8 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         return MapBuilder.of(
-            "onPress", MapBuilder.of("registrationName", "onBaiduMapPress")
+            "onPress", MapBuilder.of("registrationName", "onBaiduMapPress"),
+            "onCalloutPress", MapBuilder.of("registrationName", "onBaiduMapCalloutPress")
         )
     }
 
@@ -68,5 +69,10 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
     @ReactProp(name = "image")
     fun setImage(view: BaiduMapMarker, image: String) {
         view.setImage(image)
+    }
+
+    @ReactProp(name = "selected")
+    fun setSelected(view: BaiduMapMarker, selected: Boolean) {
+        view.active = selected
     }
 }

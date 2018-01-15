@@ -33,7 +33,7 @@ export default class MapStatus extends Component {
   ZGC = {
     overlook: -45,
     rotation: 90,
-    zoomLevel: 20,
+    zoomLevel: 16,
     center: {
       latitude: 39.97837,
       longitude: 116.31363,
@@ -43,7 +43,7 @@ export default class MapStatus extends Component {
   TAM = {
     overlook: 0,
     rotation: 0,
-    zoomLevel: 12,
+    zoomLevel: 14,
     center: {
       latitude: 39.90864,
       longitude: 116.39745,

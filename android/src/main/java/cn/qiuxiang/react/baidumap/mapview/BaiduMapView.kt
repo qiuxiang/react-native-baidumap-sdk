@@ -36,13 +36,11 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
                 emit(id, "onClick", data)
-                map.hideInfoWindow()
                 return true
             }
 
             override fun onMapClick(latLng: LatLng) {
                 emit(id, "onClick", createWritableMapFromLatLng(latLng))
-                map.hideInfoWindow()
             }
         })
 
