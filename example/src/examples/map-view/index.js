@@ -2,6 +2,7 @@ import Basic from './basic'
 import MapStatus from './map-status'
 import AnimatedMapStatus from './animated-map-status'
 import Satellite from './satellite'
+import Traffic from './traffic'
 import BaiduHeatMap from './baidu-heat-map'
 import Indoor from './indoor'
 import Events from './events'
@@ -13,6 +14,7 @@ export default {
   mapViewMapStatus: route(MapStatus),
   mapViewAnimatedMapStatus: route(AnimatedMapStatus),
   mapViewSatellite: route(Satellite),
+  mapViewTraffic: route(Traffic),
   mapViewBaiduHeatMap: route(BaiduHeatMap),
   mapViewIndoor: route(Indoor),
   mapViewEvents: route(Events),
