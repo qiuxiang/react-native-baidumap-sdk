@@ -17,7 +17,7 @@ export default class Text extends PureComponent<Props> {
   static propTypes = {
     ...ViewPropTypes,
     coordinate: LatLng.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.string,
     fontSize: PropTypes.number,
     rotation: PropTypes.number,
     color: ColorPropType,
