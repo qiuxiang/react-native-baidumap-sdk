@@ -27,6 +27,7 @@ type Props = {
   zoomLevel?: number,
   rotation?: number,
   overlook?: number,
+  paused?: boolean,
   onLoad?: () => {},
   onClick?: LatLng => {},
   onLongClick?: LatLng => {},
@@ -51,6 +52,7 @@ export default class MapView extends Component<Props> {
     zoomLevel: PropTypes.number,
     rotation: PropTypes.number,
     overlook: PropTypes.number,
+    paused: PropTypes.bool,
   }
 
   nativeComponentName = 'BaiduMapView'

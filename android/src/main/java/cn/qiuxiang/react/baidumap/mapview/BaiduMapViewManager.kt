@@ -27,7 +27,7 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
 
     override fun onDropViewInstance(mapView: BaiduMapView) {
         super.onDropViewInstance(mapView)
-        mapView.destroy()
+        mapView.mapView.onDestroy()
     }
 
     override fun addView(mapView: BaiduMapView, view: View, index: Int) {
@@ -126,5 +126,10 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
         mapView.map.setMapStatus(MapStatusUpdateFactory.newMapStatus(
             MapStatus.Builder().overlook(overlook).build()
         ))
+    }
+
+    @ReactProp(name = "paused")
+    fun setPaused(mapView: BaiduMapView, paused: Boolean) {
+        mapView.paused = paused
     }
 }

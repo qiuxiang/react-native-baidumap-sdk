@@ -14,17 +14,31 @@ import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
 
 class BaiduMapView(context: Context) : FrameLayout(context) {
-    private val emitter: RCTEventEmitter = (context as ThemedReactContext)
-        .getJSModule(RCTEventEmitter::class.java)
+    private val emitter = (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
     private val markers = HashMap<String, BaiduMapMarker>()
 
-    val mapView = TextureMapView(context)
+    val mapView = MapView(context)
     val map: BaiduMap by lazy { mapView.map }
 
-    var compassDisabled: Boolean = false
+    var compassDisabled = false
         set(value) {
             field = value
             map.setCompassEnable(!value)
+        }
+
+    var paused = false
+        set(value) {
+            if (!field && value) {
+                mapView.onPause()
+                removeView(mapView)
+            }
+
+            if (field && !value) {
+                addView(mapView)
+                mapView.onResume()
+            }
+
+            field = value
         }
 
     init {
@@ -92,10 +106,6 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         data.putDouble("longitudeDelta", Math.abs(
             status.bound.southwest.longitude - status.bound.northeast.longitude))
         emit(id, "onStatusChange", data)
-    }
-
-    fun destroy() {
-        mapView.onDestroy()
     }
 
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
