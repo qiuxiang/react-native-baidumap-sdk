@@ -96,7 +96,7 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
 
     @ReactProp(name = "compassDisabled")
     fun setCompassEnabled(mapView: BaiduMapView, disabled: Boolean) {
-        mapView.map.setCompassEnable(!disabled)
+        mapView.compassDisabled = disabled
     }
 
     @ReactProp(name = "zoomControlsDisabled")

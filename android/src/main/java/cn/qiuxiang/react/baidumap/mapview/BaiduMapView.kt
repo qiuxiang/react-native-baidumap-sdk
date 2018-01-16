@@ -21,6 +21,12 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
     val mapView = TextureMapView(context)
     val map: BaiduMap by lazy { mapView.map }
 
+    var compassDisabled: Boolean = false
+        set(value) {
+            field = value
+            map.setCompassEnable(!value)
+        }
+
     init {
         mapView.layoutParams = LayoutParams(
             LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -28,6 +34,13 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
         map.setOnMapLoadedCallback {
             emit(id, "onLoad")
+
+            // Some bugs (probably by ReactView) cause the compass to fail to display
+            // So I do some hack
+            if (!compassDisabled) {
+                map.setCompassEnable(false)
+                map.setCompassEnable(true)
+            }
         }
 
         map.setOnMapClickListener(object : BaiduMap.OnMapClickListener {
@@ -57,15 +70,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             override fun onMapStatusChangeStart(status: MapStatus, reason: Int) {}
             override fun onMapStatusChange(status: MapStatus) {}
             override fun onMapStatusChangeFinish(status: MapStatus) {
-                val data = createWritableMapFromLatLng(status.target)
-                data.putDouble("zoomLevel", status.zoom.toDouble())
-                data.putDouble("overlook", status.overlook.toDouble())
-                data.putDouble("rotation", status.rotate.toDouble())
-                data.putDouble("latitudeDelta", Math.abs(
-                    status.bound.southwest.latitude - status.bound.northeast.latitude))
-                data.putDouble("longitudeDelta", Math.abs(
-                    status.bound.southwest.longitude - status.bound.northeast.longitude))
-                emit(id, "onStatusChange", data)
+                emitStatusChange(status)
             }
         })
 
@@ -75,6 +80,18 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             emit(markerView?.id, "onPress")
             true
         }
+    }
+
+    fun emitStatusChange(status: MapStatus) {
+        val data = createWritableMapFromLatLng(status.target)
+        data.putDouble("zoomLevel", status.zoom.toDouble())
+        data.putDouble("overlook", status.overlook.toDouble())
+        data.putDouble("rotation", status.rotate.toDouble())
+        data.putDouble("latitudeDelta", Math.abs(
+            status.bound.southwest.latitude - status.bound.northeast.latitude))
+        data.putDouble("longitudeDelta", Math.abs(
+            status.bound.southwest.longitude - status.bound.northeast.longitude))
+        emit(id, "onStatusChange", data)
     }
 
     fun destroy() {

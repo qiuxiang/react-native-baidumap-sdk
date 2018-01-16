@@ -74,8 +74,8 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         // This hack will not work.
         callout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateCustomInfoWindow()
-            android.os.Handler().postDelayed({ updateCustomInfoWindow() }, 100)
-            android.os.Handler().postDelayed({ active = active }, 500)
+            handler.postDelayed({ updateCustomInfoWindow() }, 100)
+            handler.postDelayed({ active = active }, 500)
         }
     }
 

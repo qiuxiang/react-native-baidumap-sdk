@@ -8,7 +8,7 @@ import { findNodeHandle, UIManager } from 'react-native'
 
 export default class Component<T> extends PureComponent<T> {
   /**
-   * Must defined in subclass if want to call native component method
+   * Must be defined in subclass if need to call native component method
    */
   nativeComponentName: string
 
@@ -23,7 +23,7 @@ export default class Component<T> extends PureComponent<T> {
   handlers(events: string[]) {
     return events.reduce((handlers, name) => {
       handlers[name.replace(/^on/, 'onBaiduMap')] = event => {
-        // $FlowFixMe: I hope to keep it simple
+        // $FlowFixMe: I want to keep this simple
         const handler = this.props[name]
         if (handler) {
           handler(event.nativeEvent)
