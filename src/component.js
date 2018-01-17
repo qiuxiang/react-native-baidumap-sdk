@@ -22,12 +22,10 @@ export default class Component<T> extends PureComponent<T> {
 
   handlers(events: string[]) {
     return events.reduce((handlers, name) => {
-      handlers[name.replace(/^on/, 'onBaiduMap')] = event => {
-        // $FlowFixMe: I want to keep this simple
-        const handler = this.props[name]
-        if (handler) {
-          handler(event.nativeEvent)
-        }
+      // $FlowFixMe: I want to keep this simple
+      const handler = this.props[name]
+      if (handler) {
+        handlers[name.replace(/^on/, 'onBaiduMap')] = event => handler(event.nativeEvent)
       }
       return handlers
     }, {})

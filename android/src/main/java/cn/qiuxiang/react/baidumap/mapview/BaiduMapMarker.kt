@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import cn.qiuxiang.react.baidumap.R
@@ -13,7 +14,9 @@ import com.facebook.react.views.view.ReactViewGroup
 
 class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverlay {
     private val options = MarkerOptions()
+    private var iconHeight = 0
     private val imageView = ImageView(context)
+    private var markerView: View? = null
     private var callout: BaiduMapCallout? = null
     private var infoWindow: InfoWindow? = null
     private var mapView: BaiduMapView? = null
@@ -23,6 +26,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     init {
         imageView.setImageResource(R.drawable.marker)
         setColor(0xfff5533d.toInt())
+        iconHeight = imageView.height
     }
 
     var active: Boolean = false
@@ -40,7 +44,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         options.position(position)
         marker?.let {
             it.position = position
-            updateInfoWindow()
+            active = active
         }
     }
 
@@ -64,40 +68,42 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         setIcon(BitmapDescriptorFactory.fromResource(drawable))
     }
 
+    fun setMarkerView(view: View) {
+        markerView = view
+        view.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            updateMarkerView()
+        }
+    }
+
+    fun updateMarkerView() {
+        markerView?.let {
+            iconHeight = it.height
+            marker?.icon = bitmapDescriptorFrom(it)
+        }
+    }
+
     fun setInfoWindow(callout: BaiduMapCallout) {
         this.callout = callout
-
-        // We need to updateCustomInfoWindow before showInfoWindow
-        // because callout view may contain Image.
-        //
-        // But notice that if Image source is remote URI,
-        // This hack will not work.
         callout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            updateCustomInfoWindow()
-            handler.postDelayed({ updateCustomInfoWindow() }, 100)
             handler.postDelayed({ active = active }, 500)
         }
     }
 
     fun select() {
         updateCustomInfoWindow()
-        mapView?.map?.showInfoWindow(infoWindow)
-    }
-
-    private fun updateInfoWindow() {
         updateDefaultInfoWindow()
-        active = active
+        mapView?.map?.showInfoWindow(infoWindow)
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateDefaultInfoWindow() {
-        if (marker?.title != null) {
+        if (marker?.title != null && this.callout == null) {
             val callout = Button(context)
             callout.text = " " + marker?.title + " "
             callout.transformationMethod = null
             callout.setBackgroundResource(R.drawable.callout)
             val bitmapDescriptor = BitmapDescriptorFactory.fromView(callout)
-            infoWindow = InfoWindow(bitmapDescriptor, marker?.position, -imageView.height, {
+            infoWindow = InfoWindow(bitmapDescriptor, marker?.position, -iconHeight, {
                 mapView?.emit(id, "onCalloutPress")
             })
         }
@@ -106,10 +112,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     private fun updateCustomInfoWindow() {
         callout?.let {
             if (it.width > 0 && it.height > 0) {
-                val bitmap = Bitmap.createBitmap(it.width, it.height, Bitmap.Config.ARGB_8888)
-                it.draw(Canvas(bitmap))
-                val bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
-                infoWindow = InfoWindow(bitmapDescriptor, marker?.position, -imageView.height, {
+                infoWindow = InfoWindow(bitmapDescriptorFrom(it), marker?.position, -iconHeight, {
                     mapView?.emit(it.id, "onPress")
                     mapView?.emit(id, "onCalloutPress")
                 })
@@ -117,10 +120,16 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         }
     }
 
+    private fun bitmapDescriptorFrom(view: View): BitmapDescriptor {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        view.draw(Canvas(bitmap))
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
     override fun addTo(mapView: BaiduMapView) {
         this.mapView = mapView
         marker = mapView.map.addOverlay(options) as Marker
-        updateInfoWindow()
+        active = active
     }
 
     override fun remove() {

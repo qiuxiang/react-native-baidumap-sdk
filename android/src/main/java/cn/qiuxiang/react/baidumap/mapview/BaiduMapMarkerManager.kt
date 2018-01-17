@@ -22,9 +22,10 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
     }
 
     override fun addView(marker: BaiduMapMarker, view: View, index: Int) {
+        super.addView(marker, view, index)
         when (view) {
             is BaiduMapCallout -> marker.setInfoWindow(view)
-            else -> super.addView(marker, view, index)
+            else -> marker.setMarkerView(view)
         }
     }
 
@@ -37,17 +38,20 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     companion object {
         val SELECT = 0
+        val UPDATE = 1
     }
 
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
-            "select" to SELECT
+            "select" to SELECT,
+            "update" to UPDATE
         )
     }
 
     override fun receiveCommand(marker: BaiduMapMarker, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             SELECT -> marker.select()
+            UPDATE -> marker.updateMarkerView()
         }
     }
 

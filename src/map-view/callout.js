@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
-import { StyleSheet, requireNativeComponent, ViewPropTypes } from 'react-native'
-import PropTypes from 'prop-types'
+import { requireNativeComponent, StyleSheet, ViewPropTypes } from 'react-native'
 import Component from '../component'
 
 const style = StyleSheet.create({
@@ -15,10 +14,7 @@ type Props = {
 } & ViewPropTypes
 
 export default class Callout extends Component<Props> {
-  static propTypes = {
-    ...ViewPropTypes,
-    onBaiduMapPress: PropTypes.func,
-  }
+  static propTypes = ViewPropTypes
 
   nativeComponentName = 'BaiduMapCallout'
 
