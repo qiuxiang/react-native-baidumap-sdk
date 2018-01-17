@@ -32,7 +32,7 @@ type Props = {
   onClick?: LatLng => {},
   onLongClick?: LatLng => {},
   onDoubleClick?: LatLng => {},
-  onStatusChange?: LatLng => {},
+  onStatusChange?: MapStatus => {},
 } & ViewPropTypes
 
 export default class MapView extends Component<Props> {

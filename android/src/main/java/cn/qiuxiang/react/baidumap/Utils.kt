@@ -3,6 +3,7 @@ package cn.qiuxiang.react.baidumap
 import android.content.res.Resources
 import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.model.LatLng
+import com.baidu.mapapi.model.LatLngBounds
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
@@ -17,19 +18,27 @@ fun initialize(context: ThemedReactContext) {
     }
 }
 
-fun createWritableMapFromLatLng(latLng: LatLng): WritableMap {
-    val writableMap = Arguments.createMap()
-    writableMap.putDouble("latitude", latLng.latitude)
-    writableMap.putDouble("longitude", latLng.longitude)
-    return writableMap
-}
-
 fun ReadableMap.toLatLng(): LatLng {
     return LatLng(this.getDouble("latitude"), this.getDouble("longitude"))
 }
 
 fun ReadableArray.toLatLngList(): List<LatLng> {
     return (0..(this.size() - 1)).map { this.getMap(it).toLatLng() }
+}
+
+fun LatLng.toWritableMap(): WritableMap {
+    val map = Arguments.createMap()
+    map.putDouble("latitude", this.latitude)
+    map.putDouble("longitude", this.longitude)
+    return map
+}
+
+fun LatLngBounds.toWritableMap(): WritableMap {
+    val map = Arguments.createMap()
+    map.putMap("center", this.center.toWritableMap())
+    map.putDouble("latitudeDelta", Math.abs(this.southwest.latitude - this.northeast.latitude))
+    map.putDouble("longitudeDelta", Math.abs(this.southwest.longitude - this.northeast.longitude))
+    return map
 }
 
 fun Float.toPx(): Int {

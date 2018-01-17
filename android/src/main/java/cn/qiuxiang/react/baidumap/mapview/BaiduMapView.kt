@@ -3,8 +3,8 @@ package cn.qiuxiang.react.baidumap.mapview
 import android.content.Context
 import android.view.View
 import android.widget.FrameLayout
-import cn.qiuxiang.react.baidumap.createWritableMapFromLatLng
 import cn.qiuxiang.react.baidumap.toLatLng
+import cn.qiuxiang.react.baidumap.toWritableMap
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.Arguments
@@ -42,8 +42,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         }
 
     init {
-        mapView.layoutParams = LayoutParams(
-            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        mapView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         super.addView(mapView)
 
         map.setOnMapLoadedCallback {
@@ -59,7 +58,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
         map.setOnMapClickListener(object : BaiduMap.OnMapClickListener {
             override fun onMapPoiClick(poi: MapPoi): Boolean {
-                val data = createWritableMapFromLatLng(poi.position)
+                val data = poi.position.toWritableMap()
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
                 emit(id, "onClick", data)
@@ -67,16 +66,16 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             }
 
             override fun onMapClick(latLng: LatLng) {
-                emit(id, "onClick", createWritableMapFromLatLng(latLng))
+                emit(id, "onClick", latLng.toWritableMap())
             }
         })
 
         map.setOnMapDoubleClickListener { latLng ->
-            emit(id, "onDoubleClick", createWritableMapFromLatLng(latLng))
+            emit(id, "onDoubleClick", latLng.toWritableMap())
         }
 
         map.setOnMapLongClickListener { latLng ->
-            emit(id, "onLongClick", createWritableMapFromLatLng(latLng))
+            emit(id, "onLongClick", latLng.toWritableMap())
         }
 
         map.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
@@ -84,7 +83,13 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             override fun onMapStatusChangeStart(status: MapStatus, reason: Int) {}
             override fun onMapStatusChange(status: MapStatus) {}
             override fun onMapStatusChangeFinish(status: MapStatus) {
-                emitStatusChange(status)
+                val data = Arguments.createMap()
+                data.putMap("center", status.target.toWritableMap())
+                data.putMap("region", status.bound.toWritableMap())
+                data.putDouble("zoomLevel", status.zoom.toDouble())
+                data.putDouble("overlook", status.overlook.toDouble())
+                data.putDouble("rotation", status.rotate.toDouble())
+                emit(id, "onStatusChange", data)
             }
         })
 
@@ -94,18 +99,6 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             emit(markerView?.id, "onPress")
             true
         }
-    }
-
-    fun emitStatusChange(status: MapStatus) {
-        val data = createWritableMapFromLatLng(status.target)
-        data.putDouble("zoomLevel", status.zoom.toDouble())
-        data.putDouble("overlook", status.overlook.toDouble())
-        data.putDouble("rotation", status.rotate.toDouble())
-        data.putDouble("latitudeDelta", Math.abs(
-            status.bound.southwest.latitude - status.bound.northeast.latitude))
-        data.putDouble("longitudeDelta", Math.abs(
-            status.bound.southwest.longitude - status.bound.northeast.longitude))
-        emit(id, "onStatusChange", data)
     }
 
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {

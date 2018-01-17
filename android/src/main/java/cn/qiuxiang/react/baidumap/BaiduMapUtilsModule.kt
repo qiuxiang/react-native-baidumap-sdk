@@ -1,7 +1,7 @@
 package cn.qiuxiang.react.baidumap
 
 import com.baidu.mapapi.utils.DistanceUtil
-import com.baidu.mapapi.utils.SpatialRelationUtil
+import com.baidu.mapapi.utils.SpatialRelationUtil.*
 import com.facebook.react.bridge.*
 
 @Suppress("unused")
@@ -17,20 +17,17 @@ class BaiduMapUtilsModule(context: ReactApplicationContext) : ReactContextBaseJa
 
     @ReactMethod
     fun getNearestPointFromPolyine(point: ReadableMap, points: ReadableArray, promise: Promise) {
-        val result = SpatialRelationUtil.getNearestPointFromLine(
-            points.toLatLngList(), point.toLatLng())
-        promise.resolve(createWritableMapFromLatLng(result))
+        val result = getNearestPointFromLine(points.toLatLngList(), point.toLatLng())
+        promise.resolve(result.toWritableMap())
     }
 
     @ReactMethod
     fun isPolygonContainsPoint(point: ReadableMap, points: ReadableArray, promise: Promise) {
-        promise.resolve(SpatialRelationUtil.isPolygonContainsPoint(
-            points.toLatLngList(), point.toLatLng()))
+        promise.resolve(isPolygonContainsPoint(points.toLatLngList(), point.toLatLng()))
     }
 
     @ReactMethod
     fun isCircleContainsPoint(point: ReadableMap, center: ReadableMap, radius: Int, promise: Promise) {
-        promise.resolve(SpatialRelationUtil.isCircleContainsPoint(
-            center.toLatLng(), radius, point.toLatLng()))
+        promise.resolve(isCircleContainsPoint(center.toLatLng(), radius, point.toLatLng()))
     }
 }
