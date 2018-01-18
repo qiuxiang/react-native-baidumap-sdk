@@ -6,7 +6,18 @@ export default class Clustering extends Component {
   static navigationOptions = { title: 'Marker clustering' }
 
   onLoad = () => this.mapView.animateTo({ zoomLevel: 10 })
-  onStatusChange = status => this.cluster.update(status)
+
+  onStatusChange = status => {
+    this.status = status
+    this.cluster.update(status)
+  }
+
+  onPress = cluster => {
+    this.mapView.animateTo({
+      center: cluster.coordinate,
+      zoomLevel: this.status.zoomLevel + 1,
+    })
+  }
 
   markers = Array(100).fill(0).map((_, i) => ({
     coordinate: {
@@ -31,9 +42,11 @@ export default class Clustering extends Component {
       onLoad: this.onLoad,
       onStatusChange: this.onStatusChange,
     }
+
     return (
       <MapView {...props}>
         <MapView.Cluster
+          onPress={this.onPress}
           ref={ref => this.cluster = ref}
           markers={this.markers}
           renderMarker={this.renderMarker}

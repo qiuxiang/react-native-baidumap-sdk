@@ -37,6 +37,7 @@ export default class Marker extends Component<Props> {
     selected: PropTypes.bool,
   }
 
+
   componentDidUpdate() {
     if (this.props.view && Platform.OS === 'android') {
       this.update()
