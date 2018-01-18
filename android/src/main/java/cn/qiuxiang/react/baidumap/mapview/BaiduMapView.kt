@@ -95,7 +95,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
         map.setOnMarkerClickListener { marker ->
             val markerView = markers[marker.id]
-            markerView?.select()
+            markerView?.active = true
             emit(markerView?.id, "topPress")
             true
         }

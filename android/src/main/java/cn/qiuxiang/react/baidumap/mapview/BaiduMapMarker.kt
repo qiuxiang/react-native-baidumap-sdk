@@ -35,7 +35,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
                 mapView?.map?.hideInfoWindow()
             }
             if (value) {
-                select()
+                showInfoWindow()
             }
             field = value
         }
@@ -89,7 +89,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         }
     }
 
-    fun select() {
+    private fun showInfoWindow() {
         updateCustomInfoWindow()
         updateDefaultInfoWindow()
         mapView?.map?.showInfoWindow(infoWindow)
@@ -133,6 +133,7 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     }
 
     override fun remove() {
+        active = false
         marker?.remove()
     }
 }

@@ -50,7 +50,7 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     override fun receiveCommand(marker: BaiduMapMarker, commandId: Int, args: ReadableArray?) {
         when (commandId) {
-            SELECT -> marker.select()
+            SELECT -> marker.active = true
             UPDATE -> marker.updateMarkerView()
         }
     }
