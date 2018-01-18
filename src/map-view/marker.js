@@ -25,6 +25,7 @@ type Props = {
   view?: ComponentType<*>,
   title?: string,
   selected?: boolean,
+  flat?: boolean,
 } & ViewPropTypes
 
 export default class Marker extends Component<Props> {
@@ -35,6 +36,7 @@ export default class Marker extends Component<Props> {
     image: PropTypes.string,
     title: PropTypes.string,
     selected: PropTypes.bool,
+    flat: PropTypes.bool,
   }
 
 

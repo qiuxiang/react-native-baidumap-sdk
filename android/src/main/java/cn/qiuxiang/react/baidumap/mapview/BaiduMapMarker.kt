@@ -68,6 +68,11 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
         setIcon(BitmapDescriptorFactory.fromResource(drawable))
     }
 
+    fun setFlat(flat: Boolean) {
+        options.flat(flat)
+        marker?.isFlat = flat
+    }
+
     fun setMarkerView(view: View) {
         markerView = view
         view.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->

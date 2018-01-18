@@ -79,4 +79,9 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
     fun setSelected(view: BaiduMapMarker, selected: Boolean) {
         view.active = selected
     }
+
+    @ReactProp(name = "flat")
+    fun setFlat(view: BaiduMapMarker, flat: Boolean) {
+        view.setFlat(flat)
+    }
 }
