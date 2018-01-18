@@ -9,7 +9,7 @@ import BaiduHeatMap from './baidu-heat-map'
 import Indoor from './indoor'
 import Events from './events'
 
-export default mapComponents('mapView', [
+export default mapComponents('mapView', {
   Basic,
   MapStatus,
   AnimatedMapStatus,
@@ -18,4 +18,4 @@ export default mapComponents('mapView', [
   BaiduHeatMap,
   Indoor,
   Events,
-])
+})
