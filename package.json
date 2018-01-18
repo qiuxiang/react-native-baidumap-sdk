@@ -7,7 +7,7 @@
     "mapview",
     "baidumap"
   ],
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "7c00 <i@7c00.cc>",
   "repository": {
     "type": "git",
@@ -36,5 +36,8 @@
     "flow-bin": "^0.63.1",
     "react": "^16.2.0",
     "react-native": "^0.52.0"
+  },
+  "dependencies": {
+    "supercluster": "^3.0.2"
   }
 }

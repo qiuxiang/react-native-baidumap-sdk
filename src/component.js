@@ -25,7 +25,7 @@ export default class Component<T> extends PureComponent<T> {
       // $FlowFixMe: I want to keep this simple
       const handler = this.props[name]
       if (handler) {
-        handlers[name.replace(/^on/, 'onBaiduMap')] = event => handler(event.nativeEvent)
+        handlers[name.replace(/^on/, 'top')] = event => handler(event.nativeEvent)
       }
       return handlers
     }, {})

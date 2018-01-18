@@ -46,7 +46,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         super.addView(mapView)
 
         map.setOnMapLoadedCallback {
-            emit(id, "onLoad")
+            emit(id, "topLoad")
 
             // Some bugs (probably by ReactView) cause the compass to fail to display
             // So I do some hack
@@ -61,21 +61,21 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 val data = poi.position.toWritableMap()
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
-                emit(id, "onClick", data)
+                emit(id, "topClick", data)
                 return true
             }
 
             override fun onMapClick(latLng: LatLng) {
-                emit(id, "onClick", latLng.toWritableMap())
+                emit(id, "topClick", latLng.toWritableMap())
             }
         })
 
         map.setOnMapDoubleClickListener { latLng ->
-            emit(id, "onDoubleClick", latLng.toWritableMap())
+            emit(id, "topDoubleClick", latLng.toWritableMap())
         }
 
         map.setOnMapLongClickListener { latLng ->
-            emit(id, "onLongClick", latLng.toWritableMap())
+            emit(id, "topLongClick", latLng.toWritableMap())
         }
 
         map.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
@@ -89,14 +89,14 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 data.putDouble("zoomLevel", status.zoom.toDouble())
                 data.putDouble("overlook", status.overlook.toDouble())
                 data.putDouble("rotation", status.rotate.toDouble())
-                emit(id, "onStatusChange", data)
+                emit(id, "topStatusChange", data)
             }
         })
 
         map.setOnMarkerClickListener { marker ->
             val markerView = markers[marker.id]
             markerView?.select()
-            emit(markerView?.id, "onPress")
+            emit(markerView?.id, "topPress")
             true
         }
     }

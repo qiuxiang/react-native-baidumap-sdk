@@ -1,5 +1,6 @@
 // @flow
-import * as React from 'react'
+import React from 'react'
+import type { ComponentType } from 'react'
 import PropTypes from 'prop-types'
 import {
   ColorPropType,
@@ -21,7 +22,7 @@ type Props = {
   coordinate: LatLng,
   color?: ColorPropType,
   image?: string,
-  view?: React.ComponentType<*>,
+  view?: ComponentType<*>,
   title?: string,
   selected?: boolean,
 } & ViewPropTypes
@@ -35,7 +36,6 @@ export default class Marker extends Component<Props> {
     title: PropTypes.string,
     selected: PropTypes.bool,
   }
-
 
   componentDidUpdate() {
     if (this.props.view && Platform.OS === 'android') {
@@ -54,12 +54,11 @@ export default class Marker extends Component<Props> {
   }
 
   renderMarkerView() {
-    const { view } = this.props
-    if (view) {
+    if (this.props.view) {
+      // $FlowFixMe
+      const markerView = <this.props.view />
       return (
-        <View style={style.marker} key="marker">
-          <view />
-        </View>
+        <View style={style.marker} key="marker">{markerView}</View>
       )
     }
     return null

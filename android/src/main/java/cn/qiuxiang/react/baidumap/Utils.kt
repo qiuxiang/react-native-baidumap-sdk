@@ -35,7 +35,8 @@ fun LatLng.toWritableMap(): WritableMap {
 
 fun LatLngBounds.toWritableMap(): WritableMap {
     val map = Arguments.createMap()
-    map.putMap("center", this.center.toWritableMap())
+    map.putDouble("latitude", this.center.latitude)
+    map.putDouble("longitude", this.center.longitude)
     map.putDouble("latitudeDelta", Math.abs(this.southwest.latitude - this.northeast.latitude))
     map.putDouble("longitudeDelta", Math.abs(this.southwest.longitude - this.northeast.longitude))
     return map

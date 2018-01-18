@@ -4,13 +4,7 @@ import { requireNativeComponent, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types'
 import { LatLng } from '../prop-types'
 import Component from '../component'
-
-type MapStatus = {
-  zoomLevel?: number,
-  center?: LatLng,
-  overlook?: number,
-  rotation?: number,
-}
+import type { MapStatus } from '..'
 
 type Props = {
   satellite?: boolean,
@@ -32,7 +26,7 @@ type Props = {
   onClick?: LatLng => {},
   onLongClick?: LatLng => {},
   onDoubleClick?: LatLng => {},
-  onStatusChange?: MapStatus => {},
+  onStatusChange?: LatLng => {},
 } & ViewPropTypes
 
 export default class MapView extends Component<Props> {

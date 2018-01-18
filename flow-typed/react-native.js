@@ -1,5 +1,7 @@
+import ReactNative from 'react-native'
+
 declare module 'react-native' {
-  declare module.exports: any
+  declare module.exports: ReactNative
 }
 
 declare module EventEmitter {
