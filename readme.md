@@ -2,8 +2,7 @@
 
 React Native BaiduMap SDK.
 
-[example.apk](https://github.com/qiuxiang/react-native-baidumap-sdk/releases/download/v0.1.0/example.apk)
-
+[example.apk](https://github.com/qiuxiang/react-native-baidumap-sdk/releases/download/v0.1.6/example.apk)
 
 [npm]: https://www.npmjs.com/package/react-native-baidumap-sdk
 [version-badge]: https://badge.fury.io/js/react-native-baidumap-sdk.svg
