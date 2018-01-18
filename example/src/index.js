@@ -1,3 +1,4 @@
+// @flow
 import { StackNavigator } from 'react-navigation'
 import examples from './examples'
 

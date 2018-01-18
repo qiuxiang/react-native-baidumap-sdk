@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved, import/extensions, react/no-multi-comp */
+/* eslint-disable react/no-multi-comp */
 // @flow
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'

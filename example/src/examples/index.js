@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { SectionList, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
@@ -7,6 +8,9 @@ import marker from './marker'
 import overlays from './overlays'
 
 const style = StyleSheet.create({
+  body: {
+    backgroundColor: '#f5f5f5',
+  },
   item: {
     padding: 16,
   },
@@ -26,39 +30,43 @@ const style = StyleSheet.create({
   },
 })
 
-const ListItem = withNavigation(({ title, routeName, navigation }) => (
-  <TouchableNativeFeedback onPress={() => navigation.navigate(routeName)}>
+const ListItem = withNavigation(({ title, route, navigation }) => (
+  <TouchableNativeFeedback onPress={() => navigation.navigate(route)}>
     <View style={style.item}>
       <Text style={style.itemText}>{title}</Text>
     </View>
-  </TouchableNativeFeedback>))
+  </TouchableNativeFeedback>
+))
 
-const SectionHeader = ({ section }: { section: { title: string } }) => (
-  <Text style={style.sectionHeader}>{section.title}</Text>
-)
+function renderSectionHeader({ section }: { section: { title: string } }) {
+  return <Text style={style.sectionHeader}>{section.title}</Text>
+}
 
-const SectionFooter = () => <View style={style.sectionFooter} />
+function renderSectionFooter() {
+  return <View style={style.sectionFooter} />
+}
 
-const mapComponents = components => Object.keys(components).map(key => ({
-  key, title: components[key].title,
-}))
+function mapScreens(components) {
+  return Object.keys(components).map(key => ({ key, title: components[key].title }))
+}
 
 class Examples extends Component<{}> {
   static navigationOptions = { title: 'Examples' }
 
   sections = [
-    { title: 'MapView', data: mapComponents(mapView) },
-    { title: 'Location', data: mapComponents(location) },
-    { title: 'Marker', data: mapComponents(marker) },
-    { title: 'Overlays', data: mapComponents(overlays) },
+    { title: 'MapView', data: mapScreens(mapView) },
+    { title: 'Location', data: mapScreens(location) },
+    { title: 'Marker', data: mapScreens(marker) },
+    { title: 'Overlays', data: mapScreens(overlays) },
   ]
 
   render() {
     return (
       <SectionList
-        renderItem={({ item }) => <ListItem title={item.title} routeName={item.key} />}
-        renderSectionHeader={SectionHeader}
-        renderSectionFooter={SectionFooter}
+        style={style.body}
+        renderItem={({ item }) => <ListItem title={item.title} route={item.key} />}
+        renderSectionHeader={renderSectionHeader}
+        renderSectionFooter={renderSectionFooter}
         sections={this.sections}
       />
     )

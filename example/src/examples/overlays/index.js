@@ -1,10 +1,6 @@
 // @flow
+import { mapComponents } from '../../utils'
 import Polygon from './polygon'
 import Text from './text'
 
-const route = screen => ({ screen, title: screen.navigationOptions.title })
-
-export default {
-  overlaysPolygon: route(Polygon),
-  overlaysText: route(Text),
-}
+export default mapComponents('overlays', [Polygon, Text])

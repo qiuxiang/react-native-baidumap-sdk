@@ -1,3 +1,5 @@
+// @flow
+import { mapComponents } from '../../utils'
 import Basic from './basic'
 import MapStatus from './map-status'
 import AnimatedMapStatus from './animated-map-status'
@@ -7,15 +9,13 @@ import BaiduHeatMap from './baidu-heat-map'
 import Indoor from './indoor'
 import Events from './events'
 
-const route = screen => ({ screen, title: screen.navigationOptions.title })
-
-export default {
-  mapViewBasic: route(Basic),
-  mapViewMapStatus: route(MapStatus),
-  mapViewAnimatedMapStatus: route(AnimatedMapStatus),
-  mapViewSatellite: route(Satellite),
-  mapViewTraffic: route(Traffic),
-  mapViewBaiduHeatMap: route(BaiduHeatMap),
-  mapViewIndoor: route(Indoor),
-  mapViewEvents: route(Events),
-}
+export default mapComponents('mapView', [
+  Basic,
+  MapStatus,
+  AnimatedMapStatus,
+  Satellite,
+  Traffic,
+  BaiduHeatMap,
+  Indoor,
+  Events,
+])

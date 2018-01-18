@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved, import/extensions, react/no-multi-comp */
+/* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react'
 import { StyleSheet, ToastAndroid } from 'react-native'
 import EventSubscription from 'EventSubscription'
