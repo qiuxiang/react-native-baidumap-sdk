@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.FrameLayout
 import cn.qiuxiang.react.baidumap.toLatLng
+import cn.qiuxiang.react.baidumap.toLatLngBounds
 import cn.qiuxiang.react.baidumap.toWritableMap
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLng
@@ -126,8 +127,13 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             mapStatusBuilder.rotate(target.getDouble("rotation").toFloat())
         }
 
-        map.animateMapStatus(
-            MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
+        if (target.hasKey("region")) {
+            map.animateMapStatus(
+                MapStatusUpdateFactory.newLatLngBounds(target.toLatLngBounds()), duration)
+        } else {
+            map.animateMapStatus(
+                MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
+        }
     }
 
     fun add(view: View) {

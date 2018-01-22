@@ -22,6 +22,17 @@ fun ReadableMap.toLatLng(): LatLng {
     return LatLng(this.getDouble("latitude"), this.getDouble("longitude"))
 }
 
+fun ReadableMap.toLatLngBounds(): LatLngBounds {
+    val latitude = this.getDouble("latitude")
+    val longitude = this.getDouble("longitude")
+    val latitudeDelta = this.getDouble("latitudeDelta")
+    val longitudeDelta = this.getDouble("longitudeDelta")
+    return LatLngBounds.Builder()
+        .include(LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2))
+        .include(LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2))
+        .build()
+}
+
 fun ReadableArray.toLatLngList(): List<LatLng> {
     return (0..(this.size() - 1)).map { this.getMap(it).toLatLng() }
 }
