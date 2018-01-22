@@ -51,7 +51,7 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
     }
 
     companion object {
-        val ANIMATE_TO = 0
+        const val ANIMATE_TO = 0
     }
 
     override fun getCommandsMap(): Map<String, Int> {
@@ -102,6 +102,26 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
     @ReactProp(name = "zoomControlsDisabled")
     fun setZoomControlsDisabled(mapView: BaiduMapView, disabled: Boolean) {
         mapView.mapView.showZoomControls(!disabled)
+    }
+
+    @ReactProp(name = "scrollDisabled")
+    fun setScrollDisabled(mapView: BaiduMapView, disabled: Boolean) {
+        mapView.map.uiSettings.isScrollGesturesEnabled = !disabled
+    }
+
+    @ReactProp(name = "overlookDisabled")
+    fun setOverlookDisabled(mapView: BaiduMapView, disabled: Boolean) {
+        mapView.map.uiSettings.isOverlookingGesturesEnabled = !disabled
+    }
+
+    @ReactProp(name = "rotateDisabled")
+    fun setRotateDisabled(mapView: BaiduMapView, disabled: Boolean) {
+        mapView.map.uiSettings.isRotateGesturesEnabled = !disabled
+    }
+
+    @ReactProp(name = "zoomDisabled")
+    fun setZoomDisabled(mapView: BaiduMapView, disabled: Boolean) {
+        mapView.map.uiSettings.isZoomGesturesEnabled = !disabled
     }
 
     @ReactProp(name = "center")

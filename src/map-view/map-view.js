@@ -17,6 +17,10 @@ type Props = {
   compassDisabled?: boolean,
   zoomControlsDisabled?: boolean,
   scaleBarDisabled?: boolean,
+  scrollDisabled?: boolean,
+  overlookDisabled?: boolean,
+  rotateDisabled?: boolean,
+  zoomDisalbed?: boolean,
   center?: LatLng,
   zoomLevel?: number,
   rotation?: number,
@@ -26,7 +30,7 @@ type Props = {
   onClick?: LatLng => {},
   onLongClick?: LatLng => {},
   onDoubleClick?: LatLng => {},
-  onStatusChange?: LatLng => {},
+  onStatusChange?: MapStatus => {},
 } & ViewPropTypes
 
 export default class MapView extends Component<Props> {
@@ -42,6 +46,10 @@ export default class MapView extends Component<Props> {
     compassDisabled: PropTypes.bool,
     zoomControlsDisabled: PropTypes.bool,
     scaleBarDisabled: PropTypes.bool,
+    scrollDisabled: PropTypes.bool,
+    overlookDisabled: PropTypes.bool,
+    rotateDisabled: PropTypes.bool,
+    zoomDisabled: PropTypes.bool,
     center: LatLngPropType,
     zoomLevel: PropTypes.number,
     rotation: PropTypes.number,

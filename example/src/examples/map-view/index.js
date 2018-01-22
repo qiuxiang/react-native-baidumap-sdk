@@ -8,6 +8,7 @@ import Traffic from './traffic'
 import BaiduHeatMap from './baidu-heat-map'
 import Indoor from './indoor'
 import Events from './events'
+import Gestures from './gestures'
 
 export default mapComponents('mapView', {
   Basic,
@@ -18,4 +19,5 @@ export default mapComponents('mapView', {
   BaiduHeatMap,
   Indoor,
   Events,
+  Gestures,
 })

@@ -37,8 +37,8 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
     }
 
     companion object {
-        val SELECT = 0
-        val UPDATE = 1
+        const val SELECT = 0
+        const val UPDATE = 1
     }
 
     override fun getCommandsMap(): Map<String, Int> {
