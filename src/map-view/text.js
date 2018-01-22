@@ -2,7 +2,8 @@
 import React, { PureComponent } from 'react'
 import { ColorPropType, requireNativeComponent, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types'
-import { LatLng } from '../prop-types'
+import { LatLngPropType } from '../prop-types'
+import type { LatLng } from '../types'
 
 type Props = {
   coordinate: LatLng,
@@ -16,7 +17,7 @@ type Props = {
 export default class Text extends PureComponent<Props> {
   static propTypes = {
     ...ViewPropTypes,
-    coordinate: LatLng.isRequired,
+    coordinate: LatLngPropType.isRequired,
     content: PropTypes.string,
     fontSize: PropTypes.number,
     rotation: PropTypes.number,

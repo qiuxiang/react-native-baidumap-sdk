@@ -9,8 +9,9 @@ import {
   StyleSheet,
   View,
   ViewPropTypes } from 'react-native'
-import { LatLng } from '../prop-types'
+import { LatLngPropType } from '../prop-types'
 import Component from '../component'
+import type { LatLng } from '../types'
 
 const style = StyleSheet.create({
   marker: {
@@ -31,14 +32,13 @@ type Props = {
 export default class Marker extends Component<Props> {
   static propTypes = {
     ...ViewPropTypes,
-    coordinate: LatLng.isRequired,
+    coordinate: LatLngPropType.isRequired,
     color: ColorPropType,
     image: PropTypes.string,
     title: PropTypes.string,
     selected: PropTypes.bool,
     flat: PropTypes.bool,
   }
-
 
   componentDidUpdate() {
     if (this.props.view && Platform.OS === 'android') {

@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import type { Element } from 'react'
 import { ViewPropTypes } from 'react-native'
 import SuperCluster from 'supercluster'
-import type { LatLng, MapStatus } from '../..'
+import type { LatLng, MapStatus } from '../../types'
 import ClusterView from './cluster-view'
 
 export type ClusterParams = {

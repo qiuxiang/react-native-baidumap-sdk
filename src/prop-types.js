@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types'
 
-const LatLng = PropTypes.shape({
+const LatLngPropType = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
 })
 
-const Region = PropTypes.shape({
+const RegionPropType = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
   latitudeDelta: PropTypes.number.isRequired,
   longitudeDelta: PropTypes.number.isRequired,
 })
 
-const Point = PropTypes.shape({
+const PointPropType = PropTypes.shape({
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
 })
 
-export { LatLng, Region, Point }
+export { LatLngPropType, RegionPropType, PointPropType }

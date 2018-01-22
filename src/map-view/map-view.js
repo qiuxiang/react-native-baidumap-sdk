@@ -2,9 +2,9 @@
 import React from 'react'
 import { requireNativeComponent, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types'
-import { LatLng } from '../prop-types'
+import { LatLngPropType } from '../prop-types'
 import Component from '../component'
-import type { MapStatus } from '..'
+import type { LatLng, MapStatus } from '../types'
 
 type Props = {
   satellite?: boolean,
@@ -42,7 +42,7 @@ export default class MapView extends Component<Props> {
     compassDisabled: PropTypes.bool,
     zoomControlsDisabled: PropTypes.bool,
     scaleBarDisabled: PropTypes.bool,
-    center: LatLng,
+    center: LatLngPropType,
     zoomLevel: PropTypes.number,
     rotation: PropTypes.number,
     overlook: PropTypes.number,
