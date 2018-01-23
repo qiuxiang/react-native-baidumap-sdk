@@ -2,6 +2,7 @@ package cn.qiuxiang.react.baidumap
 
 import android.content.res.Resources
 import com.baidu.mapapi.SDKInitializer
+import com.baidu.mapapi.map.MyLocationData
 import com.baidu.mapapi.model.LatLng
 import com.baidu.mapapi.model.LatLngBounds
 import com.facebook.react.bridge.Arguments
@@ -31,6 +32,22 @@ fun ReadableMap.toLatLngBounds(): LatLngBounds {
         .include(LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2))
         .include(LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2))
         .build()
+}
+
+fun ReadableMap.toLocationData(): MyLocationData {
+    val builder = MyLocationData.Builder()
+        .latitude(this.getDouble("latitude"))
+        .longitude(this.getDouble("longitude"))
+
+    if (this.hasKey("accuracy")) {
+        builder.accuracy(this.getDouble("accuracy").toFloat())
+    }
+
+    if (this.hasKey("direction")) {
+        builder.direction(this.getDouble("direction").toFloat())
+    }
+
+    return builder.build()
 }
 
 fun ReadableArray.toLatLngList(): List<LatLng> {

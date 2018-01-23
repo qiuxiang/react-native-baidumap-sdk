@@ -24,7 +24,6 @@ export default class ReGeoCode extends Component {
   componentDidMount() {
     Location.setOptions({
       gps: true,
-      auto: true,
       reGeocode: true,
     })
     Location.request()

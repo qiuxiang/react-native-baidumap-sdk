@@ -15,3 +15,10 @@ export type MapStatus = {
   rotation: number,
   zoomLevel: number,
 }
+
+export type Location = {
+  accuracy?: number,
+  direction?: number,
+  latitude: number,
+  longitude: number,
+}

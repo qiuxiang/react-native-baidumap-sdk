@@ -3,10 +3,13 @@ package cn.qiuxiang.react.baidumap.mapview
 import android.view.View
 import cn.qiuxiang.react.baidumap.initialize
 import cn.qiuxiang.react.baidumap.toLatLng
+import cn.qiuxiang.react.baidumap.toLocationData
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_NORMAL
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_SATELLITE
 import com.baidu.mapapi.map.MapStatus
 import com.baidu.mapapi.map.MapStatusUpdateFactory
+import com.baidu.mapapi.map.MyLocationConfiguration
+import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -146,6 +149,22 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
         mapView.map.setMapStatus(MapStatusUpdateFactory.newMapStatus(
             MapStatus.Builder().overlook(overlook).build()
         ))
+    }
+
+    @ReactProp(name = "locationEnabled")
+    fun setLocationEnabled(mapView: BaiduMapView, enabled: Boolean) {
+        mapView.map.isMyLocationEnabled = enabled
+    }
+
+    @ReactProp(name = "location")
+    fun setLocationEnabled(mapView: BaiduMapView, data: ReadableMap) {
+        mapView.map.setMyLocationData(data.toLocationData())
+    }
+
+    @ReactProp(name = "compassMode")
+    fun setCompassMode(mapView: BaiduMapView, enabled: Boolean) {
+        val mode = if (enabled) LocationMode.COMPASS else LocationMode.NORMAL
+        mapView.map.setMyLocationConfiguration(MyLocationConfiguration(mode, true, null))
     }
 
     @ReactProp(name = "paused")

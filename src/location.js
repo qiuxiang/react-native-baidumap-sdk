@@ -1,5 +1,6 @@
 // @flow
 import { NativeModules, NativeEventEmitter } from 'react-native'
+import type { Location } from './types'
 
 const { BaiduMapLocation } = NativeModules
 const eventEmitter = new NativeEventEmitter(BaiduMapLocation)
@@ -17,12 +18,8 @@ type Options = {
 type Listener = (listener: {
   time: string,
   coordinateType: string,
-  accuracy: number,
-  latitude: number,
-  longitude: number,
   altitude: number,
   speed: number,
-  direction: number,
   country: string,
   countryCode: string,
   province: string,
@@ -34,7 +31,7 @@ type Listener = (listener: {
   adCode: string,
   description: string,
   locationType: number,
-}) => {}
+} & Location) => {}
 
 export default {
   start: () => BaiduMapLocation.start(),

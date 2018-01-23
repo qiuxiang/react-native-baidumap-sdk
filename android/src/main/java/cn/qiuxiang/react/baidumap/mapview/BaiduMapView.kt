@@ -7,6 +7,7 @@ import cn.qiuxiang.react.baidumap.toLatLng
 import cn.qiuxiang.react.baidumap.toLatLngBounds
 import cn.qiuxiang.react.baidumap.toWritableMap
 import com.baidu.mapapi.map.*
+import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
@@ -44,6 +45,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
     init {
         mapView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        map.setMyLocationConfiguration(MyLocationConfiguration(LocationMode.NORMAL, true, null))
         super.addView(mapView)
 
         map.setOnMapLoadedCallback {
@@ -140,7 +142,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         if (view is BaiduMapOverlay) {
             view.addTo(this)
             when (view) {
-                is BaiduMapMarker -> markers.put(view.marker?.id!!, view)
+                is BaiduMapMarker -> markers[view.marker?.id!!] = view
             }
         }
     }
