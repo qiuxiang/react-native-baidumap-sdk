@@ -1,3 +1,8 @@
+export type Point = {
+  x: number,
+  y: number,
+}
+
 export type LatLng = {
   latitude: number,
   longitude: number,

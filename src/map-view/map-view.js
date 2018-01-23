@@ -3,8 +3,17 @@ import React from 'react'
 import { requireNativeComponent, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types'
 import { LatLngPropType, LocationPropType } from '../prop-types'
-import type { LatLng, Location, MapStatus } from '../types'
+import type { LatLng, Location, MapStatus, Point, Region } from '../types'
 import Component from '../component'
+
+type Target = {
+  center?: LatLng,
+  point?: Point,
+  region?: Region,
+  overlook?: number,
+  rotation?: number,
+  zoomLevel?: number,
+}
 
 type Props = {
   satellite?: boolean,
@@ -65,7 +74,7 @@ export default class MapView extends Component<Props> {
 
   nativeComponentName = 'BaiduMapView'
 
-  animateTo(target: MapStatus, duration?: number = 500) {
+  animateTo(target: Target, duration?: number = 500) {
     this.call('animateTo', [target, duration])
   }
 

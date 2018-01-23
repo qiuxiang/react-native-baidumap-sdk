@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.FrameLayout
 import cn.qiuxiang.react.baidumap.toLatLng
 import cn.qiuxiang.react.baidumap.toLatLngBounds
+import cn.qiuxiang.react.baidumap.toPoint
 import cn.qiuxiang.react.baidumap.toWritableMap
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode
@@ -127,6 +128,10 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
         if (target.hasKey("rotation")) {
             mapStatusBuilder.rotate(target.getDouble("rotation").toFloat())
+        }
+
+        if (target.hasKey("point")) {
+            mapStatusBuilder.targetScreen(target.getMap("point").toPoint())
         }
 
         if (target.hasKey("region")) {

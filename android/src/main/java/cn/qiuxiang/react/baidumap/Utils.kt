@@ -1,6 +1,7 @@
 package cn.qiuxiang.react.baidumap
 
 import android.content.res.Resources
+import android.graphics.Point
 import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.MyLocationData
 import com.baidu.mapapi.model.LatLng
@@ -17,6 +18,13 @@ fun initialize(context: ThemedReactContext) {
     if (!isInitialized) {
         SDKInitializer.initialize(context.applicationContext)
     }
+}
+
+fun ReadableMap.toPoint(): Point {
+    return Point(
+        this.getDouble("x").toFloat().toPx(),
+        this.getDouble("y").toFloat().toPx()
+    )
 }
 
 fun ReadableMap.toLatLng(): LatLng {
