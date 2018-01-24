@@ -109,7 +109,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         id?.let { emitter.receiveEvent(it, name, data) }
     }
 
-    fun animateTo(args: ReadableArray?) {
+    fun setStatus(args: ReadableArray?) {
         val target = args!!.getMap(0)
         val duration = args.getInt(1)
         val mapStatusBuilder = MapStatus.Builder()
@@ -131,15 +131,24 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         }
 
         if (target.hasKey("point")) {
-            mapStatusBuilder.targetScreen(target.getMap("point").toPoint())
+            val point = target.getMap("point").toPoint()
+            mapStatusBuilder.target(map.projection.fromScreenLocation(point))
         }
 
         if (target.hasKey("region")) {
-            map.animateMapStatus(
+            setStatus(
                 MapStatusUpdateFactory.newLatLngBounds(target.toLatLngBounds()), duration)
         } else {
-            map.animateMapStatus(
+            setStatus(
                 MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
+        }
+    }
+
+    private fun setStatus(statusUpdate: MapStatusUpdate, duration: Int) {
+        if (duration == 0) {
+            map.setMapStatus(statusUpdate)
+        } else {
+            map.animateMapStatus(statusUpdate, duration)
         }
     }
 

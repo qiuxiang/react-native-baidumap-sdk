@@ -22,12 +22,9 @@ export default class ReGeoCode extends Component {
   state = {}
 
   componentDidMount() {
-    Location.setOptions({
-      gps: true,
-      reGeocode: true,
-    })
-    Location.request()
     this.listener = Location.addLocationListener(location => this.setState(location))
+    Location.setOptions({ gps: true, reGeocode: true })
+    Location.request()
   }
 
   componentWillUnmount() {

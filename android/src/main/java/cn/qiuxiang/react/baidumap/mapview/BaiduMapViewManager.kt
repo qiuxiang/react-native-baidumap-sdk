@@ -54,16 +54,16 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
     }
 
     companion object {
-        const val ANIMATE_TO = 0
+        const val SET_STATUS = 0
     }
 
     override fun getCommandsMap(): Map<String, Int> {
-        return mapOf("animateTo" to ANIMATE_TO)
+        return mapOf("setStatus" to SET_STATUS)
     }
 
     override fun receiveCommand(mapView: BaiduMapView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
-            ANIMATE_TO -> mapView.animateTo(args)
+            SET_STATUS -> mapView.setStatus(args)
         }
     }
 

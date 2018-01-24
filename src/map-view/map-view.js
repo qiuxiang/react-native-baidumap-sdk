@@ -6,7 +6,7 @@ import { LatLngPropType, LocationPropType } from '../prop-types'
 import type { LatLng, Location, MapStatus, Point, Region } from '../types'
 import Component from '../component'
 
-type Target = {
+type Status = {
   center?: LatLng,
   point?: Point,
   region?: Region,
@@ -72,11 +72,11 @@ export default class MapView extends Component<Props> {
     paused: PropTypes.bool,
   }
 
-  nativeComponentName = 'BaiduMapView'
-
-  animateTo(target: Target, duration?: number = 500) {
-    this.call('animateTo', [target, duration])
+  setStatus(status: Status, duration?: number = 0) {
+    this.call('setStatus', [status, duration])
   }
+
+  nativeComponentName = 'BaiduMapView'
 
   render() {
     const props = {
