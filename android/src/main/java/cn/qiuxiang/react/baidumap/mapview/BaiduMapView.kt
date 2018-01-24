@@ -135,21 +135,18 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             mapStatusBuilder.target(map.projection.fromScreenLocation(point))
         }
 
-        if (target.hasKey("region")) {
-            setStatus(
-                MapStatusUpdateFactory.newLatLngBounds(target.toLatLngBounds()), duration)
+        val mapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build())
+
+        if (duration == 0) {
+            map.setMapStatus(mapStatusUpdate)
         } else {
-            setStatus(
-                MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
+            map.animateMapStatus(mapStatusUpdate, duration)
         }
     }
 
-    private fun setStatus(statusUpdate: MapStatusUpdate, duration: Int) {
-        if (duration == 0) {
-            map.setMapStatus(statusUpdate)
-        } else {
-            map.animateMapStatus(statusUpdate, duration)
-        }
+    fun setRegion(args: ReadableArray?) {
+        val bounds = args!!.getMap(0).toLatLngBounds()
+        map.animateMapStatus(MapStatusUpdateFactory.newLatLngBounds(bounds), 500)
     }
 
     fun add(view: View) {

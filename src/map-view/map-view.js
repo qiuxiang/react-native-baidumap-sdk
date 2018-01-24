@@ -9,7 +9,6 @@ import Component from '../component'
 type Status = {
   center?: LatLng,
   point?: Point,
-  region?: Region,
   overlook?: number,
   rotation?: number,
   zoomLevel?: number,
@@ -74,6 +73,10 @@ export default class MapView extends Component<Props> {
 
   setStatus(status: Status, duration?: number = 0) {
     this.call('setStatus', [status, duration])
+  }
+
+  setRegion(region: Region) {
+    this.call('setRegion', [region])
   }
 
   nativeComponentName = 'BaiduMapView'

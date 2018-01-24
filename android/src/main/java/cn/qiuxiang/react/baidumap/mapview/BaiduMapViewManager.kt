@@ -55,15 +55,17 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
 
     companion object {
         const val SET_STATUS = 0
+        const val SET_REGION = 1
     }
 
     override fun getCommandsMap(): Map<String, Int> {
-        return mapOf("setStatus" to SET_STATUS)
+        return mapOf("setStatus" to SET_STATUS, "setRegion" to SET_REGION)
     }
 
     override fun receiveCommand(mapView: BaiduMapView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             SET_STATUS -> mapView.setStatus(args)
+            SET_REGION -> mapView.setRegion(args)
         }
     }
 
