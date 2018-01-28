@@ -74,6 +74,7 @@ class Examples extends Component<{}> {
 }
 
 export default {
+  _: mapView.mapViewBasic,
   examples: { screen: Examples },
   ...mapView,
   ...location,
