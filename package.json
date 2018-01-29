@@ -1,0 +1,50 @@
+{
+  "name": "react-native-baidumap-sdk",
+  "description": "React Native BaiduMap SDK",
+  "keywords": [
+    "react-native",
+    "maps",
+    "mapview",
+    "baidumap"
+  ],
+  "version": "0.1.6",
+  "author": "7c00 <i@7c00.cc>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qiuxiang/react-native-baidumap-sdk"
+  },
+  "license": "MIT",
+  "files": [
+    "lib/js",
+    "lib/android/src",
+    "lib/android/build.gradle"
+  ],
+  "main": "lib/js",
+  "scripts": {
+    "test": "eslint . && flow",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
+    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
+    "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release"
+  },
+  "dependencies": {
+    "supercluster": "^3.0.2"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.47"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "babel-preset-react-native": "^4.0.0",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "flow-bin": "^0.63.1",
+    "react": "^16.2.0",
+    "react-native": "^0.52.0",
+    "react-navigation": "^1.0.0-beta.23"
+  }
+}
