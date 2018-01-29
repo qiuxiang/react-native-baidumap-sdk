@@ -6,11 +6,12 @@ module.exports = {
     'arrow-parens': ['error', 'as-needed'],
     'no-console': ['warn'],
     'no-return-assign': 'off',
-    'no-param-reassign': 'off',
     'react/jsx-filename-extension': 'off',
     'react/require-default-props': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/extensions': 'off',
-    'import/no-unresolved': 'off',
+    'import/no-unresolved': ['error', {
+      ignore: ['react-native-baidumap-sdk', 'EventEmitter'],
+    }],
   },
 }
