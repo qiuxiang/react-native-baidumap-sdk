@@ -13,11 +13,11 @@ class BaiduMapPackage : ReactPackage {
 
     override fun createViewManagers(context: ReactApplicationContext): List<ViewManager<*, *>> {
         return listOf(
-            BaiduMapViewManager(),
-            BaiduMapMarkerManager(),
-            BaiduMapCalloutManager(),
-            BaiduMapPolygonManager(),
-            BaiduMapTextManager()
+                BaiduMapViewManager(),
+                BaiduMapMarkerManager(),
+                BaiduMapCalloutManager(),
+                BaiduMapPolygonManager(),
+                BaiduMapTextManager()
         )
     }
 }

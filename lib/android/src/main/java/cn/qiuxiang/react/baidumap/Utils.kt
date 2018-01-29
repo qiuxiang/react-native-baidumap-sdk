@@ -17,13 +17,14 @@ var isInitialized = false
 fun initialize(context: ThemedReactContext) {
     if (!isInitialized) {
         SDKInitializer.initialize(context.applicationContext)
+        isInitialized = true
     }
 }
 
 fun ReadableMap.toPoint(): Point {
     return Point(
-        this.getDouble("x").toFloat().toPx(),
-        this.getDouble("y").toFloat().toPx()
+            this.getDouble("x").toFloat().toPx(),
+            this.getDouble("y").toFloat().toPx()
     )
 }
 
@@ -37,15 +38,15 @@ fun ReadableMap.toLatLngBounds(): LatLngBounds {
     val latitudeDelta = this.getDouble("latitudeDelta")
     val longitudeDelta = this.getDouble("longitudeDelta")
     return LatLngBounds.Builder()
-        .include(LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2))
-        .include(LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2))
-        .build()
+            .include(LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2))
+            .include(LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2))
+            .build()
 }
 
 fun ReadableMap.toLocationData(): MyLocationData {
     val builder = MyLocationData.Builder()
-        .latitude(this.getDouble("latitude"))
-        .longitude(this.getDouble("longitude"))
+            .latitude(this.getDouble("latitude"))
+            .longitude(this.getDouble("longitude"))
 
     if (this.hasKey("accuracy")) {
         builder.accuracy(this.getDouble("accuracy").toFloat())

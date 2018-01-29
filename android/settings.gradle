@@ -1,0 +1,5 @@
+rootProject.name = 'RNBaiduMap'
+include ':react-native-baidumap-sdk'
+project(':react-native-baidumap-sdk').projectDir = new File(rootProject.projectDir, '../lib/android')
+
+include ':app'

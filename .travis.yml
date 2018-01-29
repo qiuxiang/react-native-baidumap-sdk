@@ -4,11 +4,6 @@ jobs:
       language: node_js
       node_js: node
       cache: yarn
-      script:
-        - cd example
-        - yarn
-        - cd ..
-        - yarn test
 
 stages:
   - "test js"

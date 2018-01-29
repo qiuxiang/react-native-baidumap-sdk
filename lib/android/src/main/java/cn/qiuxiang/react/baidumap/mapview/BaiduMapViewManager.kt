@@ -45,11 +45,11 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         return MapBuilder.of(
-            "topLoad", MapBuilder.of("registrationName", "topLoad"),
-            "topClick", MapBuilder.of("registrationName", "topClick"),
-            "topLongClick", MapBuilder.of("registrationName", "topClick"),
-            "topDoubleClick", MapBuilder.of("registrationName", "topDoubleClick"),
-            "topStatusChange", MapBuilder.of("registrationName", "topStatusChange")
+                "topLoad", MapBuilder.of("registrationName", "topLoad"),
+                "topClick", MapBuilder.of("registrationName", "topClick"),
+                "topLongClick", MapBuilder.of("registrationName", "topClick"),
+                "topDoubleClick", MapBuilder.of("registrationName", "topDoubleClick"),
+                "topStatusChange", MapBuilder.of("registrationName", "topStatusChange")
         )
     }
 
@@ -140,14 +140,14 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
     @ReactProp(name = "rotation")
     fun setRotate(mapView: BaiduMapView, rotation: Float) {
         mapView.map.setMapStatus(MapStatusUpdateFactory.newMapStatus(
-            MapStatus.Builder().rotate(rotation).build()
+                MapStatus.Builder().rotate(rotation).build()
         ))
     }
 
     @ReactProp(name = "overlook")
     fun setOverlook(mapView: BaiduMapView, overlook: Float) {
         mapView.map.setMapStatus(MapStatusUpdateFactory.newMapStatus(
-            MapStatus.Builder().overlook(overlook).build()
+                MapStatus.Builder().overlook(overlook).build()
         ))
     }
 

@@ -1,4 +1,12 @@
-import { AppRegistry } from 'react-native'
-import App from './src'
+// @flow
+import { StackNavigator } from 'react-navigation'
+import examples from './examples'
 
-AppRegistry.registerComponent('BaiduMap', () => App)
+export default StackNavigator(examples, {
+  navigationOptions: {
+    headerTintColor: '#fff',
+    headerStyle: {
+      backgroundColor: '#292c36',
+    },
+  },
+})

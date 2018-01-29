@@ -15,19 +15,28 @@
   },
   "license": "MIT",
   "files": [
-    "src",
-    "android/src",
-    "android/build.gradle"
+    "lib/js",
+    "lib/android/src",
+    "lib/android/build.gradle"
   ],
-  "main": "src",
+  "main": "lib/js",
   "scripts": {
-    "test": "eslint src example/src && flow"
+    "test": "eslint . && flow",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
+    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
+    "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release"
+  },
+  "dependencies": {
+    "supercluster": "^3.0.2"
   },
   "peerDependencies": {
     "react-native": ">=0.47"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
+    "babel-preset-react-native": "^4.0.0",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
@@ -35,9 +44,7 @@
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.63.1",
     "react": "^16.2.0",
-    "react-native": "^0.52.0"
-  },
-  "dependencies": {
-    "supercluster": "^3.0.2"
+    "react-native": "^0.52.0",
+    "react-navigation": "^1.0.0-beta.23"
   }
 }

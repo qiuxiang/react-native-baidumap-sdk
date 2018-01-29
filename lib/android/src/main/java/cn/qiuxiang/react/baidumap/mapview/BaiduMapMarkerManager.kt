@@ -31,8 +31,8 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         return MapBuilder.of(
-            "topPress", MapBuilder.of("registrationName", "topPress"),
-            "topCalloutPress", MapBuilder.of("registrationName", "topCalloutPress")
+                "topPress", MapBuilder.of("registrationName", "topPress"),
+                "topCalloutPress", MapBuilder.of("registrationName", "topCalloutPress")
         )
     }
 
@@ -43,8 +43,8 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
-            "select" to SELECT,
-            "update" to UPDATE
+                "select" to SELECT,
+                "update" to UPDATE
         )
     }
 
