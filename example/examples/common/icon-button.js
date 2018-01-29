@@ -16,11 +16,11 @@ const style = StyleSheet.create({
 type Props = {
   onPress: () => {},
   source: Image.propTypes.source,
-  tintColor: ColorPropType,
+  color: ColorPropType,
 }
 
-export default ({ onPress, source, tintColor }: Props) => {
-  tintColor = tintColor || '#fff'
+export default ({ onPress, source, color }: Props) => {
+  const tintColor = color || '#fff'
   return (
     <Touchable onPress={onPress} borderless>
       <View style={style.container}>

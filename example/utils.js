@@ -13,6 +13,7 @@ export function mapComponents(
   return Object.keys(screens).reduce((result, name) => {
     const screen = screens[name]
     const { title } = screen.navigationOptions
+    /* eslint-disable no-param-reassign */
     result[`${prefix}${name}`] = { screen, title }
     return result
   }, {})
