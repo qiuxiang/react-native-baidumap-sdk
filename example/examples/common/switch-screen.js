@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 // @flow
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
@@ -13,6 +12,7 @@ const style = StyleSheet.create({
   },
 })
 
+/* eslint-disable react/no-multi-comp */
 class SwitchButton extends Component<{}, { value : boolean }> {
   state = { value: true }
 
