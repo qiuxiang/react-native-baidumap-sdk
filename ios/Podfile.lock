@@ -1,0 +1,43 @@
+PODS:
+  - BaiduMapKit (3.4.4)
+  - React (0.52.2):
+    - React/Core (= 0.52.2)
+  - react-native-baidumap-sdk (0.1.6):
+    - BaiduMapKit
+    - React
+  - React/Core (0.52.2):
+    - yoga (= 0.52.2.React)
+  - React/DevSupport (0.52.2):
+    - React/Core
+    - React/RCTWebSocket
+  - React/fishhook (0.52.2)
+  - React/RCTBlob (0.52.2):
+    - React/Core
+  - React/RCTWebSocket (0.52.2):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - yoga (0.52.2.React)
+
+DEPENDENCIES:
+  - react-native-baidumap-sdk (from `../lib/ios`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  react-native-baidumap-sdk:
+    :path: ../lib/ios
+  yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga
+
+SPEC CHECKSUMS:
+  BaiduMapKit: 4ac88f5a363500760392825b69709f4a0125f81e
+  React: 43e97926f429d846050880666de1809e22dd5cc5
+  react-native-baidumap-sdk: 1def8f0c24de77e71233aaaa7549057b6828d24e
+  yoga: 55da126afc384965b96bff46652464373b330add
+
+PODFILE CHECKSUM: 3cfe9031fdb902a31317c38f6b566131fc183974
+
+COCOAPODS: 1.4.0

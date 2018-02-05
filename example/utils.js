@@ -1,5 +1,7 @@
 // @flow
-import type { NavigationComponent } from 'react-navigation/src/TypeDefinition'
+
+// TODO: add type definition
+type NavigationComponent = any
 
 export function mapComponents(
   prefix: string,

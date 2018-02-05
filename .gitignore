@@ -2,7 +2,9 @@
 .gradle/
 node_modules/
 build/
-captures/
+xcuserdata/
+*.xcworkspac/
+Pods/
 
 *.iml
 local.properties
