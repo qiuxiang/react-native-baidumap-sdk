@@ -1,11 +1,24 @@
 // @flow
 import React, { Component } from 'react'
-import { SectionList, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
+import {
+  Platform,
+  SectionList,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  View,
+} from 'react-native'
 import { withNavigation } from 'react-navigation'
 import mapView from './map-view'
 import location from './location'
 import marker from './marker'
 import overlays from './overlays'
+
+let Touchable = TouchableHighlight
+if (Platform.OS === 'android') {
+  Touchable = TouchableNativeFeedback
+}
 
 const style = StyleSheet.create({
   body: {
@@ -13,6 +26,7 @@ const style = StyleSheet.create({
   },
   item: {
     padding: 16,
+    backgroundColor: '#f5f5f5',
   },
   itemText: {
     color: '#212121',
@@ -20,8 +34,8 @@ const style = StyleSheet.create({
   },
   sectionHeader: {
     color: '#757575',
+    backgroundColor: '#f5f5f5',
     padding: 16,
-    paddingBottom: 24,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#bdbdbd',
   },
@@ -31,11 +45,11 @@ const style = StyleSheet.create({
 })
 
 const ListItem = withNavigation(({ title, route, navigation }) => (
-  <TouchableNativeFeedback onPress={() => navigation.navigate(route)}>
+  <Touchable onPress={() => navigation.navigate(route)}>
     <View style={style.item}>
       <Text style={style.itemText}>{title}</Text>
     </View>
-  </TouchableNativeFeedback>
+  </Touchable>
 ))
 
 function renderSectionHeader({ section }: { section: { title: string } }) {

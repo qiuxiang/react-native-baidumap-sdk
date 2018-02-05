@@ -1,0 +1,10 @@
+.idea/
+.gradle/
+node_modules/
+build/
+xcuserdata/
+*.xcworkspac/
+Pods/
+
+*.iml
+local.properties
