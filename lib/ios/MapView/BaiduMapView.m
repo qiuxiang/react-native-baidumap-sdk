@@ -96,15 +96,17 @@
 }
 
 - (void)mapView:(BaiduMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    self.onBaiduMapStatusChange(@{
-        @"center": @{
-            @"latitude": @(self.centerCoordinate.latitude),
-            @"longitude": @(self.centerCoordinate.longitude),
-        },
-        @"zoomLevel": @(self.zoomLevel),
-        @"rotation": @(self.rotation),
-        @"overlook": @(self.overlooking),
-    });
+    if (self.onBaiduMapStatusChange) {
+        self.onBaiduMapStatusChange(@{
+            @"center": @{
+                @"latitude": @(self.centerCoordinate.latitude),
+                @"longitude": @(self.centerCoordinate.longitude),
+            },
+            @"zoomLevel": @(self.zoomLevel),
+            @"rotation": @(self.rotation),
+            @"overlook": @(self.overlooking),
+        });
+    }
 }
 
 @end
