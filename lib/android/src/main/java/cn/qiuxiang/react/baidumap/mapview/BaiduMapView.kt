@@ -50,7 +50,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         super.addView(mapView)
 
         map.setOnMapLoadedCallback {
-            emit(id, "topLoad")
+            emit(id, "onLoad")
 
             // Some bugs (probably by ReactView) cause the compass to fail to display
             // So I do some hack
@@ -65,21 +65,21 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 val data = poi.position.toWritableMap()
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
-                emit(id, "topClick", data)
+                emit(id, "onClick", data)
                 return true
             }
 
             override fun onMapClick(latLng: LatLng) {
-                emit(id, "topClick", latLng.toWritableMap())
+                emit(id, "onClick", latLng.toWritableMap())
             }
         })
 
         map.setOnMapDoubleClickListener { latLng ->
-            emit(id, "topDoubleClick", latLng.toWritableMap())
+            emit(id, "onDoubleClick", latLng.toWritableMap())
         }
 
         map.setOnMapLongClickListener { latLng ->
-            emit(id, "topLongClick", latLng.toWritableMap())
+            emit(id, "onLongClick", latLng.toWritableMap())
         }
 
         map.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
@@ -93,14 +93,14 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 data.putDouble("zoomLevel", status.zoom.toDouble())
                 data.putDouble("overlook", status.overlook.toDouble())
                 data.putDouble("rotation", status.rotate.toDouble())
-                emit(id, "topStatusChange", data)
+                emit(id, "onStatusChange", data)
             }
         })
 
         map.setOnMarkerClickListener { marker ->
             val markerView = markers[marker.id]
             markerView?.active = true
-            emit(markerView?.id, "topPress")
+            emit(markerView?.id, "onPress")
             true
         }
     }
