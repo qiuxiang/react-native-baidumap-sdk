@@ -1,8 +1,13 @@
+#import <React/UIView+React.h>
 #import "BaiduMapView.h"
+#import "BaiduMapMarker.h"
 
-@implementation BaiduMapView
+@implementation BaiduMapView {
+    NSMutableDictionary *_markers;
+}
 
 - (instancetype)init {
+    _markers = [NSMutableDictionary new];
     self = [super init];
     self.delegate = self;
     return self;
@@ -106,6 +111,43 @@
             @"rotation": @(self.rotation),
             @"overlook": @(self.overlooking),
         });
+    }
+}
+
+- (BMKAnnotationView *)mapView:(BaiduMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[BaiduMapMarker class]]) {
+        BaiduMapMarker *marker = (BaiduMapMarker *)annotation;
+        return marker.annotationView;
+    }
+    return nil;
+}
+
+- (void)mapView:(BaiduMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view {
+    BaiduMapMarker *marker = [self getMarker:view.annotation];
+    [marker updateCalloutPressHandler];
+}
+
+- (BaiduMapMarker *)getMarker:(id <BMKAnnotation>)annotation {
+    return _markers[[@(annotation.hash) stringValue]];
+}
+
+- (void)didAddSubview:(UIView *)subview {
+    if ([subview isKindOfClass:[BaiduMapMarker class]]) {
+        BaiduMapMarker *marker = (BaiduMapMarker *) subview;
+        marker.mapView = self;
+        _markers[[@(marker.hash) stringValue]] = marker;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addAnnotation:marker];
+        });
+    }
+}
+
+- (void)removeReactSubview:(id <RCTComponent>)subview {
+    [super removeReactSubview:(UIView *) subview];
+    if ([subview isKindOfClass:[BaiduMapMarker class]]) {
+        BaiduMapMarker *marker = (BaiduMapMarker *) subview;
+        [_markers removeObjectForKey:[@(marker.annotation.hash) stringValue]];
+        [self removeAnnotation:marker];
     }
 }
 
