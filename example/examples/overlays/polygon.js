@@ -25,7 +25,7 @@ export default class Polygon extends Component {
       <MapView style={StyleSheet.absoluteFill}>
         <MapView.Polygon
           points={points}
-          strokeWidth={5}
+          strokeWidth={2}
           strokeColor="rgba(0, 0, 255, 0.5)"
           fillColor="rgba(255, 0, 0, 0.5)"
         />

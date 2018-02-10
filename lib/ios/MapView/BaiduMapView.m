@@ -1,13 +1,16 @@
 #import <React/UIView+React.h>
 #import "BaiduMapView.h"
 #import "BaiduMapMarker.h"
+#import "BaiduMapOverlay.h"
 
 @implementation BaiduMapView {
     NSMutableDictionary *_markers;
+    NSMutableDictionary *_overlays;
 }
 
 - (instancetype)init {
     _markers = [NSMutableDictionary new];
+    _overlays = [NSMutableDictionary new];
     self = [super init];
     self.delegate = self;
     return self;
@@ -128,6 +131,11 @@
     return nil;
 }
 
+- (BMKOverlayView *)mapView:(BaiduMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay {
+    BaiduMapOverlay *o = [self getOverlay:overlay];
+    return o.overlayView;
+}
+
 - (void)mapView:(BaiduMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view {
     BaiduMapMarker *marker = [self getMarker:view.annotation];
     [marker bindCalloutPressHandler];
@@ -137,12 +145,21 @@
     return _markers[[@(annotation.hash) stringValue]];
 }
 
+- (BaiduMapOverlay *)getOverlay:(id <BMKOverlay>)overlay {
+    return _overlays[[@(overlay.hash) stringValue]];
+}
+
 - (void)didAddSubview:(UIView *)subview {
     if ([subview isKindOfClass:[BaiduMapMarker class]]) {
-        BaiduMapMarker *marker = (BaiduMapMarker *) subview;
+        BaiduMapMarker *marker = (BaiduMapMarker *)subview;
         marker.mapView = self;
         _markers[[@(marker.hash) stringValue]] = marker;
         [self addAnnotation:marker];
+    }
+    if ([subview isKindOfClass:[BaiduMapOverlay class]]) {
+        BaiduMapOverlay *overlay = (BaiduMapOverlay *)subview;
+        _overlays[[@(overlay.overlay.hash) stringValue]] = overlay;
+        [self addOverlay:overlay.overlay];
     }
 }
 
@@ -152,6 +169,11 @@
         BaiduMapMarker *marker = (BaiduMapMarker *) subview;
         [_markers removeObjectForKey:[@(marker.annotation.hash) stringValue]];
         [self removeAnnotation:marker];
+    }
+    if ([subview isKindOfClass:[BaiduMapOverlay class]]) {
+        BaiduMapOverlay *overlay = (BaiduMapOverlay *)subview;
+        _overlays[[@(overlay.hash) stringValue]] = overlay;
+        [self removeOverlay:overlay.overlay];
     }
 }
 
