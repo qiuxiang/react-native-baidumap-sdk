@@ -136,9 +136,7 @@
         BaiduMapMarker *marker = (BaiduMapMarker *) subview;
         marker.mapView = self;
         _markers[[@(marker.hash) stringValue]] = marker;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addAnnotation:marker];
-        });
+        [self addAnnotation:marker];
     }
 }
 

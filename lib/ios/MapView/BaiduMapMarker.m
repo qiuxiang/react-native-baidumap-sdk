@@ -64,6 +64,8 @@
         _calloutView = [[BMKActionPaopaoView alloc] initWithCustomView:subview];
         _annotationView.paopaoView = _calloutView;
     } else {
+        [_annotationView addSubview:subview];
+        _annotationView.bounds = subview.bounds;
     }
 }
 

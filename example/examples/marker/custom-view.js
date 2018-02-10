@@ -38,7 +38,6 @@ export default class CustomView extends Component {
     clearInterval(this.timer)
   }
 
-  coordinate = { latitude: 39.914884, longitude: 116.403883 }
   renderMarker = () => (
     <View style={style.marker}>
       <Image style={style.image} source={{ uri: 'https://avatars0.githubusercontent.com/u/1709072?s=100&v=4' }} />
