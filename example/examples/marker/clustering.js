@@ -5,7 +5,7 @@ import { MapView } from 'react-native-baidumap-sdk'
 export default class Clustering extends Component {
   static navigationOptions = { title: 'Marker clustering' }
 
-  onLoad = () => this.mapView.animateTo({ zoomLevel: 10 })
+  onLoad = () => this.mapView.setStatus({ zoomLevel: 10 }, 500)
 
   onStatusChange = status => {
     this.status = status
@@ -13,10 +13,10 @@ export default class Clustering extends Component {
   }
 
   onPress = cluster => {
-    this.mapView.animateTo({
+    this.mapView.setStatus({
       center: cluster.coordinate,
       zoomLevel: this.status.zoomLevel + 1,
-    })
+    }, 500)
   }
 
   markers = Array(100).fill(0).map((_, i) => ({

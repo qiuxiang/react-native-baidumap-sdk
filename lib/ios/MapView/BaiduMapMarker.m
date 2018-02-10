@@ -65,6 +65,7 @@
         _annotationView.paopaoView = _calloutView;
     } else {
         [_annotationView addSubview:subview];
+        _annotationView.image = nil;
         _annotationView.bounds = subview.bounds;
     }
 }

@@ -107,6 +107,12 @@
                 @"latitude": @(self.centerCoordinate.latitude),
                 @"longitude": @(self.centerCoordinate.longitude),
             },
+            @"region": @{
+                @"latitude": @(self.region.center.latitude),
+                @"longitude": @(self.region.center.longitude),
+                @"latitudeDelta": @(self.region.span.latitudeDelta),
+                @"longitudeDelta": @(self.region.span.longitudeDelta),
+            },
             @"zoomLevel": @(self.zoomLevel),
             @"rotation": @(self.rotation),
             @"overlook": @(self.overlooking),
