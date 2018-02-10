@@ -1,12 +1,12 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 
-@interface BaiduMapLocation : RCTEventEmitter <RCTBridgeModule>
+@interface RCTLocation : RCTEventEmitter <RCTBridgeModule>
 @end
 
-@implementation BaiduMapLocation
+@implementation RCTLocation
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(BaiduMapLocation)
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[@"baiduMapLocation"];

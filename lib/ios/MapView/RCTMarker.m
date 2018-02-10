@@ -1,8 +1,8 @@
 #import <React/UIView+React.h>
-#import "BaiduMapMarker.h"
-#import "BaiduMapCallout.h"
+#import "RCTMarker.h"
+#import "RCTCallout.h"
 
-@implementation BaiduMapMarker {
+@implementation RCTMarker {
     BMKAnnotationView *_annotationView;
     BMKActionPaopaoView *_calloutView;
     UITapGestureRecognizer *_calloutPressHandler;
@@ -12,7 +12,7 @@
 - (instancetype)init {
     self = [super init];
     _annotationView = [[BMKAnnotationView alloc] initWithAnnotation:self reuseIdentifier:nil];
-    _annotationView.image = [UIImage imageNamed:@"marker" inBundle:BaiduMapMarker.bundle compatibleWithTraitCollection:nil];
+    _annotationView.image = [UIImage imageNamed:@"marker" inBundle:RCTMarker.bundle compatibleWithTraitCollection:nil];
     [_annotationView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_onPress:)]];
     _calloutPressHandler = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_onCalloutPress:)];
     return self;
@@ -60,7 +60,7 @@
 }
 
 - (void)didAddSubview:(UIView *)subview {
-    if ([subview isKindOfClass:[BaiduMapCallout class]]) {
+    if ([subview isKindOfClass:[RCTCallout class]]) {
         _calloutView = [[BMKActionPaopaoView alloc] initWithCustomView:subview];
         _annotationView.paopaoView = _calloutView;
     } else {

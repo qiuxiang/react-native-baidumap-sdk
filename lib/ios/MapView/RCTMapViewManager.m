@@ -1,16 +1,16 @@
 #import <React/RCTUIManager.h>
-#import "BaiduMapView.h"
+#import "RCTMapView.h"
 
-@interface BaiduMapViewManager : RCTViewManager
+@interface RCTMapViewManager : RCTViewManager
 @end
 
-@implementation BaiduMapViewManager
+@implementation RCTMapViewManager
 
 - (UIView *)view {
-    return [BaiduMapView new];
+    return [RCTMapView new];
 }
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(BaiduMapView)
 
 RCT_REMAP_VIEW_PROPERTY(center, centerCoordinate, CLLocationCoordinate2D)
 RCT_REMAP_VIEW_PROPERTY(zoomLevel, zoom, float)
@@ -42,7 +42,7 @@ RCT_EXPORT_VIEW_PROPERTY(onBaiduMapStatusChange, RCTBubblingEventBlock)
 
 RCT_EXPORT_METHOD(setStatus:(nonnull NSNumber *)reactTag params:(NSDictionary *)params duration:(int)duration) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-        BaiduMapView *mapView = (BaiduMapView *) viewRegistry[reactTag];
+        RCTMapView *mapView = (RCTMapView *) viewRegistry[reactTag];
         BMKMapStatus *mapStatus = [BMKMapStatus new];
         
         if (params[@"zoomLevel"]) {

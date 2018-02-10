@@ -1,8 +1,8 @@
 #import <BaiduMapAPI_Map/BMKPolygonView.h>
-#import "BaiduMapPolygon.h"
+#import "RCTPolygon.h"
 #import "Coordinate.h"
 
-@implementation BaiduMapPolygon {
+@implementation RCTPolygon {
     BMKPolygon *_polygon;
     BMKPolygonView *_polygonView;
 }

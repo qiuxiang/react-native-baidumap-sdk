@@ -1,16 +1,16 @@
 #import <React/RCTViewManager.h>
-#import "BaiduMapMarker.h"
+#import "RCTMarker.h"
 
-@interface BaiduMapMarkerManager : RCTViewManager
+@interface RCTMarkerManager : RCTViewManager
 @end
 
-@implementation BaiduMapMarkerManager
+@implementation RCTMarkerManager
 
 - (UIView *)view {
-    return [BaiduMapMarker new];
+    return [RCTMarker new];
 }
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(BaiduMapMarker)
 
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
 RCT_EXPORT_VIEW_PROPERTY(title, NSString)

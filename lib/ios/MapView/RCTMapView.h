@@ -1,7 +1,7 @@
 #import <React/RCTComponent.h>
 #import <BaiduMapAPI_Map/BMKMapView.h>
 
-@interface BaiduMapView : BMKMapView <BMKMapViewDelegate>
+@interface RCTMapView : BMKMapView <BMKMapViewDelegate>
 
 @property(nonatomic, copy) RCTBubblingEventBlock onBaiduMapLoad;
 @property(nonatomic, copy) RCTBubblingEventBlock onBaiduMapClick;

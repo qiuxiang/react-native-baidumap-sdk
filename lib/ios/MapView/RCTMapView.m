@@ -1,9 +1,9 @@
 #import <React/UIView+React.h>
-#import "BaiduMapView.h"
-#import "BaiduMapMarker.h"
-#import "BaiduMapOverlay.h"
+#import "RCTMapView.h"
+#import "RCTMarker.h"
+#import "RCTOverlay.h"
 
-@implementation BaiduMapView {
+@implementation RCTMapView {
     NSMutableDictionary *_markers;
     NSMutableDictionary *_overlays;
 }
@@ -59,13 +59,13 @@
     [self setMapStatus:status];
 }
 
-- (void)mapViewDidFinishLoading:(BaiduMapView *)mapView {
+- (void)mapViewDidFinishLoading:(RCTMapView *)mapView {
     if (self.onBaiduMapLoad) {
         self.onBaiduMapLoad(nil);
     }
 }
 
-- (void)mapView:(BaiduMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate {
+- (void)mapView:(RCTMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate {
     if (self.onBaiduMapClick) {
         self.onBaiduMapClick(@{
             @"latitude": @(coordinate.latitude),
@@ -74,7 +74,7 @@
     }
 }
 
-- (void)mapView:(BaiduMapView *)mapView onClickedMapPoi:(BMKMapPoi *)mapPoi {
+- (void)mapView:(RCTMapView *)mapView onClickedMapPoi:(BMKMapPoi *)mapPoi {
     if (self.onBaiduMapClick) {
         self.onBaiduMapClick(@{
             @"latitude": @(mapPoi.pt.latitude),
@@ -85,7 +85,7 @@
     }
 }
 
-- (void)mapview:(BaiduMapView *)mapView onLongClick:(CLLocationCoordinate2D)coordinate {
+- (void)mapview:(RCTMapView *)mapView onLongClick:(CLLocationCoordinate2D)coordinate {
     if (self.onBaiduMapLongClick) {
         self.onBaiduMapLongClick(@{
            @"latitude": @(coordinate.latitude),
@@ -94,7 +94,7 @@
     }
 }
 
-- (void)mapview:(BaiduMapView *)mapView onDoubleClick:(CLLocationCoordinate2D)coordinate {
+- (void)mapview:(RCTMapView *)mapView onDoubleClick:(CLLocationCoordinate2D)coordinate {
     if (self.onBaiduMapDoubleClick) {
         self.onBaiduMapDoubleClick(@{
            @"latitude": @(coordinate.latitude),
@@ -103,7 +103,7 @@
     }
 }
 
-- (void)mapView:(BaiduMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+- (void)mapView:(RCTMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     if (self.onBaiduMapStatusChange) {
         self.onBaiduMapStatusChange(@{
             @"center": @{
@@ -123,41 +123,41 @@
     }
 }
 
-- (BMKAnnotationView *)mapView:(BaiduMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation {
-    if ([annotation isKindOfClass:[BaiduMapMarker class]]) {
-        BaiduMapMarker *marker = (BaiduMapMarker *)annotation;
+- (BMKAnnotationView *)mapView:(RCTMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[RCTMarker class]]) {
+        RCTMarker *marker = (RCTMarker *)annotation;
         return marker.annotationView;
     }
     return nil;
 }
 
-- (BMKOverlayView *)mapView:(BaiduMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay {
-    BaiduMapOverlay *o = [self getOverlay:overlay];
+- (BMKOverlayView *)mapView:(RCTMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay {
+    RCTOverlay *o = [self getOverlay:overlay];
     return o.overlayView;
 }
 
-- (void)mapView:(BaiduMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view {
-    BaiduMapMarker *marker = [self getMarker:view.annotation];
+- (void)mapView:(RCTMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view {
+    RCTMarker *marker = [self getMarker:view.annotation];
     [marker bindCalloutPressHandler];
 }
 
-- (BaiduMapMarker *)getMarker:(id <BMKAnnotation>)annotation {
+- (RCTMarker *)getMarker:(id <BMKAnnotation>)annotation {
     return _markers[[@(annotation.hash) stringValue]];
 }
 
-- (BaiduMapOverlay *)getOverlay:(id <BMKOverlay>)overlay {
+- (RCTOverlay *)getOverlay:(id <BMKOverlay>)overlay {
     return _overlays[[@(overlay.hash) stringValue]];
 }
 
 - (void)didAddSubview:(UIView *)subview {
-    if ([subview isKindOfClass:[BaiduMapMarker class]]) {
-        BaiduMapMarker *marker = (BaiduMapMarker *)subview;
+    if ([subview isKindOfClass:[RCTMarker class]]) {
+        RCTMarker *marker = (RCTMarker *)subview;
         marker.mapView = self;
         _markers[[@(marker.hash) stringValue]] = marker;
         [self addAnnotation:marker];
     }
-    if ([subview isKindOfClass:[BaiduMapOverlay class]]) {
-        BaiduMapOverlay *overlay = (BaiduMapOverlay *)subview;
+    if ([subview isKindOfClass:[RCTOverlay class]]) {
+        RCTOverlay *overlay = (RCTOverlay *)subview;
         _overlays[[@(overlay.overlay.hash) stringValue]] = overlay;
         [self addOverlay:overlay.overlay];
     }
@@ -165,13 +165,13 @@
 
 - (void)removeReactSubview:(id <RCTComponent>)subview {
     [super removeReactSubview:(UIView *) subview];
-    if ([subview isKindOfClass:[BaiduMapMarker class]]) {
-        BaiduMapMarker *marker = (BaiduMapMarker *) subview;
+    if ([subview isKindOfClass:[RCTMarker class]]) {
+        RCTMarker *marker = (RCTMarker *) subview;
         [_markers removeObjectForKey:[@(marker.annotation.hash) stringValue]];
         [self removeAnnotation:marker];
     }
-    if ([subview isKindOfClass:[BaiduMapOverlay class]]) {
-        BaiduMapOverlay *overlay = (BaiduMapOverlay *)subview;
+    if ([subview isKindOfClass:[RCTOverlay class]]) {
+        RCTOverlay *overlay = (RCTOverlay *)subview;
         _overlays[[@(overlay.hash) stringValue]] = overlay;
         [self removeOverlay:overlay.overlay];
     }
