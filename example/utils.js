@@ -1,15 +1,16 @@
 // @flow
 
-// TODO: add type definition
-type NavigationComponent = any
+interface Screen {
+  +navigationOptions: { title: string }
+}
 
 export function mapComponents(
   prefix: string,
-  screens: { [name: string]: NavigationComponent },
+  screens: { [name: string]: Screen },
 ): {
   [key: string]: {
     title: string,
-    screen: NavigationComponent,
+    screen: Screen,
   },
 } {
   return Object.keys(screens).reduce((result, name) => {
