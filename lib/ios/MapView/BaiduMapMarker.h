@@ -16,7 +16,7 @@
 @property (nonatomic, weak) BaiduMapView *mapView;
 
 - (BMKAnnotationView *)annotationView;
-- (void)updateCalloutPressHandler;
+- (void)bindCalloutPressHandler;
 
 + (NSBundle *)bundle;
 

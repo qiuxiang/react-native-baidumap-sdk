@@ -124,7 +124,7 @@
 
 - (void)mapView:(BaiduMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view {
     BaiduMapMarker *marker = [self getMarker:view.annotation];
-    [marker updateCalloutPressHandler];
+    [marker bindCalloutPressHandler];
 }
 
 - (BaiduMapMarker *)getMarker:(id <BMKAnnotation>)annotation {
