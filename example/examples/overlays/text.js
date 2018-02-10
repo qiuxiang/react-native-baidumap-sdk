@@ -7,6 +7,7 @@ export default class Text extends Component {
 
   render() {
     const props = {
+      content: 'Hello',
       coordinate: { latitude: 39.906901, longitude: 116.397972 },
       fontSize: 24,
       color: '#fff',
@@ -15,7 +16,7 @@ export default class Text extends Component {
 
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <MapView.Text {...props}>Hello</MapView.Text>
+        <MapView.Text {...props} />
       </MapView>
     )
   }
