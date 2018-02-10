@@ -1,15 +1,15 @@
 #import <React/RCTUIManager.h>
-#import "BaiduMapPolygon.h"
+#import "RCTPolygon.h"
 
-@interface BaiduMapPolygonManager : RCTViewManager
+@interface RCTPolygonManager : RCTViewManager
 @end
 
-@implementation BaiduMapPolygonManager
+@implementation RCTPolygonManager
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(BaiduMapPolygon)
 
 - (UIView *)view {
-    return [BaiduMapPolygon new];
+    return [RCTPolygon new];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(points, CoordinateArray)

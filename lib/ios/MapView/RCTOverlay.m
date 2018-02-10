@@ -1,6 +1,6 @@
-#import "BaiduMapOverlay.h"
+#import "RCTOverlay.h"
 
-@implementation BaiduMapOverlay
+@implementation RCTOverlay
 
 - (id <BMKOverlay>)overlay {
     return nil;

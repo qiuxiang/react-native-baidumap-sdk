@@ -1,7 +1,7 @@
 #import <BaiduMapAPI_Map/BMKAnnotationView.h>
-#import "BaiduMapView.h"
+#import "RCTMapView.h"
 
-@interface BaiduMapMarker : BMKAnnotationView <BMKAnnotation>
+@interface RCTMarker : BMKAnnotationView <BMKAnnotation>
 
 @property(nonatomic, copy) RCTBubblingEventBlock onBaiduMapPress;
 @property(nonatomic, copy) RCTBubblingEventBlock onBaiduMapCalloutPress;
@@ -13,7 +13,7 @@
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
-@property (nonatomic, weak) BaiduMapView *mapView;
+@property (nonatomic, weak) RCTMapView *mapView;
 
 - (BMKAnnotationView *)annotationView;
 - (void)bindCalloutPressHandler;
