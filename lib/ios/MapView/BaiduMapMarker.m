@@ -1,8 +1,10 @@
 #import <React/UIView+React.h>
 #import "BaiduMapMarker.h"
+#import "BaiduMapCallout.h"
 
 @implementation BaiduMapMarker {
     BMKAnnotationView *_annotationView;
+    BMKActionPaopaoView *_calloutView;
     UITapGestureRecognizer *_calloutPressHandler;
     BOOL _selected;
 }
@@ -16,7 +18,7 @@
     return self;
 }
 
-- (void)updateCalloutPressHandler {
+- (void)bindCalloutPressHandler {
     [_annotationView.paopaoView addGestureRecognizer:_calloutPressHandler];
 }
 
@@ -55,6 +57,14 @@
 - (BMKAnnotationView *)annotationView {
     self.selected = _selected;
     return _annotationView;
+}
+
+- (void)didAddSubview:(UIView *)subview {
+    if ([subview isKindOfClass:[BaiduMapCallout class]]) {
+        _calloutView = [[BMKActionPaopaoView alloc] initWithCustomView:subview];
+        _annotationView.paopaoView = _calloutView;
+    } else {
+    }
 }
 
 - (UIImage *)tint:(UIImage *)image withColor:(UIColor *)color {
