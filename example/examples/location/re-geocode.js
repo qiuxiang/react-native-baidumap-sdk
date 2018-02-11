@@ -8,7 +8,7 @@ const style = StyleSheet.create({
   },
   item: {
     flexDirection: 'row',
-    marginBottom: 2,
+    marginBottom: 4,
   },
   label: {
     color: '#f5533d',
