@@ -25,7 +25,8 @@ export default class Basic extends Component {
 
   state = {}
 
-  componentDidMount() {
+  async componentDidMount() {
+    await Location.init()
     Location.setOptions({ coordinateType: 'bd09ll' })
     this.listener = Location.addLocationListener(location => {
       this.setState({ location })

@@ -2,6 +2,7 @@
 #import "RCTMapView.h"
 #import "RCTMarker.h"
 #import "RCTOverlay.h"
+#import "UserLocation.h"
 
 @implementation RCTMapView {
     NSMutableDictionary *_markers;
@@ -57,6 +58,10 @@
     BMKMapStatus *status = [BMKMapStatus new];
     status.fOverlooking = overlook;
     [self setMapStatus:status];
+}
+
+- (void)setLocation:(UserLocation *)userLocation {
+    [self updateLocationData:userLocation];
 }
 
 - (void)mapViewDidFinishLoading:(RCTMapView *)mapView {
