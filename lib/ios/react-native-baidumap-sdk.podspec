@@ -6,7 +6,6 @@ Pod::Spec.new do |s|
   s.name         = package['name']
   s.version      = package['version']
   s.summary      = package['description']
-
   s.authors      = { "7c00" => "i@7c00.cc" }
   s.homepage     = package['repository']['url']
   s.license      = package['license']
@@ -15,7 +14,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => package['repository']['url'] }
   s.source_files = '**/*.{h,m}'
   s.resource_bundles = {
-    'react-native-baidumap-sdk' => ['**/*.png'],
+    'react-native-baidumap-sdk' => 'Resources/*.{png}',
   }
 
   s.dependency 'React'
