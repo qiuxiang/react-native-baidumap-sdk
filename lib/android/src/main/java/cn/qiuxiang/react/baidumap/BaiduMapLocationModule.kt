@@ -33,6 +33,7 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
                 data.putString("street", location.street)
                 data.putString("streetNumber", location.streetNumber)
                 data.putString("adCode", location.adCode)
+                data.putString("address", location.addrStr)
                 data.putString("description", location.locationDescribe)
                 data.putInt("locationType", location.locType) // todo: to string
                 emitter.emit("baiduMapLocation", data)

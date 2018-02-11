@@ -1,12 +1,14 @@
-#import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
+#import <BaiduMapAPI_Search/BMKGeocodeSearch.h>
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "UserLocation.h"
 
-@interface RCTLocationModule : RCTEventEmitter <RCTBridgeModule, BMKLocationServiceDelegate>
+@interface RCTLocationModule : RCTEventEmitter <RCTBridgeModule, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate>
 @end
 
 @implementation RCTLocationModule {
+    BMKGeoCodeSearch *_search;
+    BMKReverseGeoCodeOption *_searchOption;
     BMKLocationService *_service;
     UserLocation *_location;
     BOOL _initialized;
@@ -37,9 +39,12 @@ RCT_REMAP_METHOD(init, initWithResolver:(RCTPromiseResolveBlock)resolve rejecter
     if (!_initialized) {
         _initialized = YES;
         _location = [UserLocation new];
+        _searchOption = [BMKReverseGeoCodeOption new];
         dispatch_async(dispatch_get_main_queue(), ^{
             _service = [BMKLocationService new];
             _service.delegate = self;
+            _search = [BMKGeoCodeSearch new];
+            _search.delegate = self;
             resolve(nil);
         });
     } else {
@@ -61,9 +66,25 @@ RCT_EXPORT_METHOD(request) {
 
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation {
     [_location updateWithCLLocation:userLocation.location];
-    [self sendEventWithName:@"baiduMapLocation" body: _location.json];
+    
+    if (_reGeocode) {
+        _searchOption.reverseGeoPoint = userLocation.location.coordinate;
+        [_search reverseGeoCode:_searchOption];
+    } else {
+        [self sendEventWithName:@"baiduMapLocation" body: _location.json];
+    }
+    
     if (!_auto) {
         [_service stopUserLocationService];
+    }
+}
+
+- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher
+                           result:(BMKReverseGeoCodeResult *)result
+                        errorCode:(BMKSearchErrorCode)error {
+    if (error == BMK_SEARCH_NO_ERROR) {
+        [_location updateWithReGeoCodeResult:result];
+        [self sendEventWithName:@"baiduMapLocation" body: _location.json];
     }
 }
 

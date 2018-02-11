@@ -59,8 +59,7 @@ RCT_EXPORT_METHOD(setStatus:(nonnull NSNumber *)reactTag params:(NSDictionary *)
         if (params[@"center"]) {
             NSDictionary *coordinate = params[@"center"];
             mapStatus.targetGeoPt = CLLocationCoordinate2DMake(
-                    [coordinate[@"latitude"] doubleValue],
-                    [coordinate[@"longitude"] doubleValue]);
+                [coordinate[@"latitude"] doubleValue], [coordinate[@"longitude"] doubleValue]);
         }
         
         if (params[@"overlook"]) {
