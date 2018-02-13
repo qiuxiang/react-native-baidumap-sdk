@@ -1,4 +1,5 @@
 #import <React/UIView+React.h>
+#import <React/RCTConvert.h>
 #import "RCTMarker.h"
 #import "RCTCallout.h"
 
@@ -7,12 +8,14 @@
     BMKActionPaopaoView *_calloutView;
     UITapGestureRecognizer *_calloutPressHandler;
     BOOL _selected;
+    UIImage *_image;
 }
 
 - (instancetype)init {
     self = [super init];
+    _image = [UIImage imageNamed:@"marker" inBundle:RCTMarker.bundle compatibleWithTraitCollection:nil];
     _annotationView = [[BMKAnnotationView alloc] initWithAnnotation:self reuseIdentifier:nil];
-    _annotationView.image = [UIImage imageNamed:@"marker" inBundle:RCTMarker.bundle compatibleWithTraitCollection:nil];
+    [self setColor:[RCTConvert UIColor:@(0xff000000)]];
     [_annotationView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_onPress:)]];
     _calloutPressHandler = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_onCalloutPress:)];
     return self;
@@ -23,7 +26,7 @@
 }
 
 - (void)setColor:(UIColor *)color {
-    _annotationView.image = [self tint:_annotationView.image withColor:color];
+    _annotationView.image = [self tintWithColor:color];
 }
 
 - (void)setImage:(NSString *)image {
@@ -70,15 +73,30 @@
     }
 }
 
-- (UIImage *)tint:(UIImage *)image withColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
-    [color setFill];
-    UIRectFill(rect);
-    [image drawInRect:rect blendMode:kCGBlendModeDestinationIn alpha:1];
-    UIImage *tintedImage = UIGraphicsGetImageFromCurrentImageContext();
+- (UIImage *)tintWithColor:(UIColor *)color {
+    CGFloat r, g, b, a;
+    [color getRed:&r green:&g blue:&b alpha:&a];
+    unsigned char red = r * 255;
+    unsigned char green = g * 255;
+    unsigned char blue = b * 255;
+    unsigned char alpha = a * 255;
+    
+    UIGraphicsBeginImageContextWithOptions(_image.size, NO, _image.scale);
+    [_image drawInRect:CGRectMake(0, 0, _image.size.width, _image.size.height)];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    unsigned char* data = CGBitmapContextGetData(context);
+    unsigned long length = CGBitmapContextGetWidth(context) * CGBitmapContextGetHeight(context) * 4;
+    for (int i = 0; i < length; i += 4) {
+        if (data[i] > 200 && data[i + 1] > 200 && data[i + 2] > 200) {
+            data[i] = blue;
+            data[i + 1] = green;
+            data[i + 2] = red;
+            data[i + 3] = alpha;
+        }
+    }
+    UIImage *output = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return tintedImage;
+    return output;
 }
 
 + (NSBundle *)bundle {
