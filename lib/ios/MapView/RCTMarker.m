@@ -87,7 +87,7 @@
     unsigned char* data = CGBitmapContextGetData(context);
     unsigned long length = CGBitmapContextGetWidth(context) * CGBitmapContextGetHeight(context) * 4;
     for (int i = 0; i < length; i += 4) {
-        if (data[i] > 200 && data[i + 1] > 200 && data[i + 2] > 200) {
+        if (data[i] > 127 && data[i + 1] > 127 && data[i + 2] > 127) {
             data[i] = blue;
             data[i + 1] = green;
             data[i + 2] = red;
