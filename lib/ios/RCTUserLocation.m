@@ -1,6 +1,6 @@
-#import "UserLocation.h"
+#import "RCTUserLocation.h"
 
-@implementation UserLocation {
+@implementation RCTUserLocation {
     BMKReverseGeoCodeResult *_reGeocodeResult;
 }
 

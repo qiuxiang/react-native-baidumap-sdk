@@ -12,7 +12,7 @@ RCT_EXPORT_MODULE(BaiduMapPolygon)
     return [RCTPolygon new];
 }
 
-RCT_EXPORT_VIEW_PROPERTY(points, CoordinateArray)
+RCT_EXPORT_VIEW_PROPERTY(points, RCTCoordinateArray)
 RCT_EXPORT_VIEW_PROPERTY(strokeWidth, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(strokeColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(fillColor, UIColor)

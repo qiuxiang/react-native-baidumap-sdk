@@ -1,6 +1,6 @@
 #import <BaiduMapAPI_Map/BMKPolygonView.h>
 #import "RCTPolygon.h"
-#import "Coordinate.h"
+#import "RCTCoordinate.h"
 
 @implementation RCTPolygon {
     BMKPolygon *_polygon;
@@ -16,7 +16,7 @@
     return self;
 }
 
-- (void)setPoints:(NSArray<Coordinate *> *)points {
+- (void)setPoints:(NSArray<RCTCoordinate *> *)points {
     CLLocationCoordinate2D coordinates[points.count];
     for (NSUInteger i = 0; i < points.count; i++) {
         coordinates[i] = points[i].coordinate;

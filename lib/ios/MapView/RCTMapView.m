@@ -2,7 +2,7 @@
 #import "RCTMapView.h"
 #import "RCTMarker.h"
 #import "RCTOverlay.h"
-#import "UserLocation.h"
+#import "RCTUserLocation.h"
 
 @implementation RCTMapView {
     NSMutableDictionary *_markers;
@@ -60,7 +60,7 @@
     [self setMapStatus:status];
 }
 
-- (void)setLocation:(UserLocation *)userLocation {
+- (void)setLocation:(RCTUserLocation *)userLocation {
     [self updateLocationData:userLocation];
 }
 

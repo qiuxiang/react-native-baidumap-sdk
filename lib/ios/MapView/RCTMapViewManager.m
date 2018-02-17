@@ -20,7 +20,7 @@ RCT_EXPORT_VIEW_PROPERTY(rotation, int)
 
 RCT_EXPORT_VIEW_PROPERTY(minZoomLevel, float)
 RCT_EXPORT_VIEW_PROPERTY(maxZoomLevel, float)
-RCT_EXPORT_VIEW_PROPERTY(location, UserLocation)
+RCT_EXPORT_VIEW_PROPERTY(location, RCTUserLocation)
 
 // layers
 RCT_EXPORT_VIEW_PROPERTY(satellite, BOOL)
