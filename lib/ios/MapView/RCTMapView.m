@@ -146,6 +146,30 @@
     [marker bindCalloutPressHandler];
 }
 
+- (void)mapView:(BMKMapView *)mapView
+ annotationView:(BMKAnnotationView *)view
+didChangeDragState:(BMKAnnotationViewDragState)newState
+   fromOldState:(BMKAnnotationViewDragState)oldState {
+    RCTMarker *marker = [self getMarker:view.annotation];
+
+    id coordinate = @{
+        @"latitude": @(view.annotation.coordinate.latitude),
+        @"longitude": @(view.annotation.coordinate.longitude),
+    };
+
+    if (newState == BMKAnnotationViewDragStateStarting && marker.onBaiduMapDragStart) {
+        marker.onBaiduMapDragStart(coordinate);
+    }
+
+    if (newState == BMKAnnotationViewDragStateDragging && marker.onBaiduMapDrag) {
+        marker.onBaiduMapDrag(coordinate);
+    }
+
+    if (newState == BMKAnnotationViewDragStateEnding && marker.onBaiduMapDragEnd) {
+        marker.onBaiduMapDragEnd(coordinate);
+    }
+}
+
 - (RCTMarker *)getMarker:(id <BMKAnnotation>)annotation {
     return _markers[[@(annotation.hash) stringValue]];
 }
@@ -161,6 +185,7 @@
         _markers[[@(marker.hash) stringValue]] = marker;
         [self addAnnotation:marker];
     }
+
     if ([subview isKindOfClass:[RCTOverlay class]]) {
         RCTOverlay *overlay = (RCTOverlay *)subview;
         _overlays[[@(overlay.overlay.hash) stringValue]] = overlay;
@@ -170,11 +195,13 @@
 
 - (void)removeReactSubview:(id <RCTComponent>)subview {
     [super removeReactSubview:(UIView *) subview];
+
     if ([subview isKindOfClass:[RCTMarker class]]) {
         RCTMarker *marker = (RCTMarker *) subview;
         [_markers removeObjectForKey:[@(marker.annotation.hash) stringValue]];
         [self removeAnnotation:marker];
     }
+
     if ([subview isKindOfClass:[RCTOverlay class]]) {
         RCTOverlay *overlay = (RCTOverlay *)subview;
         _overlays[[@(overlay.hash) stringValue]] = overlay;

@@ -31,6 +31,9 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         return MapBuilder.of(
+                "onDrag", MapBuilder.of("registrationName", "onBaiduMapDrag"),
+                "onDragStart", MapBuilder.of("registrationName", "onBaiduMapDragStart"),
+                "onDragEnd", MapBuilder.of("registrationName", "onBaiduMapDragEnd"),
                 "onPress", MapBuilder.of("registrationName", "onBaiduMapPress"),
                 "onCalloutPress", MapBuilder.of("registrationName", "onBaiduMapCalloutPress")
         )
@@ -57,7 +60,7 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
 
     @ReactProp(name = "coordinate")
     fun setCoordinate(view: BaiduMapMarker, coordinate: ReadableMap) {
-        view.setPosition(coordinate.toLatLng())
+        view.position = coordinate.toLatLng()
     }
 
     @ReactProp(name = "title")
@@ -78,6 +81,11 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
     @ReactProp(name = "selected")
     fun setSelected(view: BaiduMapMarker, selected: Boolean) {
         view.active = selected
+    }
+
+    @ReactProp(name = "draggable")
+    fun setDraggable(view: BaiduMapMarker, draggable: Boolean) {
+        view.setDraggable(draggable)
     }
 
     @ReactProp(name = "flat")
