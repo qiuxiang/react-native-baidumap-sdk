@@ -1,7 +1,7 @@
 #import <React/RCTEventEmitter.h>
 #import <BaiduMapAPI_Search/BMKGeocodeSearch.h>
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
-#import "UserLocation.h"
+#import "RCTUserLocation.h"
 
 @interface RCTLocationModule : RCTEventEmitter <RCTBridgeModule, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate>
 @end
@@ -10,7 +10,7 @@
     BMKGeoCodeSearch *_search;
     BMKReverseGeoCodeOption *_searchOption;
     BMKLocationService *_service;
-    UserLocation *_location;
+    RCTUserLocation *_location;
     BOOL _initialized;
     BOOL _auto;
     BOOL _reGeocode;
@@ -38,7 +38,7 @@ RCT_EXPORT_METHOD(setOptions:(NSDictionary *)options) {
 RCT_REMAP_METHOD(init, initWithResolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     if (!_initialized) {
         _initialized = YES;
-        _location = [UserLocation new];
+        _location = [RCTUserLocation new];
         _searchOption = [BMKReverseGeoCodeOption new];
         dispatch_async(dispatch_get_main_queue(), ^{
             _service = [BMKLocationService new];

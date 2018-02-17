@@ -1,6 +1,6 @@
 #import <CoreLocation/CoreLocation.h>
 
-@interface Coordinate : NSObject
+@interface RCTCoordinate : NSObject
 
 @property(nonatomic, assign) CLLocationCoordinate2D coordinate;
 

@@ -1,6 +1,6 @@
-#import "Coordinate.h"
+#import "RCTCoordinate.h"
 
-@implementation Coordinate
+@implementation RCTCoordinate
 
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate {
     self = [super init];
