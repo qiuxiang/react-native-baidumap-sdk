@@ -66,11 +66,13 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
                 emit(id, "onClick", data)
+                map.hideInfoWindow()
                 return true
             }
 
             override fun onMapClick(latLng: LatLng) {
                 emit(id, "onClick", latLng.toWritableMap())
+                map.hideInfoWindow()
             }
         })
 
@@ -103,10 +105,32 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             emit(markerView?.id, "onPress")
             true
         }
+
+        map.setOnMarkerDragListener(object : BaiduMap.OnMarkerDragListener {
+            override fun onMarkerDragEnd(marker: Marker) {
+                emitDragEvent(marker, "onDragEnd")
+            }
+
+            override fun onMarkerDragStart(marker: Marker) {
+                map.hideInfoWindow()
+                emitDragEvent(marker, "onDragStart")
+            }
+
+            override fun onMarkerDrag(marker: Marker) {
+                emitDragEvent(marker, "onDrag")
+            }
+        })
     }
 
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
         id?.let { emitter.receiveEvent(it, name, data) }
+    }
+
+    fun emitDragEvent(marker: Marker, event: String) {
+        val markerView = markers[marker.id]
+        markerView?.let {
+            emit(it.id, event, it.position?.toWritableMap()!!)
+        }
     }
 
     fun setStatus(args: ReadableArray?) {

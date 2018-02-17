@@ -44,6 +44,10 @@
     });
 }
 
+- (void)setDraggable:(BOOL)draggable {
+    _annotationView.draggable = draggable;
+}
+
 - (void)_onPress:(UITapGestureRecognizer *)recognizer {
     [self.mapView selectAnnotation:self animated:YES];
     if (self.onBaiduMapPress) {
