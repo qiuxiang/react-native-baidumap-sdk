@@ -10,14 +10,14 @@ npm i react-native-baidumap-sdk
 ```
 或
 ```bash
-$ yarn add react-native-baidumap-sdk
+yarn add react-native-baidumap-sdk
 ```
 
 ### 配置
 
 #### Android
 ```bash
-$ react-native link react-native-baidumap-sdk
+react-native link react-native-baidumap-sdk
 ```
 
 #### iOS
@@ -39,7 +39,7 @@ end
 
 然后运行：
 ```bash
-$ pod install
+pod install
 ```
 
 ### 添加密钥
@@ -125,19 +125,19 @@ render() {
 
 ### 初始化
 ```bash
-$ yarn
-$ yarn start # 这会占用一个终端窗口
+yarn
+yarn start # 这会占用一个终端窗口
 ```
 
 ### Android
 ```bash
-$ yarn run-android
+yarn run-android
 ```
 
 ### iOS
 ```bash
-$ cd ios && pod install && cd ..
-$ yarn run-ios
+cd ios && pod install && cd ..
+yarn run-ios
 ```
 
 [npm]: https://www.npmjs.com/package/react-native-baidumap-sdk
