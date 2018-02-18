@@ -8,3 +8,4 @@ Pods/
 
 *.iml
 local.properties
+Podfile.lock
