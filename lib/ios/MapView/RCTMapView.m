@@ -14,6 +14,7 @@
     _overlays = [NSMutableDictionary new];
     self = [super init];
     self.delegate = self;
+    self.showMapScaleBar = YES;
     return self;
 }
 
@@ -42,6 +43,11 @@
 }
 
 - (void)setCompassDisabled:(BOOL)disabled {
+    if (disabled) {
+        self.compassPosition = CGPointMake(999, 0);
+    } else {
+        self.compassPosition = CGPointMake(5, 5);
+    }
 }
 
 - (void)setScaleBarDisabled:(BOOL)disabled {
@@ -65,6 +71,9 @@
 }
 
 - (void)mapViewDidFinishLoading:(RCTMapView *)mapView {
+    self.compassPosition = CGPointMake(5, 5);
+    self.mapScaleBarPosition = CGPointMake(2, self.frame.size.height - 43);
+
     if (self.onBaiduMapLoad) {
         self.onBaiduMapLoad(nil);
     }
