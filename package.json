@@ -7,7 +7,7 @@
     "mapview",
     "baidumap"
   ],
-  "version": "0.1.6",
+  "version": "0.2.0",
   "author": "7c00 <i@7c00.cc>",
   "repository": {
     "type": "git",
@@ -16,6 +16,7 @@
   "license": "MIT",
   "files": [
     "lib/js",
+    "lib/ios",
     "lib/android/src",
     "lib/android/build.gradle"
   ],
