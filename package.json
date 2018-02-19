@@ -1,6 +1,6 @@
 {
   "name": "react-native-baidumap-sdk",
-  "description": "React Native BaiduMap SDK",
+  "description": "React Native BaiduMap SDK for Android + iOS",
   "keywords": [
     "react-native",
     "maps",
