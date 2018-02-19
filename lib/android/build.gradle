@@ -22,10 +22,16 @@ android {
         minSdkVersion 16
         targetSdkVersion 22
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir '../../node_modules/baidumap-sdk/libs'
+        }
+    }
 }
 
 dependencies {
     provided 'com.facebook.react:react-native:+'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile files('src/main/libs/BaiduLBS_Android.jar')
+    compile files('../../node_modules/baidumap-sdk/libs/BaiduLBS_Android.jar')
 }

@@ -870,6 +870,10 @@ babylon@^6.18.0:
   version "6.18.0"
   resolved "http://registry.npm.taobao.org/babylon/download/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
+baidumap-sdk@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/baidumap-sdk/download/baidumap-sdk-1.0.0.tgz#5f1a824b8ecca25f20a5a3963bfed4f35e7ce24b"
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/balanced-match/download/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
