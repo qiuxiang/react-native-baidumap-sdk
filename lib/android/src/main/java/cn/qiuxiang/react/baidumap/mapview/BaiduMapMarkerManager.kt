@@ -1,7 +1,6 @@
 package cn.qiuxiang.react.baidumap.mapview
 
 import android.view.View
-import cn.qiuxiang.react.baidumap.initialize
 import cn.qiuxiang.react.baidumap.toLatLng
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
@@ -17,7 +16,6 @@ class BaiduMapMarkerManager : ViewGroupManager<BaiduMapMarker>() {
     }
 
     override fun createViewInstance(context: ThemedReactContext): BaiduMapMarker {
-        initialize(context)
         return BaiduMapMarker(context)
     }
 

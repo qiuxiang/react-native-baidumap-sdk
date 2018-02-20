@@ -1,73 +1,15 @@
 # react-native-baidumap-sdk [![npm version][version-badge]][npm] [![build status][build-badge]][build]
 
-React Native BaiduMap SDK.
+React Native BaiduMap SDK for Android + iOS.
+
+你可以安装 [example.apk](https://github.com/qiuxiang/react-native-baidumap-sdk/releases/download/v0.3.0/example.apk) 看看实际中的效果。
+
+*注意：RN v0.53 存在一些 bug（主要影响 iOS），建议使用 RN v0.52.2。*
 
 ## 安装
 
-### 引入项目
-```bash
-npm i react-native-baidumap-sdk
-```
-或
-```bash
-$ yarn add react-native-baidumap-sdk
-```
-
-### 配置
-
-#### Android
-```bash
-$ react-native link react-native-baidumap-sdk
-```
-
-#### iOS
-暂时只提供 cocoapods 配置方式。
-
-在 `ios` 目录下新建文件 `Podfile`：
-
-```ruby
-platform :ios, '8.0'
-
-target '...' do
-  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga'
-  pod 'React', path: '../node_modules/react-native', :subspecs => [
-    'DevSupport',
-  ]
-  pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
-end
-```
-
-然后运行：
-```bash
-$ pod install
-```
-
-### 添加密钥
-
-#### Android
-1. [获取密钥](http://lbsyun.baidu.com/index.php?title=androidsdk/guide/create-project/ak)
-2. 在 AndroidManifest 中添加：
-   ```xml
-   <application>  
-       <meta-data  
-          android:name="com.baidu.lbsapi.API_KEY"  
-          android:value="开发密钥" />  
-   </application>
-   ```
-
-#### iOS
-1. [获取密钥](http://lbsyun.baidu.com/index.php?title=iossdk/guide/create-project/ak)
-2. 在 `AppDelegate.m` 中添加密钥信息：
-   ```objective-c
-   #import <BaiduMapAPI_Base/BMKMapManager.h>
-
-   - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-       BMKMapManager *mapManager = [BMKMapManager new];
-       [mapManager start:@"开发密钥" generalDelegate:nil];
-
-       ...
-   }
-   ```
+- [安装说明](docs/installation.md)
+- [项目示例运行说明](docs/setup.md)
 
 ## 用法
 
@@ -86,7 +28,7 @@ import { MapView, Location } from 'react-native-baidumap-sdk'
 
 await Location.init()
 Location.addLocationListener(location => this.setState({ location }))
-Location.request()
+Location.start()
 
 state = { location: null }
 
@@ -120,25 +62,16 @@ render() {
 </MapView>
 ```
 
-## 示例
-你可以在 [example](https://github.com/qiuxiang/react-native-baidumap-sdk/tree/master/example) 找到一些实际的例子，当然，你可以将项目 clone 下来运行，或者直接安装 [example.apk](https://github.com/qiuxiang/react-native-baidumap-sdk/releases/download/v0.2.0/example.apk)。
+需要注意，以上例子简写了一些属性，并不能直接使用，更多实际的例子请参考：[example](https://github.com/qiuxiang/react-native-baidumap-sdk/tree/master/example)。
 
-### 初始化
-```bash
-$ yarn
-$ yarn start # 这会占用一个终端窗口
-```
+## 接口文档
+[JS 代码](lib/js)有完善的类型标注，建议结合源代码一起阅读，特别是需要知道具体参数、返回值类型的时候。
 
-### Android
-```bash
-$ yarn run-android
-```
-
-### iOS
-```bash
-$ cd ios && pod install && cd ..
-$ yarn run-ios
-```
+- [MapView](docs/map-view.md)
+  - [Marker](docs/marker.md)
+  - [Polygon](docs/polygon.md)
+- [Location](docs/location.md)
+- [Geocode](docs/geocode.md)
 
 [npm]: https://www.npmjs.com/package/react-native-baidumap-sdk
 [version-badge]: https://badge.fury.io/js/react-native-baidumap-sdk.svg

@@ -47,7 +47,7 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
         return MapBuilder.of(
                 "onLoad", MapBuilder.of("registrationName", "onBaiduMapLoad"),
                 "onClick", MapBuilder.of("registrationName", "onBaiduMapClick"),
-                "onLongClick", MapBuilder.of("registrationName", "onBaiduMapClick"),
+                "onLongClick", MapBuilder.of("registrationName", "onBaiduMapLongClick"),
                 "onDoubleClick", MapBuilder.of("registrationName", "onBaiduMapDoubleClick"),
                 "onStatusChange", MapBuilder.of("registrationName", "onBaiduMapStatusChange")
         )
@@ -161,10 +161,14 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
         mapView.map.setMyLocationData(data.toLocationData())
     }
 
-    @ReactProp(name = "compassMode")
-    fun setCompassMode(mapView: BaiduMapView, enabled: Boolean) {
-        val mode = if (enabled) LocationMode.COMPASS else LocationMode.NORMAL
-        mapView.map.setMyLocationConfiguration(MyLocationConfiguration(mode, true, null))
+    @ReactProp(name = "locationMode")
+    fun setCompassMode(mapView: BaiduMapView, mode: String) {
+        val locationMode = when (mode) {
+            "follow" -> LocationMode.FOLLOWING
+            "compass" -> LocationMode.COMPASS
+            else -> LocationMode.NORMAL
+        }
+        mapView.map.setMyLocationConfiguration(MyLocationConfiguration(locationMode, true, null))
     }
 
     @ReactProp(name = "paused")

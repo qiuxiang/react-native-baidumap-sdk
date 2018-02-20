@@ -7,9 +7,9 @@ declare module 'react-native' {
 }
 
 declare module EventEmitter {
-  declare module.exports: any
+  declare module.exports: EventEmitter
 }
 
 declare module EventSubscription {
-  declare module.exports: any
+  declare module.exports: EventSubscription
 }

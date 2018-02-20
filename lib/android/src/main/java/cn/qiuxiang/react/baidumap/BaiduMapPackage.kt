@@ -8,7 +8,7 @@ import com.facebook.react.uimanager.ViewManager
 
 class BaiduMapPackage : ReactPackage {
     override fun createNativeModules(context: ReactApplicationContext): List<NativeModule> {
-        return listOf(BaiduMapLocationModule(context))
+        return listOf(BaiduMapLocationModule(context), BaiduMapGeocodeModule(context))
     }
 
     override fun createViewManagers(context: ReactApplicationContext): List<ViewManager<*, *>> {

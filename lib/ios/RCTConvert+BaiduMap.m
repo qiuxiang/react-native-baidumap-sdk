@@ -1,4 +1,5 @@
 #import <React/RCTConvert+CoreLocation.h>
+#import <BaiduMapAPI_Map/BMKMapView.h>
 #import "RCTCoordinate.h"
 #import "RCTUserLocation.h"
 
@@ -20,5 +21,11 @@
 }
 
 RCT_ARRAY_CONVERTER(RCTCoordinate)
+
+RCT_ENUM_CONVERTER(BMKUserTrackingMode, (@{
+     @"normal": @(BMKUserTrackingModeHeading),
+     @"compass": @(BMKUserTrackingModeFollowWithHeading),
+     @"follow": @(BMKUserTrackingModeFollow),
+}), BMKUserTrackingModeHeading, intValue)
 
 @end
