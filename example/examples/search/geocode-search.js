@@ -46,7 +46,7 @@ export default class GeocodeSearch extends Component {
             defaultValue={this.address}
             style={style.input}
             returnKeyType="search"
-            placeholder="地址"
+            placeholder="Address"
             placeholderTextColor="#9e9e9e"
             onChangeText={text => this.address = text}
             onSubmitEditing={this.search}
@@ -54,12 +54,12 @@ export default class GeocodeSearch extends Component {
           <TextInput
             style={style.input}
             returnKeyType="search"
-            placeholder="城市"
+            placeholder="City"
             placeholderTextColor="#9e9e9e"
             onChangeText={text => this.city = text}
             onSubmitEditing={this.search}
           />
-          <Button title="搜索" onPress={this.search} />
+          <Button title="Search" onPress={this.search} />
         </View>
         <MapView ref={ref => this.mapView = ref} style={style.mapView}>
           {this.state.address &&
