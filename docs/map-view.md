@@ -1,7 +1,5 @@
-# MapView
-地图组件
+# MapView 地图组件
 
-示例：
 ```javascript
 import { MapView } from 'react-native-baidumap-sdk'
 
@@ -99,4 +97,4 @@ render() {
 | Param | Type | Description |
 | ----- | ---- | ----------- |
 | status | Status | 地图状态，包括中心坐标、缩放级别等 |
-| duration | number | 过渡时间，以毫秒(ms)为单位 |
+| duration | number | 过渡时间，以毫秒(ms)为单位 |

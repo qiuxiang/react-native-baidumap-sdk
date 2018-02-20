@@ -1,4 +1,5 @@
 # 安装说明
+该项目有在 release 分支做新项目编译测试：[![build status][build-badge]][build]，可以作为编译失败时的参考。
 
 ## 引入项目
 ```bash
@@ -66,3 +67,6 @@ pod install
        ...
    }
    ```
+
+[build-badge]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk.svg?branch=release
+[build]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk

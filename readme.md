@@ -7,7 +7,7 @@ React Native BaiduMap SDK for Android + iOS.
 ## 安装
 
 - [安装说明](docs/installation.md)
-- [示例运行说明](docs/setup.md)
+- [项目示例运行说明](docs/setup.md)
 
 ## 用法
 

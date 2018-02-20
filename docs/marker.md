@@ -1,10 +1,7 @@
-# Marker
-在地图上放置一个标记
+# Marker 地图标记
 
-示例：
-
+Basic usage:
 ```javascript
-// Basic usage
 <MapView>
   <MapView.Marker
     title="This is a marker"
@@ -13,8 +10,8 @@
 </MapView>
 ```
 
+Custom View:
 ```javascript
-// Custom View
 <MapView>
   <MapView.Marker
     view={() => (
@@ -27,8 +24,8 @@
 </MapView>
 ```
 
+Custom callout:
 ```javascript
-// Custom callout
 <MapView>
   <MapView.Marker coordinate={{ latitude: 39, longitude: 113 }}>
     <MapView.Callout>
@@ -65,12 +62,12 @@ ios 对应：
 ```
 
 ### `view?: ComponentType`
-自定义 View
+自定义 View。
 
 需要注意，自定义 View 里的触摸事件是失效的。
 
 ### `selected?: boolean`
-是否选中
+是否选中。
 
 整个地图只有一个正在选中的标记，选中状态的标记会显示 Callout，点击其他区域时 Callout 会自定隐藏。
 
@@ -98,7 +95,7 @@ ios 对应：
 选中标记，相当于一次手动点击标记
 
 ### `update()` (android only)
-更新自定义 View
+更新自定义 View。
 
 由于 android 的实现是将 ReactView 转成图片，如果自定义 View 内部存在异步更新，则不能自动更新，必要时候需要手动触发更新。比如：
 ```javascript
