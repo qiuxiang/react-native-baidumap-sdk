@@ -17,7 +17,7 @@ const style = StyleSheet.create({
 })
 
 export default class Basic extends Component {
-  static navigationOptions = { title: 'Basic' }
+  static navigationOptions = { title: 'Basic usage' }
 
   state = {}
 
