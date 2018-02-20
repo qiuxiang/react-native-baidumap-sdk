@@ -1,35 +1,31 @@
 import React, { Component } from 'react'
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
-import { MapView, Location } from 'react-native-baidumap-sdk'
-import icon from '../../images/ic_my_location.png'
+import { StyleSheet, Text, View } from 'react-native'
+import { Location } from 'react-native-baidumap-sdk'
 
 const style = StyleSheet.create({
-  button: {
-    position: 'absolute',
-    right: 16,
-    bottom: 16,
-    backgroundColor: '#fff',
-    borderRadius: 40,
-    elevation: 2,
+  body: {
+    padding: 16,
   },
-  icon: {
-    width: 24,
-    height: 24,
-    margin: 12,
-    tintColor: '#616161',
+  item: {
+    flexDirection: 'row',
+    marginBottom: 4,
+  },
+  label: {
+    color: '#f5533d',
+    width: 120,
   },
 })
 
 export default class Basic extends Component {
-  static navigationOptions = { title: 'Basic usage' }
+  static navigationOptions = { title: 'Basic' }
 
   state = {}
 
   async componentDidMount() {
-    await Location.init()
     this.listener = Location.addLocationListener(location => {
-      this.setState({ location })
+      this.setState(location)
     })
+    await Location.init()
     Location.start()
   }
 
@@ -38,24 +34,15 @@ export default class Basic extends Component {
     this.listener.remove()
   }
 
-  location = () => this.mapView.setStatus({ center: this.state.location }, 1000)
-
   render() {
     return (
-      <View style={StyleSheet.absoluteFill}>
-        <MapView
-          ref={ref => this.mapView = ref}
-          style={StyleSheet.absoluteFill}
-          zoomLevel={18}
-          location={this.state.location}
-          locationEnabled
-          zoomControlsDisabled
-        />
-        <View style={style.button}>
-          <TouchableOpacity onPress={this.location}>
-            <Image style={style.icon} source={icon} />
-          </TouchableOpacity>
-        </View>
+      <View style={style.body}>
+        {Object.keys(this.state).map(key => (
+          <View style={style.item} key={key}>
+            <Text style={style.label}>{key}</Text>
+            <Text>{this.state[key]}</Text>
+          </View>
+        ))}
       </View>
     )
   }
