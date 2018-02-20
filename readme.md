@@ -69,6 +69,7 @@ render() {
   - [Marker](docs/marker.md)
   - [Polygon](docs/polygon.md)
 - [Location](docs/location.md)
+- [Geocode](docs/geocode.md)
 
 [npm]: https://www.npmjs.com/package/react-native-baidumap-sdk
 [version-badge]: https://badge.fury.io/js/react-native-baidumap-sdk.svg

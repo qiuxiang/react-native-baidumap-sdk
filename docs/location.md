@@ -4,6 +4,8 @@
 
 用法：
 ```javascript
+import { Location } from 'react-native-baidumap-sdk'
+
 await Location.init()
 Location.addLocationListener(location => console.log(location))
 Location.start()
@@ -31,9 +33,9 @@ Location.start()
 添加监听函数
 
 #### `Result`
-- `latitude: number` 经度
-- `longitude: number` 纬度
-- `accuracy: number` 精度
-- `altitude: number` 海拔
-- `speed: number` 速度
-- `direction: number` 方向
+- `latitude`: 经度
+- `longitude`: 纬度
+- `accuracy`: 精度
+- `altitude`: 海拔
+- `speed`: 速度
+- `direction`: 方向
