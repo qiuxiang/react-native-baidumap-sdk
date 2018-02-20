@@ -1,7 +1,5 @@
-# Polygon
-多边形覆盖物
+# Polygon 多边形覆盖物
 
-示例：
 ```javascript
 <MapView>
   <MapView.Polygon

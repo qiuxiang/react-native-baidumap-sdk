@@ -27,11 +27,10 @@ export default class Basic extends Component {
 
   async componentDidMount() {
     await Location.init()
-    Location.setOptions({ coordinateType: 'bd09ll' })
     this.listener = Location.addLocationListener(location => {
       this.setState({ location })
-      this.mapView.setStatus({ center: location }, 1000)
     })
+    Location.start()
   }
 
   componentWillUnmount() {
@@ -39,7 +38,7 @@ export default class Basic extends Component {
     this.listener.remove()
   }
 
-  location = () => Location.request()
+  location = () => this.mapView.setStatus({ center: this.state.location }, 1000)
 
   render() {
     return (
