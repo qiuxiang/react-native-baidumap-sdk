@@ -17,6 +17,7 @@
 
 - (BMKAnnotationView *)annotationView;
 - (void)bindCalloutPressHandler;
+- (void)setSelected:(BOOL)selected;
 
 + (NSBundle *)bundle;
 

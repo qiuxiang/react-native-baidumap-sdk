@@ -1,4 +1,4 @@
-#import <React/RCTViewManager.h>
+#import <React/RCTUIManager.h>
 #import "RCTMarker.h"
 
 @interface RCTMarkerManager : RCTViewManager
@@ -25,5 +25,12 @@ RCT_EXPORT_VIEW_PROPERTY(onBaiduMapCalloutPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onBaiduMapDrag, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onBaiduMapDragStart, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onBaiduMapDragEnd, RCTBubblingEventBlock)
+
+RCT_EXPORT_METHOD(select:(nonnull NSNumber *)reactTag) {
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        RCTMarker *marker = (RCTMarker *) viewRegistry[reactTag];
+        marker.selected = YES;
+    }];
+}
 
 @end
