@@ -69,6 +69,7 @@ RCT_EXPORT_METHOD(reverse:(CLLocationCoordinate2D)coordinate
             @"street": result.addressDetail.streetName,
             @"streetNumber": result.addressDetail.streetNumber,
             @"adCode": result.addressDetail.adCode,
+            @"businessCircle": result.businessCircle,
             @"address": result.address,
             @"description": result.sematicDescription,
         });
