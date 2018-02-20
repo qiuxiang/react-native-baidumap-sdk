@@ -26,7 +26,7 @@ import { MapView, Location } from 'react-native-baidumap-sdk'
 
 await Location.init()
 Location.addLocationListener(location => this.setState({ location }))
-Location.request()
+Location.start()
 
 state = { location: null }
 
