@@ -41,6 +41,15 @@ export default class GeocodeSearch extends Component {
   render() {
     return (
       <View style={style.body}>
+        <MapView ref={ref => this.mapView = ref} style={style.mapView}>
+          {this.state.address &&
+            <MapView.Marker
+              ref={ref => this.marker = ref}
+              title={this.state.address}
+              coordinate={this.state}
+            />
+          }
+        </MapView>
         <View style={style.form}>
           <TextInput
             defaultValue={this.address}
@@ -61,15 +70,6 @@ export default class GeocodeSearch extends Component {
           />
           <Button title="Search" onPress={this.search} />
         </View>
-        <MapView ref={ref => this.mapView = ref} style={style.mapView}>
-          {this.state.address &&
-            <MapView.Marker
-              ref={ref => this.marker = ref}
-              title={this.state.address}
-              coordinate={this.state}
-            />
-          }
-        </MapView>
       </View>
     )
   }

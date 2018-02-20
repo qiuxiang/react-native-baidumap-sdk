@@ -14,6 +14,7 @@ import mapView from './map-view'
 import location from './location'
 import marker from './marker'
 import overlays from './overlays'
+import search from './search'
 
 let Touchable = TouchableHighlight
 if (Platform.OS === 'android') {
@@ -72,6 +73,7 @@ class Examples extends Component<{}> {
     { title: 'Location', data: mapScreens(location) },
     { title: 'Marker', data: mapScreens(marker) },
     { title: 'Overlays', data: mapScreens(overlays) },
+    { title: 'Search', data: mapScreens(search) },
   ]
 
   render() {
@@ -93,4 +95,5 @@ export default {
   ...location,
   ...marker,
   ...overlays,
+  ...search,
 }
