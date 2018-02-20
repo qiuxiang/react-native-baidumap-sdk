@@ -1,6 +1,6 @@
 // @flow
 import { mapComponents } from '../../utils'
 import Basic from './basic'
-import ReGeocode from './re-geocode'
+import MapView from './map-view'
 
-export default mapComponents('location', { Basic, ReGeocode })
+export default mapComponents('location', { Basic, MapView })
