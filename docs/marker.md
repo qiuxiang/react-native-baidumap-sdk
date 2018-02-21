@@ -10,7 +10,7 @@
   />
 </MapView>
 ```
-![](https://user-images.githubusercontent.com/1709072/36481792-d5be5222-174b-11e8-98ff-bdf32860675d.png)
+<img src="https://user-images.githubusercontent.com/1709072/36481792-d5be5222-174b-11e8-98ff-bdf32860675d.png" width=200>
 
 自定义 View 标记:
 ```javascript
@@ -25,7 +25,7 @@
   />
 </MapView>
 ```
-![](https://user-images.githubusercontent.com/1709072/36482092-103c58da-174d-11e8-8c74-1ec587afba1f.png)
+<img src="https://user-images.githubusercontent.com/1709072/36482092-103c58da-174d-11e8-8c74-1ec587afba1f.png" width=200>
 
 自定义 callout:
 ```javascript
@@ -37,7 +37,7 @@
   </MapView.Marker>
 </MapView>
 ```
-![](https://user-images.githubusercontent.com/1709072/36482191-63be95b8-174d-11e8-969b-077cbf75d512.png)
+<img src="https://user-images.githubusercontent.com/1709072/36482191-63be95b8-174d-11e8-969b-077cbf75d512.png" width=200>
 
 ## Props
 
@@ -101,7 +101,7 @@ ios 对应：
 ### `update()` (android only)
 更新自定义 View。
 
-由于 android 的实现是将 ReactView 转成图片，如果自定义 View 内部存在异步更新，则不能自动更新，必要时候需要手动触发更新。比如：
+由于 android 需要将 ReactView 转成图片，如果自定义 View 内部存在异步更新，则不能自动更新，必要时候需要手动触发更新。比如：
 ```javascript
 <MapView.Marker
   ref={ref => this.marker = ref}
