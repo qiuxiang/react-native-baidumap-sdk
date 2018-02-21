@@ -18,9 +18,25 @@ React Native BaiduMap SDK for Android + iOS.
 import { MapView } from 'react-native-baidumap-sdk'
 
 render() {
-  return <MapView center={{ latitude: 39.2, longitude: 112.4 }}>
+  return <MapView center={{ latitude: 39.2, longitude: 112.4 }} />
 }
 ```
+
+### 监听地图事件
+```javascript
+import { MapView } from 'react-native-baidumap-sdk'
+
+render() {
+  return (
+    <MapView
+      onLoad={() => console.log('onLoad)}
+      onClick={point => console.log(point)}
+      onStatusChange={status => console.log(status)}
+    />
+  )
+}
+```
+![](https://user-images.githubusercontent.com/1709072/36482949-bd0b4aec-174f-11e8-8b99-1f355f5bae52.png)
 
 ### 定位并关联定位图层
 ```javascript
@@ -36,6 +52,7 @@ render() {
   return <MapView location={this.state.location} locationEnabled />
 }
 ```
+![](https://user-images.githubusercontent.com/1709072/36482673-07a9cda4-174f-11e8-8db2-33b8f4d424bd.png)
 
 ### 添加标记
 ```javascript
@@ -47,6 +64,7 @@ render() {
   />
 </MapView>
 ```
+![](https://user-images.githubusercontent.com/1709072/36481792-d5be5222-174b-11e8-98ff-bdf32860675d.png)
 
 ### 添加自定义标记
 ```javascript
@@ -54,13 +72,23 @@ render() {
   <MapView.Marker
     icon={() => (
       <View>
-        <Image sourcr={image} />
+        <Image source={image} />
         <Text>This is a custom marker</Text>
       </View>
     )}
   />
 </MapView>
 ```
+![](https://user-images.githubusercontent.com/1709072/36482766-41b14fcc-174f-11e8-998a-abbf90be2db2.png)
+
+### 地理编码/逆地理编码
+```javascript
+import { Geocode } from 'react-native-baidumap-sdk'
+
+const searchResult = await Geocode.search('海龙大厦')
+const reverseResult = await Geocode.reverse({ latitude: 39, longitude: 113 })
+```
+![](https://user-images.githubusercontent.com/1709072/36482622-e9122c9c-174e-11e8-82c7-f28628128729.png)
 
 需要注意，以上例子简写了一些属性，并不能直接使用，更多实际的例子请参考：[example](https://github.com/qiuxiang/react-native-baidumap-sdk/tree/master/example)。
 
