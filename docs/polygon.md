@@ -13,7 +13,7 @@
   />
 </MapView>
 ```
-![](https://user-images.githubusercontent.com/1709072/36482316-d9d645e8-174d-11e8-8268-b3c4271e886c.png)
+<img src="https://user-images.githubusercontent.com/1709072/36482316-d9d645e8-174d-11e8-8268-b3c4271e886c.png" width=200>
 
 ## Props
 
