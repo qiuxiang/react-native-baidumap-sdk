@@ -1,16 +1,18 @@
 # Marker 地图标记
 
-Basic usage:
+基本用法:
 ```javascript
 <MapView>
   <MapView.Marker
     title="This is a marker"
+    color="#3498db"
     coordinate={{ latitude: 39, longitude: 113 }}
   />
 </MapView>
 ```
+![](https://user-images.githubusercontent.com/1709072/36481792-d5be5222-174b-11e8-98ff-bdf32860675d.png)
 
-Custom View:
+自定义 View 标记:
 ```javascript
 <MapView>
   <MapView.Marker
@@ -23,8 +25,9 @@ Custom View:
   />
 </MapView>
 ```
+![](https://user-images.githubusercontent.com/1709072/36482092-103c58da-174d-11e8-8c74-1ec587afba1f.png)
 
-Custom callout:
+自定义 callout:
 ```javascript
 <MapView>
   <MapView.Marker coordinate={{ latitude: 39, longitude: 113 }}>
@@ -34,6 +37,7 @@ Custom callout:
   </MapView.Marker>
 </MapView>
 ```
+![](https://user-images.githubusercontent.com/1709072/36482191-63be95b8-174d-11e8-969b-077cbf75d512.png)
 
 ## Props
 

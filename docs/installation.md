@@ -1,5 +1,5 @@
 # 安装说明
-该项目有在 release 分支做新项目编译测试：[![build status][build-badge]][build]，可以作为编译失败时的参考。
+该项目在 release 分支做了新项目的编译测试：[![build status][build-badge]][build]，可以作为安装参考。
 
 ## 引入项目
 ```bash

@@ -8,7 +8,7 @@
     "location",
     "baidumap"
   ],
-  "version": "0.3.0",
+  "version": "0.3.2",
   "author": "7c00 <i@7c00.cc>",
   "repository": {
     "type": "git",
@@ -39,17 +39,17 @@
     "react-native": ">=0.47"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^8.2.2",
     "babel-preset-react-native": "^4.0.0",
     "eslint": "^4.18.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.66.0",
     "react": "^16.2.0",
     "react-native": "^0.52.2",
-    "react-navigation": "1.0.3"
+    "react-navigation": "1.1.1"
   },
   "presets": [
     "react-native"
