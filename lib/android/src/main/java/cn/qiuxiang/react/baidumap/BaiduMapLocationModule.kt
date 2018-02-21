@@ -18,6 +18,7 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
         val option = client.locOption
         option.coorType = "bd09ll"
         option.setOpenAutoNotifyMode()
+        option.setEnableSimulateGps(true)
         client.locOption = option
         client.registerLocationListener(object : BDAbstractLocationListener() {
             override fun onReceiveLocation(location: BDLocation) {
