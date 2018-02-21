@@ -27,6 +27,7 @@ export default class MapViewExample extends Component {
 
   async componentDidMount() {
     await Location.init()
+    Location.setOptions({ gps: true })
     this.listener = Location.addLocationListener(location => {
       this.setState({ location })
     })
