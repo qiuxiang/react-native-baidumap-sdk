@@ -98,6 +98,7 @@ const reverseResult = await Geocode.reverse({ latitude: 39, longitude: 113 })
 - [MapView](docs/map-view.md)
   - [Marker](docs/marker.md)
   - [Polygon](docs/polygon.md)
+  - [Cluster](docs/cluster.md)
 - [Location](docs/location.md)
 - [Geocode](docs/geocode.md)
 
