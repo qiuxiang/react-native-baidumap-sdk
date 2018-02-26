@@ -10,7 +10,7 @@
   />
 </MapView>
 ```
-<img src="https://user-images.githubusercontent.com/1709072/36481792-d5be5222-174b-11e8-98ff-bdf32860675d.png" width=200>
+<img src="https://user-images.githubusercontent.com/1709072/36655491-f24ab3d0-1afd-11e8-8928-622a624aa850.png" width=300>
 
 自定义 View 标记:
 ```javascript
@@ -18,14 +18,14 @@
   <MapView.Marker
     view={() => (
       <View>
-        <Text>This is a custom marker</Text>
+        <Text>This is a custom view marker</Text>
       </View>
     )}
     coordinate={{ latitude: 39, longitude: 113 }}
   />
 </MapView>
 ```
-<img src="https://user-images.githubusercontent.com/1709072/36482092-103c58da-174d-11e8-8c74-1ec587afba1f.png" width=200>
+<img src="https://user-images.githubusercontent.com/1709072/36655993-03dbbfba-1b01-11e8-9b38-970acb5f6447.png" width=300>
 
 自定义 callout:
 ```javascript
@@ -37,7 +37,7 @@
   </MapView.Marker>
 </MapView>
 ```
-<img src="https://user-images.githubusercontent.com/1709072/36482191-63be95b8-174d-11e8-969b-077cbf75d512.png" width=200>
+<img src="https://user-images.githubusercontent.com/1709072/36655994-0449591c-1b01-11e8-854d-b2cf7dbf21c1.png" width=300>
 
 ## Props
 
