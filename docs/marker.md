@@ -1,30 +1,33 @@
 # Marker 地图标记
 
-Basic usage:
+基本用法:
 ```javascript
 <MapView>
   <MapView.Marker
     title="This is a marker"
+    color="#3498db"
     coordinate={{ latitude: 39, longitude: 113 }}
   />
 </MapView>
 ```
+<img src="https://user-images.githubusercontent.com/1709072/36655491-f24ab3d0-1afd-11e8-8928-622a624aa850.png" width=300>
 
-Custom View:
+自定义 View 标记:
 ```javascript
 <MapView>
   <MapView.Marker
     view={() => (
       <View>
-        <Text>This is a custom marker</Text>
+        <Text>This is a custom view marker</Text>
       </View>
     )}
     coordinate={{ latitude: 39, longitude: 113 }}
   />
 </MapView>
 ```
+<img src="https://user-images.githubusercontent.com/1709072/36655993-03dbbfba-1b01-11e8-9b38-970acb5f6447.png" width=300>
 
-Custom callout:
+自定义 callout:
 ```javascript
 <MapView>
   <MapView.Marker coordinate={{ latitude: 39, longitude: 113 }}>
@@ -34,6 +37,7 @@ Custom callout:
   </MapView.Marker>
 </MapView>
 ```
+<img src="https://user-images.githubusercontent.com/1709072/36655994-0449591c-1b01-11e8-854d-b2cf7dbf21c1.png" width=300>
 
 ## Props
 
@@ -97,7 +101,7 @@ ios 对应：
 ### `update()` (android only)
 更新自定义 View。
 
-由于 android 的实现是将 ReactView 转成图片，如果自定义 View 内部存在异步更新，则不能自动更新，必要时候需要手动触发更新。比如：
+由于 android 需要将 ReactView 转成图片，如果自定义 View 内部存在异步更新，则不能自动更新，必要时候需要手动触发更新。比如：
 ```javascript
 <MapView.Marker
   ref={ref => this.marker = ref}

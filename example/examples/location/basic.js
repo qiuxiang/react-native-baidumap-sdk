@@ -22,10 +22,9 @@ export default class Basic extends Component {
   state = {}
 
   async componentDidMount() {
-    this.listener = Location.addLocationListener(location => {
-      this.setState(location)
-    })
     await Location.init()
+    Location.setOptions({ gps: true })
+    this.listener = Location.addLocationListener(location => this.setState(location))
     Location.start()
   }
 

@@ -116,18 +116,21 @@ android {
         }
     }
     signingConfigs {
-        release {
-            storeFile file("$System.env.HOME/.android/debug.keystore")
+        example {
+            storeFile file("example.keystore")
             storePassword "android"
-            keyAlias "androiddebugkey"
+            keyAlias "example"
             keyPassword "android"
         }
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.example
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.example
         }
     }
     // applicationVariants are e.g. debug, release

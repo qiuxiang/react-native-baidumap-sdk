@@ -2,7 +2,6 @@ package cn.qiuxiang.react.baidumap
 
 import android.content.res.Resources
 import android.graphics.Point
-import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.MyLocationData
 import com.baidu.mapapi.model.LatLng
 import com.baidu.mapapi.model.LatLngBounds
@@ -10,16 +9,6 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
-import com.facebook.react.uimanager.ThemedReactContext
-
-var isInitialized = false
-
-fun initialize(context: ThemedReactContext) {
-    if (!isInitialized) {
-        SDKInitializer.initialize(context.applicationContext)
-        isInitialized = true
-    }
-}
 
 fun ReadableMap.toPoint(): Point {
     return Point(

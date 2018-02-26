@@ -1,7 +1,6 @@
 package cn.qiuxiang.react.baidumap.mapview
 
 import android.view.View
-import cn.qiuxiang.react.baidumap.initialize
 import cn.qiuxiang.react.baidumap.toLatLng
 import cn.qiuxiang.react.baidumap.toLocationData
 import com.baidu.mapapi.map.BaiduMap.MAP_TYPE_NORMAL
@@ -24,7 +23,6 @@ class BaiduMapViewManager : ViewGroupManager<BaiduMapView>() {
     }
 
     override fun createViewInstance(context: ThemedReactContext): BaiduMapView {
-        initialize(context)
         return BaiduMapView(context)
     }
 
