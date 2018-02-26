@@ -1,16 +1,16 @@
-#import <React/RCTEventEmitter.h>
+#import <React/RCTBridgeModule.h>
 #import <BaiduMapAPI_Base/BMKMapManager.h>
 
-@interface RCTSDKModule : RCTEventEmitter <RCTBridgeModule, BMKGeneralDelegate>
+@interface RCTInitializerModule : NSObject <RCTBridgeModule, BMKGeneralDelegate>
 @end
 
-@implementation RCTSDKModule {
+@implementation RCTInitializerModule {
     BMKMapManager *_manager;
     RCTPromiseResolveBlock _resolve;
     RCTPromiseRejectBlock _reject;
 }
 
-RCT_EXPORT_MODULE(BaiduMapSDK)
+RCT_EXPORT_MODULE(BaiduMapInitializer)
 
 RCT_REMAP_METHOD(init, key:(NSString *)key resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     if (!_manager) {
@@ -29,10 +29,6 @@ RCT_REMAP_METHOD(init, key:(NSString *)key resolver:(RCTPromiseResolveBlock)reso
     } else {
         _resolve(nil);
     }
-}
-
-- (NSArray<NSString *> *)supportedEvents {
-    return @[@"baiduMapInit"];
 }
 
 @end

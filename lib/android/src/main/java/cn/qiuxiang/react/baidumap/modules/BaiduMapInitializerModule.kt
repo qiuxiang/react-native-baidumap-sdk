@@ -1,4 +1,4 @@
-package cn.qiuxiang.react.baidumap
+package cn.qiuxiang.react.baidumap.modules
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,7 +10,7 @@ import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 
 @Suppress("unused")
-class BaiduMapSDKModule(private val context: ReactApplicationContext) : ReactContextBaseJavaModule(context) {
+class BaiduMapInitializerModule(private val context: ReactApplicationContext) : ReactContextBaseJavaModule(context) {
     class SDKReceiver(promise: Promise) : BroadcastReceiver() {
         private var promise: Promise? = promise
 
@@ -27,7 +27,7 @@ class BaiduMapSDKModule(private val context: ReactApplicationContext) : ReactCon
     private val emitter by lazy { context.getJSModule(RCTDeviceEventEmitter::class.java) }
 
     override fun getName(): String {
-        return "BaiduMapSDK"
+        return "BaiduMapInitializer"
     }
 
     @ReactMethod
@@ -35,7 +35,6 @@ class BaiduMapSDKModule(private val context: ReactApplicationContext) : ReactCon
         val intentFilter = IntentFilter()
         intentFilter.addAction(SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)
         intentFilter.addAction(SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)
-        intentFilter.addAction(SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)
         context.currentActivity?.registerReceiver(SDKReceiver(promise), intentFilter)
         SDKInitializer.initialize(context.applicationContext)
     }

@@ -1,5 +1,7 @@
-package cn.qiuxiang.react.baidumap
+package cn.qiuxiang.react.baidumap.modules
 
+import cn.qiuxiang.react.baidumap.toLatLng
+import cn.qiuxiang.react.baidumap.toWritableMap
 import com.baidu.mapapi.search.core.SearchResult
 import com.baidu.mapapi.search.geocode.*
 import com.facebook.react.bridge.*

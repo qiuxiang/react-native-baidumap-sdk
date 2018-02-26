@@ -1,10 +1,10 @@
 import { StatusBar } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import { SDK } from 'react-native-baidumap-sdk'
+import { Initializer } from 'react-native-baidumap-sdk'
 import examples from './examples'
 
 StatusBar.setBarStyle('light-content')
-SDK.init('6s1BDd7jUHhzUV8S8E3kMEyAKfqkKPrw')
+Initializer.init('6s1BDd7jUHhzUV8S8E3kMEyAKfqkKPrw')
 
 export default StackNavigator(examples, {
   navigationOptions: {
