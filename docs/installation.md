@@ -59,7 +59,7 @@ import { Initializer } from 'react-native-baidumap-sdk'
 Initializer.init('iOS 开发密钥')
 ```
 
-*init 方法会根据是否提供参数决定初始化的是 ios 还是 android。*
+*android 下会自动忽略 init 的参数。*
 
 [build-badge]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk.svg?branch=release
 [build]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk
