@@ -1,4 +1,4 @@
-package cn.qiuxiang.react.baidumap
+package cn.qiuxiang.react.baidumap.modules
 
 import com.baidu.location.BDAbstractLocationListener
 import com.baidu.location.BDLocation
