@@ -11,15 +11,11 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <BaiduMapAPI_Base/BMKMapManager.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  BMKMapManager *mapManager = [BMKMapManager new];
-  [mapManager start:@"6s1BDd7jUHhzUV8S8E3kMEyAKfqkKPrw" generalDelegate:nil];
-
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];

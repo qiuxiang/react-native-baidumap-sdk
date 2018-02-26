@@ -19,7 +19,7 @@ RCT_EXPORT_METHOD(setOptions:(NSDictionary *)options) {
     }
 }
 
-RCT_REMAP_METHOD(init, initWithResolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_REMAP_METHOD(init, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     if (!_initialized) {
         _initialized = YES;
         _location = [RCTUserLocation new];
