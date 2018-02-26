@@ -10,13 +10,6 @@
     RCTPromiseRejectBlock _reject;
 }
 
-- (instancetype)init {
-    self = [super init];
-    _search = [BMKGeoCodeSearch new];
-    _search.delegate = self;
-    return self;
-}
-
 RCT_EXPORT_MODULE(BaiduMapGeocode)
 
 RCT_EXPORT_METHOD(search:(NSString *)address
@@ -28,16 +21,24 @@ RCT_EXPORT_METHOD(search:(NSString *)address
     option.address = address;
     _resolve = resolve;
     _reject = reject;
+    if (!_search) {
+        _search = [BMKGeoCodeSearch new];
+        _search.delegate = self;
+    }
     [_search geoCode:option];
 }
 
 RCT_EXPORT_METHOD(reverse:(CLLocationCoordinate2D)coordinate
-      reverseWithResolver:(RCTPromiseResolveBlock)resolve
+                 resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject) {
     BMKReverseGeoCodeOption *option = [BMKReverseGeoCodeOption new];
     option.reverseGeoPoint = coordinate;
     _resolve = resolve;
     _reject = reject;
+    if (!_search) {
+        _search = [BMKGeoCodeSearch new];
+        _search.delegate = self;
+    }
     [_search reverseGeoCode:option];
 }
 
