@@ -124,6 +124,7 @@ render() {
   - [Marker](docs/marker.md)
   - [Polyline](docs/polyline.md)
   - [Polygon](docs/polygon.md)
+  - [Circle](docs/circle.md)
   - [Cluster](docs/cluster.md)
 - [Location](docs/location.md)
 - [Geocode](docs/geocode.md)
