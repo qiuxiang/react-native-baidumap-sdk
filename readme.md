@@ -122,6 +122,7 @@ render() {
 
 - [MapView](docs/map-view.md)
   - [Marker](docs/marker.md)
+  - [Polyline](docs/polyline.md)
   - [Polygon](docs/polygon.md)
   - [Cluster](docs/cluster.md)
 - [Location](docs/location.md)
