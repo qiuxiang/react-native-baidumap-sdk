@@ -23,6 +23,7 @@ class BaiduMapPackage : ReactPackage {
                 BaiduMapViewManager(),
                 BaiduMapMarkerManager(),
                 BaiduMapCalloutManager(),
+                BaiduMapPolylineManager(),
                 BaiduMapPolygonManager(),
                 BaiduMapTextManager()
         )
