@@ -12,7 +12,7 @@
   />
 </MapView>
 ```
-<img src="https://user-images.githubusercontent.com/1709072/36655489-f00b528c-1afd-11e8-9226-b59f40cc24d4.png" width=300>
+<img src="https://user-images.githubusercontent.com/1709072/36708795-bf660b60-1baf-11e8-8e25-d1f44cfa5acd.png" width=300>
 
 ## Props
 
