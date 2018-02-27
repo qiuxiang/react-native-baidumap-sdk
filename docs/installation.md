@@ -48,18 +48,20 @@ end
 pod install
 ```
 
-## 初始化
-在使用 react-native-baidumap-sdk 的组件、模块之前一定要初始化，其中 iOS 需要提供密钥（Android 密钥已经写在 Manifest）。
+## 初始化（重要！！）
+**在使用 react-native-baidumap-sdk 的组件、模块之前一定要初始化。**
+
+其中 iOS 需要提供密钥（Android 密钥已经且只能写在 Manifest），当然，你也可以用官方提供的方法进行初始化。
 
 [获取 iOS 开发密钥](http://lbsyun.baidu.com/index.php?title=iossdk/guide/create-project/ak)。
 
 ```javascript
 import { Initializer } from 'react-native-baidumap-sdk'
 
-Initializer.init('iOS 开发密钥')
+Initializer.init('iOS 开发密钥').catch(e => console.error(e))
 ```
 
-*android 下会自动忽略 init 的参数。*
+android 下会自动忽略 init 的参数，如果应用只支持 android 则可以不带参数，但还是一定要 init，否则甚至会导致应用崩溃。
 
 [build-badge]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk.svg?branch=release
 [build]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk
