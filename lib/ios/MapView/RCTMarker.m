@@ -25,12 +25,24 @@
     [_annotationView.paopaoView addGestureRecognizer:_calloutPressHandler];
 }
 
+- (void)updateCenterOffset {
+    CGSize size = _annotationView.image.size;
+    _annotationView.centerOffset = CGPointMake(0, -size.height / 2);
+}
+
 - (void)setColor:(UIColor *)color {
     _annotationView.image = [self tintWithColor:color];
+    [self updateCenterOffset];
 }
 
 - (void)setImage:(NSString *)image {
     _annotationView.image = [UIImage imageNamed:image];
+    [self updateCenterOffset];
+}
+
+- (void)setCenterOffset:(CGPoint)centerOffset {
+    // TODO: Maybe not working
+    _annotationView.centerOffset = centerOffset;
 }
 
 - (void)setSelected:(BOOL)selected {
