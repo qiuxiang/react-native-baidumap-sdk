@@ -93,17 +93,6 @@ render() {
 ```
 <img src="https://user-images.githubusercontent.com/1709072/36655482-ec5d23b8-1afd-11e8-99c3-bbf62c163476.png" width=300>
 
-### 地理编码/逆地理编码
-```javascript
-import { Geocode } from 'react-native-baidumap-sdk'
-
-const searchResult = await Geocode.search('海龙大厦')
-const reverseResult = await Geocode.reverse({ latitude: 39, longitude: 113 })
-```
-<img src="https://user-images.githubusercontent.com/1709072/36655485-ed756bfc-1afd-11e8-8f4b-c6ec50ebc8dd.png" width=300>
-
-需要注意，以上例子简写了一些属性，并不能直接使用，更多实际的例子请参考：[example](https://github.com/qiuxiang/react-native-baidumap-sdk/tree/master/example)。
-
 ### 点聚合
 ```javascript
 onStatusChange = status => this.cluster.update(status)
@@ -128,6 +117,17 @@ render() {
 }
 ```
 <img src="https://user-images.githubusercontent.com/1709072/36655484-ed17649e-1afd-11e8-81c5-04a981862b1a.png" width=300> <img src="https://user-images.githubusercontent.com/1709072/36655483-ecbb4b64-1afd-11e8-954c-ded218f8a696.png" width=300>
+
+### 地理编码/逆地理编码
+```javascript
+import { Geocode } from 'react-native-baidumap-sdk'
+
+const searchResult = await Geocode.search('海龙大厦')
+const reverseResult = await Geocode.reverse({ latitude: 39, longitude: 113 })
+```
+<img src="https://user-images.githubusercontent.com/1709072/36655485-ed756bfc-1afd-11e8-8f4b-c6ec50ebc8dd.png" width=300>
+
+需要注意，以上例子简写了一些属性，并不能直接使用，更多实际的例子请参考：[example](https://github.com/qiuxiang/react-native-baidumap-sdk/tree/master/example)。
 
 ## 接口文档
 [JS 代码](lib/js)有完善的类型标注，建议结合源代码一起阅读，特别是需要知道具体参数、返回值类型的时候。
