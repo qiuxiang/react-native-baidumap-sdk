@@ -19,8 +19,12 @@
 ### `points: LatLng[]`
 坐标集合
 
+---
+
 ### `width?: number`
 线段宽度
+
+---
 
 ### `color?: color`
 线段颜色

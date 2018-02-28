@@ -16,6 +16,8 @@ Location.start()
 ### `init(): Promise<void>`
 初始化，必须在调用其他方法前调用
 
+---
+
 ### `setOptions(options: Options)`
 设置参数
 
@@ -23,19 +25,25 @@ Location.start()
 - `distanceFilter?: number = 0` 设置距离变化超过该数值才返回数据
 - `gps?: boolean = false` 是否使用 GPS (android only)
 
+---
+
 ### `start`
 开始定位
 
+---
+
 ### `stop`
 停止定位
+
+---
 
 ### `addLocationListener: (Result => void) => EventSubscription`
 添加监听函数
 
 #### `Result`
-- `latitude`: 经度
-- `longitude`: 纬度
-- `accuracy`: 精度
-- `altitude`: 海拔
-- `speed`: 速度
-- `direction`: 方向
+- `latitude` 经度
+- `longitude` 纬度
+- `accuracy` 精度
+- `altitude` 海拔（米）
+- `speed` 速度（m/s）
+- `direction` 方向

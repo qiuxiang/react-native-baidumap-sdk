@@ -1,5 +1,5 @@
 # 安装说明
-该项目在 release 分支做了新项目的编译测试：[![build status][build-badge]][build]，可以作为安装参考。
+该项目在 release 分支做了新项目的编译测试：[![build status][build-badge]][build]，可以作为参考。
 
 ## 引入项目
 ```bash
@@ -49,7 +49,7 @@ pod install
 ```
 
 ## 初始化（重要！！）
-**在使用 react-native-baidumap-sdk 的组件、模块之前一定要初始化。**
+**在使用 react-native-baidumap-sdk 的组件、模块之前一定要初始化。未初始化可能导致应用崩溃，而初始化失败则会导致地图无法显示。**
 
 其中 iOS 需要提供密钥（Android 密钥已经且只能写在 Manifest），当然，你也可以用官方提供的方法进行初始化。
 
@@ -61,7 +61,7 @@ import { Initializer } from 'react-native-baidumap-sdk'
 Initializer.init('iOS 开发密钥').catch(e => console.error(e))
 ```
 
-android 下会自动忽略 init 的参数，如果应用只支持 android 则可以不带参数，但还是一定要 init，否则甚至会导致应用崩溃。
+android 下会自动忽略 init 的参数，如果应用只支持 android 则可以不带参数。
 
 [build-badge]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk.svg?branch=release
 [build]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk
