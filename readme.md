@@ -66,7 +66,19 @@ render() {
 ```
 <img src="https://user-images.githubusercontent.com/1709072/36655491-f24ab3d0-1afd-11e8-8928-622a624aa850.png" width=300>
 
-### 添加自定义标记
+### 添加自定义图片标记
+```javascript
+<MapView>
+  <MapView.Marker
+    title="This is a image marker"
+    image="flag"
+    coordinate={{ latitude: 39, longitude: 113 }}
+  />
+</MapView>
+```
+<img src="https://user-images.githubusercontent.com/1709072/36775133-c320cb5e-1c9b-11e8-9f04-9ab2d4139a5f.png" width=300>
+
+### 添加自定义 View 标记
 ```javascript
 <MapView>
   <MapView.Marker
