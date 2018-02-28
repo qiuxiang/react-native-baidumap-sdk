@@ -119,9 +119,9 @@ render() {
 ### `locationMode?: 'normal' | 'follow' | 'compass'`
 设置定位模式
 
-- `normal`: 普通模式，地图不会自动移动到定位点
-- `follow`: 跟随模式，地图会自动移动到定位点
-- `compass`: 罗盘模式，显示罗盘且地图会自动移动到定位点
+- `normal` 普通模式，地图不会自动移动到定位点
+- `follow` 跟随模式，地图会自动移动到定位点
+- `compass` 罗盘模式，显示罗盘且地图会自动移动到定位点
 
 ### `onLoad?: () => void`
 地图加载完毕后调用

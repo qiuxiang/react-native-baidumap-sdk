@@ -18,7 +18,7 @@
 ## Props
 
 ### `points: LatLng[]`
-标记点坐标
+坐标列表
 
 ---
 
