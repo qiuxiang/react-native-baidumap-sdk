@@ -2,6 +2,7 @@
 #import "RCTMapView.h"
 #import "RCTMarker.h"
 #import "RCTOverlay.h"
+#import "RCTHeatMap.h"
 #import "RCTUserLocation.h"
 
 @implementation RCTMapView {
@@ -200,6 +201,10 @@ didChangeDragState:(BMKAnnotationViewDragState)newState
         _overlays[[@(overlay.overlay.hash) stringValue]] = overlay;
         [self addOverlay:overlay.overlay];
     }
+    
+    if ([subview isKindOfClass:[RCTHeatMap class]]) {
+        [self addHeatMap:((RCTHeatMap *) subview).heatMap];
+    }
 }
 
 - (void)removeReactSubview:(id <RCTComponent>)subview {
@@ -215,6 +220,10 @@ didChangeDragState:(BMKAnnotationViewDragState)newState
         RCTOverlay *overlay = (RCTOverlay *)subview;
         _overlays[[@(overlay.hash) stringValue]] = overlay;
         [self removeOverlay:overlay.overlay];
+    }
+    
+    if ([subview isKindOfClass:[RCTHeatMap class]]) {
+        [self removeHeatMap];
     }
 }
 
