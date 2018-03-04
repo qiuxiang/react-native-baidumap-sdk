@@ -18,13 +18,19 @@
 ## Props
 
 ### `points: LatLng[]`
-标记点坐标
+坐标列表
+
+---
 
 ### `strokeWidth?: number`
 边框宽度
 
+---
+
 ### `strokeColor?: color`
 边框颜色
+
+---
 
 ### `fillColor?: color`
 填充颜色

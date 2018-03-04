@@ -1,6 +1,7 @@
 package cn.qiuxiang.react.baidumap.mapview
 
 import android.content.Context
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import cn.qiuxiang.react.baidumap.toLatLng
@@ -120,6 +121,15 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
                 emitDragEvent(marker, "onDrag")
             }
         })
+    }
+
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            parent.requestDisallowInterceptTouchEvent(true)
+        } else if (event.action == MotionEvent.ACTION_UP) {
+            parent.requestDisallowInterceptTouchEvent(false)
+        }
+        return super.dispatchTouchEvent(event)
     }
 
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {

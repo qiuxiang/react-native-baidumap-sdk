@@ -12,6 +12,18 @@
 ```
 <img src="https://user-images.githubusercontent.com/1709072/36655491-f24ab3d0-1afd-11e8-8928-622a624aa850.png" width=300>
 
+自定义图片标记:
+```javascript
+<MapView>
+  <MapView.Marker
+    title="This is a image marker"
+    image="flag"
+    coordinate={{ latitude: 39, longitude: 113 }}
+  />
+</MapView>
+```
+<img src="https://user-images.githubusercontent.com/1709072/36775133-c320cb5e-1c9b-11e8-9f04-9ab2d4139a5f.png" width=300>
+
 自定义 View 标记:
 ```javascript
 <MapView>
@@ -44,13 +56,17 @@
 ### `coordinate: LatLng`
 标记点坐标
 
-### `title?: string`
-标题文本
+---
 
-点击标记时弹出显示。
+### `title?: string`
+标题文本，点击标记时弹出显示。
+
+---
 
 ### `color?: color`
 默认标记的颜色
+
+---
 
 ### `image?: string`
 设置自定义图片，参数是原生图片名称，这需要你对原生开发有一定的了解。尽管 `view` 也能自定义图片并且更灵活，但我会建议优先使用 `image`，因为原生图片的开销更小。
@@ -65,30 +81,44 @@ ios 对应：
 [UIImage imageNamed:image]
 ```
 
-### `view?: ComponentType`
-自定义 View。
+---
 
-需要注意，自定义 View 里的触摸事件是失效的。
+### `view?: React.ComponentType`
+自定义 View，需要注意，自定义 View 里的触摸事件是失效的。
+
+---
 
 ### `selected?: boolean`
 是否选中。
 
 整个地图只有一个正在选中的标记，选中状态的标记会显示 Callout，点击其他区域时 Callout 会自定隐藏。
 
+---
+
 ### `draggable?: boolean`
 是否可拖拽
+
+---
 
 ### `onPress?: () => void`
 点击标记时调用
 
+---
+
 ### `onCalloutPress?: () => void`
 点击 Callout 时调用
+
+---
 
 ### `onDragStart?: LatLng => void`
 开始拖拽时调用
 
+---
+
 ### `onDrag?: LatLng => void`
 正在拖拽时调用
+
+---
 
 ### `onDragEnd?: LatLng => void`
 结束拖拽时调用
@@ -97,6 +127,8 @@ ios 对应：
 
 ### `select()`
 选中标记，相当于一次手动点击标记
+
+---
 
 ### `update()` (android only)
 更新自定义 View。
