@@ -24,7 +24,7 @@ render() {
 
 ### 显示卫星图
 ```javascript
-<MapView satellite>
+<MapView satellite />
 ```
 <img src="https://user-images.githubusercontent.com/1709072/36829451-37e03fba-1d5a-11e8-8cb4-7d4a5296a083.png" width=300>
 
