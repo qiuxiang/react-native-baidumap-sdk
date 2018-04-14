@@ -22,7 +22,7 @@ aliases:
     |
       nvm install node
       yarn global add react-native-cli
-      react-native init App
+      react-native init App --version="0.52.3"
       cd App
       yarn add react-native-baidumap-sdk
 
