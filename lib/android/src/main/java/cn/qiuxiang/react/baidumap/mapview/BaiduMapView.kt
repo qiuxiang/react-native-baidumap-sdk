@@ -170,11 +170,10 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         }
 
         if (target.hasKey("region")) {
-            setStatus(
-                    MapStatusUpdateFactory.newLatLngBounds(target.toLatLngBounds()), duration)
+            setStatus(MapStatusUpdateFactory.newLatLngBounds(
+                target.getMap("region").toLatLngBounds()), duration)
         } else {
-            setStatus(
-                    MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
+            setStatus(MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
         }
     }
 
