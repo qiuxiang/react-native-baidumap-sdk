@@ -52,6 +52,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
 
         map.setOnMapLoadedCallback {
             emit(id, "onLoad")
+            emitStatusChangeEvent(map.mapStatus)
 
             // Some bugs (probably by ReactView) cause the compass to fail to display
             // So I do some hack
@@ -90,13 +91,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
             override fun onMapStatusChangeStart(status: MapStatus, reason: Int) {}
             override fun onMapStatusChange(status: MapStatus) {}
             override fun onMapStatusChangeFinish(status: MapStatus) {
-                val data = Arguments.createMap()
-                data.putMap("center", status.target.toWritableMap())
-                data.putMap("region", status.bound.toWritableMap())
-                data.putDouble("zoomLevel", status.zoom.toDouble())
-                data.putDouble("overlook", status.overlook.toDouble())
-                data.putDouble("rotation", status.rotate.toDouble())
-                emit(id, "onStatusChange", data)
+                emitStatusChangeEvent(status)
             }
         })
 
@@ -141,6 +136,16 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         markerView?.let {
             emit(it.id, event, it.position?.toWritableMap()!!)
         }
+    }
+
+    fun emitStatusChangeEvent(status: MapStatus) {
+        val data = Arguments.createMap()
+        data.putMap("center", status.target.toWritableMap())
+        data.putMap("region", status.bound.toWritableMap())
+        data.putDouble("zoomLevel", status.zoom.toDouble())
+        data.putDouble("overlook", status.overlook.toDouble())
+        data.putDouble("rotation", status.rotate.toDouble())
+        emit(id, "onStatusChange", data)
     }
 
     fun setStatus(args: ReadableArray?) {
