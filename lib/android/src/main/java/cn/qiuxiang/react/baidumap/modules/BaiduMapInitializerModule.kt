@@ -30,6 +30,10 @@ class BaiduMapInitializerModule(private val context: ReactApplicationContext) : 
         return "BaiduMapInitializer"
     }
 
+    override fun canOverrideExistingModule(): Boolean {
+        return true
+    }
+
     @ReactMethod
     fun init(promise: Promise) {
         val intentFilter = IntentFilter()
