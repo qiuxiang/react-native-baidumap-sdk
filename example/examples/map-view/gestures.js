@@ -8,10 +8,9 @@ const style = StyleSheet.create({
     flex: 1,
   },
   controls: {
-    height: 72,
+    height: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    elevation: 4,
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: '#292c36',
@@ -22,7 +21,7 @@ const style = StyleSheet.create({
   },
   label: {
     color: '#fff',
-    marginBottom: 4,
+    marginTop: 4,
   },
 })
 
@@ -40,11 +39,11 @@ export default class Gestures extends Component {
     const prop = `${name}Disabled`
     return (
       <View style={style.control}>
-        <Text style={style.label}>{name}</Text>
         <Switch
           onValueChange={value => this.setState({ [prop]: !value })}
           value={!this.state[prop]}
         />
+        <Text style={style.label}>{name}</Text>
       </View>
     )
   }
@@ -52,13 +51,13 @@ export default class Gestures extends Component {
   render() {
     return (
       <View style={StyleSheet.absoluteFill}>
+        <MapView style={style.mapView} {...this.state} />
         <View style={style.controls}>
           {this.renderControl('overlook')}
           {this.renderControl('rotate')}
           {this.renderControl('scroll')}
           {this.renderControl('zoom')}
         </View>
-        <MapView style={style.mapView} {...this.state} />
       </View>
     )
   }
