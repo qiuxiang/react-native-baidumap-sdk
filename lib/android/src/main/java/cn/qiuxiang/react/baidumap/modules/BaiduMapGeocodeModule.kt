@@ -54,6 +54,10 @@ class BaiduMapGeocodeModule(context: ReactApplicationContext) : ReactContextBase
         return "BaiduMapGeocode"
     }
 
+    override fun canOverrideExistingModule(): Boolean {
+        return true
+    }
+
     @ReactMethod
     fun search(address: String, city: String, promise: Promise) {
         this.promise = promise
