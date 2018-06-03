@@ -10,4 +10,8 @@
     return nil;
 }
 
+- (void)update {
+    _mapView.centerCoordinate = _mapView.centerCoordinate;
+}
+
 @end
