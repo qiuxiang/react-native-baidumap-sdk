@@ -41,6 +41,10 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
         return "BaiduMapLocation"
     }
 
+    override fun canOverrideExistingModule(): Boolean {
+        return true
+    }
+
     @ReactMethod
     fun setOptions(options: ReadableMap) {
         val option = client.locOption

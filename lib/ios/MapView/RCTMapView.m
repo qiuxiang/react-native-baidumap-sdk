@@ -198,6 +198,7 @@ didChangeDragState:(BMKAnnotationViewDragState)newState
 
     if ([subview isKindOfClass:[RCTOverlay class]]) {
         RCTOverlay *overlay = (RCTOverlay *)subview;
+        overlay.mapView = self;
         _overlays[[@(overlay.overlay.hash) stringValue]] = overlay;
         [self addOverlay:overlay.overlay];
     }

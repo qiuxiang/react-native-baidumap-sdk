@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { MapView } from 'react-native-baidumap-sdk'
 
 export default class Clustering extends Component {
   static navigationOptions = { title: 'Marker clustering' }
-
-  onLoad = () => {
-    if (Platform.OS === 'android') {
-      this.mapView.setStatus({ zoomLevel: 10 }, 500)
-    }
-  }
 
   onStatusChange = status => {
     this.status = status
@@ -43,7 +37,6 @@ export default class Clustering extends Component {
     const props = {
       ref: ref => this.mapView = ref,
       style: StyleSheet.absoluteFill,
-      onLoad: this.onLoad,
       onStatusChange: this.onStatusChange,
     }
 

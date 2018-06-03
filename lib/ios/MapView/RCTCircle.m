@@ -18,22 +18,27 @@
 
 - (void)setCircleCenter:(CLLocationCoordinate2D)center {
     _circle.coordinate = center;
+    [self update];
 }
 
 - (void)setRadius:(CLLocationDistance)radius {
     _circle.radius = radius;
+    [self update];
 }
 
 - (void)setStrokeWidth:(CGFloat)strokeWidth {
     _circleView.lineWidth = strokeWidth;
+    [self update];
 }
 
 - (void)setStrokeColor:(UIColor *)strokeColor {
     _circleView.strokeColor = strokeColor;
+    [self update];
 }
 
 - (void)setFillColor:(UIColor *)fillColor {
     _circleView.fillColor = fillColor;
+    [self update];
 }
 
 - (id <BMKOverlay>)overlay {

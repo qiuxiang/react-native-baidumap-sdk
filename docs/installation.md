@@ -55,7 +55,7 @@ target 'RNBaiduMap' do
   pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'react-native-baidumap-sdk', path: '../lib/ios'
+  pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
 end
 ```
 
@@ -69,7 +69,7 @@ pod install
 ## 初始化（重要！！）
 **在使用 react-native-baidumap-sdk 的组件、模块之前一定要初始化。未初始化可能导致应用崩溃，而初始化失败则会导致地图无法显示。**
 
-其中 iOS 需要提供密钥（Android 密钥已经且只能写在 Manifest），当然，你也可以用官方提供的方法进行初始化。
+其中 iOS 需要提供密钥作为参数（Android 密钥必须写在 Manifest），当然，你也可以用官方提供的方法进行初始化。
 
 [获取 iOS 开发密钥](http://lbsyun.baidu.com/index.php?title=iossdk/guide/create-project/ak)。
 
@@ -80,6 +80,8 @@ Initializer.init('iOS 开发密钥').catch(e => console.error(e))
 ```
 
 android 下会自动忽略 init 的参数，如果应用只支持 android 则可以不带参数。
+
+另外，android 错误码请参考[错误码对照表](http://lbsyun.baidu.com/index.php?title=androidsdk/guide/addition-func/errorcode)。
 
 [build-badge]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk.svg?branch=release
 [build]: https://travis-ci.org/qiuxiang/react-native-baidumap-sdk
