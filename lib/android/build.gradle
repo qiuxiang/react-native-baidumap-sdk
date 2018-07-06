@@ -9,29 +9,17 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 22
-    }
-
-    sourceSets {
-        main {
-            jniLibs.srcDir '../../node_modules/baidumap-sdk/libs'
-        }
-    }
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
 }
 
 dependencies {
-    provided 'com.facebook.react:react-native:+'
+    compile 'com.facebook.react:react-native:+'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile files('../../node_modules/baidumap-sdk/libs/BaiduLBS_Android.jar')
+    compile 'qiuxiang:baidumap-sdk:0.0.5'
 }
