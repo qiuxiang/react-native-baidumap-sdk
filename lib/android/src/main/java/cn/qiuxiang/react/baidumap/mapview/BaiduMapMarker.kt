@@ -91,7 +91,9 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
     fun updateMarkerView() {
         markerView?.let {
             iconHeight = it.height
-            marker?.icon = bitmapDescriptorFrom(it)
+            if (it.width > 0 && it.height > 0) {
+                marker?.icon = bitmapDescriptorFrom(it)
+            }
         }
     }
 
