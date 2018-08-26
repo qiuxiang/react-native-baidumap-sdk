@@ -3,6 +3,8 @@ aliases:
     components:
       - build-tools-23.0.1
       - android-23
+      - build-tools-26.0.3
+      - android-26
       - extra-android-m2repository
       - extra-android-support
   
@@ -99,6 +101,13 @@ jobs:
               pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
               pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
               pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
+            end
+            post_install do |installer|
+              installer.pods_project.targets.each do |target|
+                if target.name == "React"
+                  target.remove_from_project
+                end
+              end
             end
           EOF
         - pod install

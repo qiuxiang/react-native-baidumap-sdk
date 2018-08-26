@@ -27,7 +27,7 @@ react-native link react-native-baidumap-sdk
 ```
 
 ### iOS
-暂时只提供 cocoapods 配置方式。
+暂时只提供 cocoapods 配置方式，手动配置请参考官方文档。
 
 在 `ios` 目录下新建文件 `Podfile`：
 
@@ -56,6 +56,14 @@ target 'RNBaiduMap' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
 end
 ```
 
