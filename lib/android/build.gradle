@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.41'
 
     repositories {
         jcenter()
@@ -16,6 +16,10 @@ buildscript {
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.3"
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
