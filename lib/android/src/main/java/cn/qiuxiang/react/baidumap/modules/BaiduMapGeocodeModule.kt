@@ -23,6 +23,7 @@ class BaiduMapGeocodeModule(context: ReactApplicationContext) : ReactContextBase
                     data.putDouble("longitude", result.location.longitude)
                     promise?.resolve(data)
                 }
+                promise = null
             }
 
             override fun onGetReverseGeoCodeResult(result: ReverseGeoCodeResult?) {
@@ -45,6 +46,7 @@ class BaiduMapGeocodeModule(context: ReactApplicationContext) : ReactContextBase
                     data.putString("description", result.sematicDescription)
                     promise?.resolve(data)
                 }
+                promise = null
             }
         })
         geoCoder
@@ -60,13 +62,21 @@ class BaiduMapGeocodeModule(context: ReactApplicationContext) : ReactContextBase
 
     @ReactMethod
     fun search(address: String, city: String, promise: Promise) {
-        this.promise = promise
-        geoCoder.geocode(GeoCodeOption().address(address).city(city))
+        if (this.promise == null) {
+            this.promise = promise
+            geoCoder.geocode(GeoCodeOption().address(address).city(city))
+        } else {
+            promise.reject("", "This callback type only permits a single invocation from native code")
+        }
     }
 
     @ReactMethod
     fun reverse(coordinate: ReadableMap, promise: Promise) {
-        this.promise = promise
-        geoCoder.reverseGeoCode(ReverseGeoCodeOption().location(coordinate.toLatLng()))
+        if (this.promise == null) {
+            this.promise = promise
+            geoCoder.reverseGeoCode(ReverseGeoCodeOption().location(coordinate.toLatLng()))
+        } else {
+            promise.reject("", "This callback type only permits a single invocation from native code")
+        }
     }
 }
