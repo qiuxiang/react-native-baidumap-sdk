@@ -22,6 +22,7 @@
         coordinates[i] = points[i].coordinate;
     }
     [_polyline setPolylineWithCoordinates:coordinates count:points.count];
+    self.mapView.centerCoordinate = self.mapView.centerCoordinate;
 }
 
 - (void)setWidth:(CGFloat)width {
