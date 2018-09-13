@@ -8,7 +8,7 @@
     "location",
     "baidumap"
   ],
-  "version": "0.5.10",
+  "version": "0.6.0",
   "author": "7c00 <i@7c00.cc>",
   "repository": {
     "type": "git",
@@ -32,6 +32,8 @@
     "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios"
   },
   "dependencies": {
+    "@types/react": "^16.4.14",
+    "@types/react-native": "^0.56.18",
     "supercluster": "^3.0.2"
   },
   "peerDependencies": {
@@ -48,7 +50,8 @@
     "flow-bin": "^0.69.0",
     "react": "^16.2.0",
     "react-native": "^0.52.3",
-    "react-navigation": "1.5.11"
+    "react-navigation": "1.5.11",
+    "typescript": "^3.0.3"
   },
   "presets": [
     "react-native"

@@ -78,6 +78,25 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@types/prop-types@*":
+  version "15.5.5"
+  resolved "http://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.5.5.tgz#17038dd322c2325f5da650a94d5f9974943625e3"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-native@^0.56.18":
+  version "0.56.18"
+  resolved "http://registry.npm.taobao.org/@types/react-native/download/@types/react-native-0.56.18.tgz#9e656d87da53a1fdd42be4cc4eab23f81bff71e9"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^16.4.14":
+  version "16.4.14"
+  resolved "http://registry.npm.taobao.org/@types/react/download/@types/react-16.4.14.tgz#47c604c8e46ed674bbdf4aabf82b34b9041c6a04"
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
 abbrev@1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -1396,6 +1415,10 @@ csrf@~3.0.0:
     rndm "1.2.0"
     tsscmp "1.0.5"
     uid-safe "2.1.4"
+
+csstype@^2.2.0:
+  version "2.5.7"
+  resolved "http://registry.npm.taobao.org/csstype/download/csstype-2.5.7.tgz#bf9235d5872141eccfb2d16d82993c6b149179ff"
 
 csurf@~1.8.3:
   version "1.8.3"
@@ -4649,6 +4672,10 @@ type-is@~1.6.6:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "http://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typescript@^3.0.3:
+  version "3.0.3"
+  resolved "http://registry.npm.taobao.org/typescript/download/typescript-3.0.3.tgz#4853b3e275ecdaa27f78fda46dc273a7eb7fc1c8"
 
 ua-parser-js@^0.7.9:
   version "0.7.17"
