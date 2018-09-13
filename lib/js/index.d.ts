@@ -1,5 +1,5 @@
-import { Component, ComponentType } from "react";
-import { ViewProps, ColorPropType } from "react-native";
+import { Component, ReactElement } from "react";
+import { ViewProps, ViewStyle } from "react-native";
 
 export type Point = {
   x: number;
@@ -44,7 +44,7 @@ export interface MarkerProps extends ViewProps {
   coordinate: LatLng;
   color?: string;
   image?: string;
-  view?: JSX.Element;
+  view?: () => ReactElement<any>;
   title?: string;
   selected?: boolean;
   draggable?: boolean;
@@ -60,6 +60,69 @@ export interface MarkerProps extends ViewProps {
 export class Marker extends Component<MarkerProps> {
   select(): void;
   update(): void;
+}
+
+export interface PolylineProps extends ViewProps {
+  points: LatLng[];
+  color?: string;
+  colors?: string;
+  width?: number;
+}
+
+export class Polyline extends Component<PolylineProps> {}
+
+export interface PolygonProps extends ViewProps {
+  points: LatLng[];
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+}
+
+export class Polygon extends Component<PolygonProps> {}
+
+export interface CircleProps extends ViewProps {
+  center: LatLng;
+  radius: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+}
+
+export class Circle extends Component<CircleProps> {}
+
+export type HeatMapPoint = { intensity: number } & LatLng;
+
+export interface HeatMapProps extends ViewProps {
+  points: HeatMapPoint[];
+  radius?: number;
+  opacity?: number;
+}
+
+export class HeatMap extends Component<HeatMapProps> {}
+
+export type ClusterParams = {
+  id: number;
+  count: number;
+  coordinate: LatLng;
+};
+
+export type ClusterMarkerItem = {
+  coordinate: LatLng;
+  extra?: any;
+};
+
+export interface ClusterProps extends ViewProps {
+  markers: ClusterMarkerItem[];
+  renderMarker: (ClusterMarkerItem) => ReactElement<any>;
+  radius?: number;
+  clusterStyle?: ViewStyle;
+  clusterTextStyle?: ViewStyle;
+  renderCluster?: (ClusterParams) => ReactElement<any>;
+  onPress?: (ClusterParams) => void;
+}
+
+export class Cluster extends Component<ClusterProps> {
+  update({ zoomLevel: number, region: Region }): void;
 }
 
 export interface MapViewProps extends ViewProps {
@@ -95,5 +158,9 @@ export interface MapViewProps extends ViewProps {
 
 export class MapView extends Component<MapViewProps> {
   static Marker: typeof Marker;
+  static Polyline: typeof Polyline;
+  static Polygon: typeof Polygon;
+  static HeatMap: typeof HeatMap;
+  static Cluster: typeof Cluster;
   setStatus(status: MapViewStatus, duration?: number): void;
 }
