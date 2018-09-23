@@ -164,3 +164,50 @@ export class MapView extends Component<MapViewProps> {
   static Cluster: typeof Cluster;
   setStatus(status: MapViewStatus, duration?: number): void;
 }
+
+export type GeocodeSearchResult = { address: string } & LatLng;
+
+export type GeocodeReverseResult = {
+  country: string;
+  countryCode: string;
+  province: string;
+  city: string;
+  cityCode: string;
+  district: string;
+  street: string;
+  streetNumber: string;
+  businessCircle: string;
+  adCode: string;
+  address: string;
+  description: string;
+} & LatLng;
+
+export class Geocode {
+  static search(address: string, city?: string): Promise<GeocodeSearchResult>;
+  static reverse(coordinate: LatLng): Promise<GeocodeReverseResult>;
+}
+
+export class Initializer {
+  static init(iosKey: string): Promise<void>;
+}
+
+export type LocationOptions = {
+  gps: boolean;
+  distanceFilter: number;
+};
+
+type LocationListener = (
+  listener: {
+    timestamp: number;
+    altitude: number;
+    speed: number;
+  } & Location
+) => {};
+
+export class Geolocation {
+  static init(): Promise<void>;
+  static start();
+  static stop();
+  static setOptions(options: LocationOptions);
+  static addLocationListener(listener: LocationListener);
+}
