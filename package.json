@@ -40,9 +40,10 @@
     "react-native": ">=0.47"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "metro-react-native-babel-preset": "0.49.2",
     "react": "16.6.1",
     "react-native": "0.57.6",
-    "metro-react-native-babel-preset": "0.49.2",
     "react-navigation": "1.5.11",
     "typescript": "^3.0.3"
   },
