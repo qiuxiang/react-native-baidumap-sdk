@@ -9,3 +9,5 @@ Pods/
 *.iml
 local.properties
 Podfile.lock
+yarn.lock
+package-lock.json
