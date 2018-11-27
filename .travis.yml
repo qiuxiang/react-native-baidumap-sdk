@@ -47,18 +47,18 @@ jobs:
         - ./gradlew build
         - ls -l app/build/outputs/apk
 
-    # - stage: "build test for example"
-    #   language: objective-c
-    #   osx_image: xcode9.3
-    #   cache: *ios-cache
-    #   before_install:
-    #   script:
-    #     - nvm install node
-    #     - brew install yarn
-    #     - yarn
-    #     - cd ios
-    #     - pod install
-    #     - xcodebuild -workspace RNBaiduMap.xcworkspace -scheme RNBaiduMap -sdk iphonesimulator -quiet
+    - stage: "build test for example"
+      language: objective-c
+      osx_image: xcode10.1
+      cache: *ios-cache
+      before_install:
+      script:
+        - nvm install node
+        - brew install yarn
+        - yarn
+        - cd ios
+        - pod install
+        - xcodebuild -workspace RNBaiduMap.xcworkspace -scheme RNBaiduMap -sdk iphonesimulator -quiet
 
     - stage: "build test for new project"
       language: android
