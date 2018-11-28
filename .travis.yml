@@ -22,7 +22,7 @@ aliases:
     |
       nvm install node
       yarn global add react-native-cli
-      react-native init App --version="0.52.3"
+      react-native init App --version="0.57.7"
       cd App
       yarn add react-native-baidumap-sdk
 
@@ -32,6 +32,9 @@ jobs:
       language: node_js
       node_js: node
       cache: yarn
+      script:
+        - node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --bundle-output bundle.js
+        - ls -lh bundle.*
 
     - stage: "build test for example"
       language: android
@@ -45,7 +48,7 @@ jobs:
         - yarn
         - cd android
         - ./gradlew build
-        - ls -l app/build/outputs/apk
+        - ls -lh app/build/outputs/apk
 
     - stage: "build test for example"
       language: objective-c
@@ -72,11 +75,11 @@ jobs:
         - react-native link
         - cd android
         - ./gradlew build
-        - ls -l app/build/outputs/apk
+        - ls -lh app/build/outputs/apk
 
     - stage: "build test for new project"
       language: objective-c
-      osx_image: xcode9.3
+      osx_image: xcode10.1
       cache: *ios-cache
       script:
         - brew install yarn
@@ -84,7 +87,7 @@ jobs:
         - cd ios
         - |
           cat << EOF > Podfile
-            platform :ios, '8.0'
+            platform :ios, '9.0'
             target 'App' do
               pod 'React', :path => '../node_modules/react-native', :subspecs => [
                 'Core',
@@ -93,10 +96,11 @@ jobs:
                 'RCTText',
                 'RCTNetwork',
                 'RCTWebSocket',
+                'RCTAnimation',
               ]
               pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
               pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
-              pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
+              pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
               pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
               pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
             end
@@ -112,8 +116,8 @@ jobs:
         - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
 
 stages:
-  # - "test js"
+  - "test js"
   - name: "build test for example"
-    # if: branch = master
+    if: branch = master
   - name: "build test for new project"
     if: branch = release
