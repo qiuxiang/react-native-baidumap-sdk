@@ -23,7 +23,6 @@
   ],
   "main": "lib/js",
   "scripts": {
-    "test": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --bundle-output bundle.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
     "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
