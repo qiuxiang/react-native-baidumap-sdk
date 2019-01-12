@@ -21,7 +21,7 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
     private val emitter = (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
     private val markers = HashMap<String, BaiduMapMarker>()
 
-    val mapView = MapView(context)
+    val mapView = TextureMapView(context)
     val map: BaiduMap by lazy { mapView.map }
 
     var compassDisabled = false

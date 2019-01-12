@@ -1,5 +1,5 @@
 {
-  "name": "react-native-baidumap-sdk",
+  "name": "smecta-rn-baidu-map",
   "description": "React Native BaiduMap SDK for Android + iOS",
   "keywords": [
     "react-native",
@@ -12,7 +12,7 @@
   "author": "7c00 <i@7c00.cc>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qiuxiang/react-native-baidumap-sdk"
+    "url": "https://github.com/jishaofeng89/react-native-baidumap-sdk"
   },
   "license": "MIT",
   "files": [
