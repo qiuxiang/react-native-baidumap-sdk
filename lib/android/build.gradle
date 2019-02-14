@@ -21,10 +21,14 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile 'qiuxiang:baidumap-sdk:0.0.5'
+    compile 'qiuxiang:baidumap-sdk:0.0.7'
 }
