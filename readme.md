@@ -4,8 +4,6 @@ React Native BaiduMap SDK for Android + iOS.
 
 你可以下载安装 [example.apk](https://github.com/qiuxiang/react-native-baidumap-sdk/releases/download/v0.5.0/example.apk) 看看实际中的效果。
 
-*注意：RN v0.53+ 存在一些 bug（主要影响 iOS 自定义 View），建议使用 RN v0.52。*
-
 ## 安装
 
 - [安装说明](docs/installation.md)

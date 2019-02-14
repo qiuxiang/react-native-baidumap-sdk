@@ -121,6 +121,6 @@ jobs:
 stages:
   - "test js"
   - name: "build test for example"
-    # if: branch = master
+    if: branch = master
   - name: "build test for new project"
-    # if: branch = release
+    if: branch = release
