@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, PermissionsAndroid } from "react-native";
 import { Location } from "react-native-baidumap-sdk";
 
 const style = StyleSheet.create({
@@ -22,11 +22,10 @@ export default class Basic extends Component {
   state = {};
 
   async componentDidMount() {
+    await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION);
     await Location.init();
     Location.setOptions({ gps: true });
-    this.listener = Location.addLocationListener(location =>
-      this.setState(location)
-    );
+    this.listener = Location.addLocationListener(location => this.setState(location));
     Location.start();
   }
 
