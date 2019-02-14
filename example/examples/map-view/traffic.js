@@ -1,18 +1,18 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { MapView } from 'react-native-baidumap-sdk'
-import { SwitchScreen } from '../common'
+import React from "react";
+import { StyleSheet } from "react-native";
+import { MapView } from "react-native-baidumap-sdk";
+import { SwitchScreen } from "../common";
 
 export default class Traffic extends SwitchScreen {
   static navigationOptions = {
     ...SwitchScreen.navigationOptions,
-    title: 'Traffic layer',
-  }
+    title: "Traffic layer"
+  };
 
-  state = { trafficEnabled: true }
+  state = { trafficEnabled: true };
 
   onSwitch(trafficEnabled) {
-    this.setState({ trafficEnabled })
+    this.setState({ trafficEnabled });
   }
 
   render() {
@@ -21,6 +21,6 @@ export default class Traffic extends SwitchScreen {
         style={StyleSheet.absoluteFill}
         trafficEnabled={this.state.trafficEnabled}
       />
-    )
+    );
   }
 }
