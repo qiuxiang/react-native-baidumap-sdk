@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
-import { MapView } from 'react-native-baidumap-sdk'
+import React, { Component } from "react";
+import { StyleSheet } from "react-native";
+import { MapView } from "react-native-baidumap-sdk";
 
 export default class Circle extends Component {
-  static navigationOptions = { title: 'Circle' }
+  static navigationOptions = { title: "Circle" };
 
   render() {
     return (
@@ -16,6 +16,6 @@ export default class Circle extends Component {
           fillColor="rgba(255, 0, 0, 0.5)"
         />
       </MapView>
-    )
+    );
   }
 }

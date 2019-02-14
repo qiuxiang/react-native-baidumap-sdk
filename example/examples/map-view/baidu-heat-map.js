@@ -1,18 +1,18 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { MapView } from 'react-native-baidumap-sdk'
-import { SwitchScreen } from '../common'
+import React from "react";
+import { StyleSheet } from "react-native";
+import { MapView } from "react-native-baidumap-sdk";
+import { SwitchScreen } from "../common";
 
 export default class BaiduHeatMap extends SwitchScreen {
   static navigationOptions = {
     ...SwitchScreen.navigationOptions,
-    title: 'Baidu heat map',
-  }
+    title: "Baidu heat map"
+  };
 
-  state = { baiduHeatMapEnabled: true }
+  state = { baiduHeatMapEnabled: true };
 
   onSwitch(baiduHeatMapEnabled) {
-    this.setState({ baiduHeatMapEnabled })
+    this.setState({ baiduHeatMapEnabled });
   }
 
   render() {
@@ -21,6 +21,6 @@ export default class BaiduHeatMap extends SwitchScreen {
         style={StyleSheet.absoluteFill}
         baiduHeatMapEnabled={this.state.baiduHeatMapEnabled}
       />
-    )
+    );
   }
 }
