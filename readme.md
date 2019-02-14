@@ -156,8 +156,6 @@ const reverseResult = await Geocode.reverse({ latitude: 39, longitude: 113 })
 需要注意，以上例子简写了一些属性，并不能直接使用，更多实际的例子请参考：[example](https://github.com/qiuxiang/react-native-baidumap-sdk/tree/master/example)。
 
 ## 接口文档
-[JS 代码](lib/js)有完善的类型标注，建议结合源代码一起阅读，特别是需要知道具体参数、返回值类型的时候。
-
 - [MapView](docs/map-view.md)
   - [Marker](docs/marker.md)
   - [Polyline](docs/polyline.md)
