@@ -1,8 +1,8 @@
 aliases:
   - &android
     components:
-      - build-tools-27.0.3
-      - android-27
+      - build-tools-28.0.3
+      - android-28
       - extra-android-m2repository
       - extra-android-support
   
@@ -22,9 +22,9 @@ aliases:
     |
       nvm install node
       yarn global add react-native-cli
-      react-native init App --version="0.57.7"
+      react-native init App --version="0.58.4"
       cd App
-      yarn add react-native-baidumap-sdk
+      yarn add react-native-baidumap-sdk@next
 
 jobs:
   include:
@@ -33,6 +33,7 @@ jobs:
       node_js: node
       cache: yarn
       script:
+        - yarn build
         - node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --bundle-output bundle.js
         - ls -lh bundle.*
 
@@ -46,6 +47,7 @@ jobs:
       script:
         - nvm install node
         - yarn
+        - yarn build
         - cd android
         - ./gradlew build
         - ls -lh app/build/outputs/apk
@@ -59,6 +61,7 @@ jobs:
         - nvm install node
         - brew install yarn
         - yarn
+        - yarn build
         - cd ios
         - pod install
         - xcodebuild -workspace RNBaiduMap.xcworkspace -scheme RNBaiduMap -sdk iphonesimulator -quiet

@@ -1,36 +1,37 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Location } from 'react-native-baidumap-sdk'
+import React, { Component } from "react";
+import { StyleSheet, Text, View, PermissionsAndroid } from "react-native";
+import { Location } from "react-native-baidumap-sdk";
 
 const style = StyleSheet.create({
   body: {
-    padding: 16,
+    padding: 16
   },
   item: {
-    flexDirection: 'row',
-    marginBottom: 4,
+    flexDirection: "row",
+    marginBottom: 4
   },
   label: {
-    color: '#f5533d',
-    width: 120,
-  },
-})
+    color: "#f5533d",
+    width: 120
+  }
+});
 
 export default class Basic extends Component {
-  static navigationOptions = { title: 'Basic usage' }
+  static navigationOptions = { title: "Basic usage" };
 
-  state = {}
+  state = {};
 
   async componentDidMount() {
-    await Location.init()
-    Location.setOptions({ gps: true })
-    this.listener = Location.addLocationListener(location => this.setState(location))
-    Location.start()
+    await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION);
+    await Location.init();
+    Location.setOptions({ gps: true });
+    this.listener = Location.addLocationListener(location => this.setState(location));
+    Location.start();
   }
 
   componentWillUnmount() {
-    Location.stop()
-    this.listener.remove()
+    Location.stop();
+    this.listener.remove();
   }
 
   render() {
@@ -43,6 +44,6 @@ export default class Basic extends Component {
           </View>
         ))}
       </View>
-    )
+    );
   }
 }

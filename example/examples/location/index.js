@@ -1,6 +1,5 @@
-// @flow
-import { mapComponents } from '../../utils'
-import Basic from './basic'
-import MapView from './map-view'
+import { mapComponents } from "../../utils";
+import Basic from "./basic";
+import MapView from "./map-view";
 
-export default mapComponents('location', { Basic, MapView })
+export default mapComponents("location", { Basic, MapView });
