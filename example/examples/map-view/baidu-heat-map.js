@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { MapView } from "react-native-baidumap-sdk";
+import { MapView } from "../../../src/index";
 import { SwitchScreen } from "../common";
 
 export default class BaiduHeatMap extends SwitchScreen {
