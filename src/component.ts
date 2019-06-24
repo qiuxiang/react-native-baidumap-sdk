@@ -17,7 +17,9 @@ export default class Component<T> extends PureComponent<T> {
     // @ts-ignore
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this),
-      UIManager[this.nativeComponent].Commands[command],
+      UIManager.getViewManagerConfig
+        ? UIManager.getViewManagerConfig(this.nativeComponent).Commands[command] // RN >= 0.58
+        : UIManager[this.nativeComponent].Commands[command], // RN < 0.58
       params
     );
   }
@@ -29,8 +31,7 @@ export default class Component<T> extends PureComponent<T> {
     return events.reduce((handlers, name) => {
       const handler = this.props[name];
       if (handler) {
-        handlers[name.replace(/^on/, "onBaiduMap")] = event =>
-          handler(event.nativeEvent);
+        handlers[name.replace(/^on/, "onBaiduMap")] = event => handler(event.nativeEvent);
       }
       return handlers;
     }, {});
