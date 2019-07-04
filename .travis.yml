@@ -31,7 +31,7 @@ jobs:
     - stage: "build test for example"
       language: android
       jdk: oraclejdk8
-      dist: xenial
+      dist: trusty
       android: *android
       before_cache:
         - rm ~/.gradle/caches/modules-2/modules-2.lock
