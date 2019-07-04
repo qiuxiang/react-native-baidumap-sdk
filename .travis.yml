@@ -8,7 +8,7 @@ aliases:
   
   - &android-cache
     directories:
-      - ~/.npm
+      - ~/.cache/yarn
       - ~/.gradle/caches/modules-2
       - ~/.gradle/wrapper
   
@@ -21,10 +21,10 @@ aliases:
   - &init-new-project
     |
       nvm install node
-      npm i react-native-cli -g
+      yarn global add react-native-cli
       react-native init App --version="0.58.4"
       cd App
-      npm i react-native-baidumap-sdk@next
+      yarn add react-native-baidumap-sdk@next
 
 jobs:
   include:
@@ -46,10 +46,10 @@ jobs:
       cache: *android-cache
       script:
         - nvm install node
-        - npm i
-        - npm run build
+        - yarn
+        - yarn build
         - cd android
-        - ./gradlew build
+        - TERM=dumb ./gradlew build
         - ls -lh app/build/outputs/apk
 
     - stage: "build test for example"
@@ -59,8 +59,9 @@ jobs:
       before_install:
       script:
         - nvm install node
-        - npm i
-        - npm run build
+        - brea install yarn
+        - yarn
+        - yarn build
         - cd ios
         - pod install
         - xcodebuild -workspace RNBaiduMap.xcworkspace -scheme RNBaiduMap -sdk iphonesimulator -quiet
@@ -76,7 +77,7 @@ jobs:
         - *init-new-project
         - react-native link
         - cd android
-        - ./gradlew build
+        - TERM=dumb ./gradlew build
         - ls -lh app/build/outputs/apk
 
     - stage: "build test for new project"
