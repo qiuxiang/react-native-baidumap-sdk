@@ -28,18 +28,10 @@ aliases:
 
 jobs:
   include:
-    - stage: "test js"
-      language: node_js
-      node_js: node
-      cache: yarn
-      script:
-        - yarn build
-        - node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --bundle-output bundle.js
-        - ls -lh bundle.*
-
     - stage: "build test for example"
       language: android
       jdk: oraclejdk8
+      dist: xenial
       android: *android
       before_cache:
         - rm ~/.gradle/caches/modules-2/modules-2.lock
@@ -50,7 +42,8 @@ jobs:
         - yarn build
         - cd android
         - TERM=dumb ./gradlew build
-        - ls -lh app/build/outputs/apk
+        - ls -lh app/build/outputs/apk/debug
+        - ls -lh app/build/outputs/apk/release
 
     - stage: "build test for example"
       language: objective-c
@@ -59,7 +52,7 @@ jobs:
       before_install:
       script:
         - nvm install node
-        - brea install yarn
+        - brew install yarn
         - yarn
         - yarn build
         - cd ios
@@ -78,7 +71,8 @@ jobs:
         - react-native link
         - cd android
         - TERM=dumb ./gradlew build
-        - ls -lh app/build/outputs/apk
+        - ls -lh app/build/outputs/apk/debug
+        - ls -lh app/build/outputs/apk/release
 
     - stage: "build test for new project"
       language: objective-c
