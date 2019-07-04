@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Alert, StyleSheet } from "react-native";
-import { MapView } from "react-native-baidumap-sdk";
+import { MapView } from "../../../src/index";
 
 export default class Dynamic extends Component {
   static navigationOptions = { title: "Dynamically add and remove" };

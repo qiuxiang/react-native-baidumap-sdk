@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Alert, StyleSheet, View } from "react-native";
-import { MapView, Geocode } from "react-native-baidumap-sdk";
+import { MapView, Geocode } from "../../../src/index";
 
 export default class GeocodeReverse extends Component {
   static navigationOptions = { title: "Geocode reverse" };

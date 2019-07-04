@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
-import { MapView, Geocode } from "react-native-baidumap-sdk";
+import { MapView, Geocode } from "../../../src/index";
 
 const style = StyleSheet.create({
   body: {

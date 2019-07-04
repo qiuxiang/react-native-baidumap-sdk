@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { MapView } from "react-native-baidumap-sdk";
+import { MapView } from "../../../src/index";
 
 const styles = StyleSheet.create({
   full: {

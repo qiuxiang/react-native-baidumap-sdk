@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Alert, Image, StyleSheet, Text, View } from "react-native";
-import { MapView } from "react-native-baidumap-sdk";
+import { MapView } from "../../../src/index";
 import image from "../../images/ic_my_location.png";
 
 const style = StyleSheet.create({

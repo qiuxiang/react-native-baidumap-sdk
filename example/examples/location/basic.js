@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, PermissionsAndroid } from "react-native";
-import { Location } from "react-native-baidumap-sdk";
+import { Location } from "../../../src/index";
 
 const style = StyleSheet.create({
   body: {
