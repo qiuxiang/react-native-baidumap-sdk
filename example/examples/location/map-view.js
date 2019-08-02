@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, StyleSheet, TouchableOpacity, View, PermissionsAndroid } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View, PermissionsAndroid, ToastAndroid } from "react-native";
 import { MapView, Location } from "react-native-baidumap-sdk";
 import icon from "../../images/ic_my_location.png";
 
@@ -28,8 +28,20 @@ export default class MapViewExample extends Component {
   async componentDidMount() {
     await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION);
     await Location.init();
-    Location.setOptions({ gps: true });
+    Location.setOptions({
+      gps: true,
+      scanSpan: 3000,
+      direction: true,
+      notify: false,
+      locationMode: 3,
+      // autoNotifyMode: true
+    });
     this.listener = Location.addLocationListener(location => {
+      ToastAndroid.showWithGravity(
+        `${location.accuracy}`,
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER
+      );
       this.setState({ location });
     });
     Location.start();

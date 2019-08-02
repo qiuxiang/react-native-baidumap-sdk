@@ -3,6 +3,7 @@ package cn.qiuxiang.react.baidumap.modules
 import com.baidu.location.BDAbstractLocationListener
 import com.baidu.location.BDLocation
 import com.baidu.location.LocationClient
+import com.baidu.location.LocationClientOption
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import java.text.SimpleDateFormat
@@ -17,7 +18,9 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
     init {
         val option = client.locOption
         option.coorType = "bd09ll"
-        option.setOpenAutoNotifyMode()
+        
+        // option.setOpenAutoNotifyMode()
+        
         option.setEnableSimulateGps(true)
         client.locOption = option
         client.registerLocationListener(object : BDAbstractLocationListener() {
@@ -47,14 +50,47 @@ class BaiduMapLocationModule(context: ReactApplicationContext) : ReactContextBas
 
     @ReactMethod
     fun setOptions(options: ReadableMap) {
-        val option = client.locOption
+        var option = client.locOption
 
         if (options.hasKey("gps")) {
-            option.isOpenGps = options.getBoolean("gps")
+            option.setOpenGps(options.getBoolean("gps"))
         }
 
         if (options.hasKey("distanceFilter")) {
             option.autoNotifyMinDistance = options.getInt("distanceFilter")
+        }
+
+        if (options.hasKey("autoNotifyMode")) {
+            if (options.getBoolean("autoNotifyMode")) {
+                option.setOpenAutoNotifyMode()
+            }
+        }
+        
+        if (options.hasKey("scanSpan")) {
+            option.setScanSpan(options.getInt("scanSpan"))
+        }
+
+        if (options.hasKey("direction")) {
+            option.setNeedDeviceDirect(options.getBoolean("direction"))
+        }
+
+        if (options.hasKey("notify")) {
+            option.setLocationNotify(options.getBoolean("notify"))
+        }
+
+        // Battery_Saving 低功耗模式
+        // Device_Sensors 仅设备(Gps)模式
+        // Hight_Accuracy 高精度模式
+        if (options.hasKey("locationMode")) {
+            val mode = options.getInt("locationMode")
+            when (mode) {
+                1 -> option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving)
+                2 -> option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors)
+                3 -> option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy)
+                else -> {
+                    println("错误码")
+                }
+            }
         }
 
         client.locOption = option
