@@ -30,4 +30,5 @@ export default class Callout extends Component<Props> {
   }
 }
 
+// @ts-ignore
 const BaiduMapCallout = requireNativeComponent("BaiduMapCallout", Callout);

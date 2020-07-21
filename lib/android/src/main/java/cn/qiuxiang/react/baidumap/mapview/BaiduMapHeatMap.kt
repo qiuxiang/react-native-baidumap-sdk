@@ -14,10 +14,10 @@ class BaiduMapHeatMap(context: Context) : ReactViewGroup(context), BaiduMapOverl
     var radius: Int = 12
 
     fun setPoints(points: ReadableArray) {
-        this.points = (0..(points.size() - 1))
+        this.points = (0 until points.size())
                 .map { points.getMap(it) }
                 .map {
-                    val intensity = if (it.hasKey("intensity")) it.getDouble("intensity") else 0.0
+                    val intensity = if (it!!.hasKey("intensity")) it.getDouble("intensity") else 0.0
                     WeightedLatLng(it.toLatLng(), intensity)
                 }
     }

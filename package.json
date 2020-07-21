@@ -8,7 +8,7 @@
     "location",
     "baidumap"
   ],
-  "version": "0.6.1-2",
+  "version": "0.7.0",
   "author": "7c00 <i@7c00.cc>",
   "repository": {
     "type": "git",
@@ -19,35 +19,36 @@
     "lib/js",
     "lib/ios",
     "lib/android/src",
-    "lib/android/build.gradle"
+    "lib/android/build.gradle",
+    "react-native.config.js"
   ],
   "main": "lib/js",
-  "types":"lib/js/index.d.ts",
+  "types": "lib/js/index.d.ts",
   "scripts": {
-    "build": "tsc --build",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "dev": "tsc -w",
+    "build": "tsc",
+    "build-docs": "npx typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
+    "start": "npx react-native start",
+    "android": "npx react-native run-android",
+    "release-android": "npx react-native run-android --variant=release",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
-    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
-    "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
-    "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release",
-    "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios"
+    "ios": "npx react-native run-ios"
   },
   "dependencies": {
     "supercluster": "^3.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@types/react": "^16.8.3",
-    "metro-react-native-babel-preset": "0.51.1",
-    "react": "16.6.3",
-    "react-native": "0.58.4",
-    "react-navigation": "1.5.11",
-    "typescript": "^3.0.3"
-  },
-  "rnpm": {
-    "android": {
-      "sourceDir": "lib/android"
-    }
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.5.1",
+    "@react-navigation/stack": "^5.5.1",
+    "@types/react-native": "^0.62.13",
+    "EventEmitter": "^1.0.0",
+    "react": "16.13.1",
+    "react-native": "^0.62.2",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-reanimated": "^1.9.0",
+    "react-native-safe-area-context": "^3.0.3",
+    "react-native-screens": "^2.8.0"
   },
   "prettier": {
     "printWidth": 100

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.SDKInitializer.*
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
@@ -40,6 +39,7 @@ class BaiduMapInitializerModule(private val context: ReactApplicationContext) : 
         intentFilter.addAction(SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)
         intentFilter.addAction(SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)
         context.currentActivity?.registerReceiver(SDKReceiver(promise), intentFilter)
-        SDKInitializer.initialize(context.applicationContext)
+        // TODO: try catch initialize 失败的情况，通常是因为没有设置 app key
+        initialize(context.applicationContext)
     }
 }

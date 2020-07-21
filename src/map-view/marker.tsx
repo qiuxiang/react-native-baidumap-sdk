@@ -101,4 +101,5 @@ export default class Marker extends Component<Props> {
   }
 }
 
+// @ts-ignore
 const BaiduMapMarker = requireNativeComponent("BaiduMapMarker", Marker);

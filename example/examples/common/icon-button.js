@@ -1,15 +1,15 @@
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
-import Touchable from "react-navigation/src/views/TouchableItem";
+import Touchable from "@react-navigation/stack/lib/module/views/TouchableItem";
 
 const style = StyleSheet.create({
   container: {
-    padding: 16
+    padding: 16,
   },
   icon: {
     width: 24,
-    height: 24
-  }
+    height: 24,
+  },
 });
 
 export default ({ onPress, source, color }) => {

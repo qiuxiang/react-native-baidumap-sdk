@@ -121,19 +121,19 @@ class BaiduMapMarker(context: Context) : ReactViewGroup(context), BaiduMapOverla
             callout.transformationMethod = null
             callout.setBackgroundResource(R.drawable.callout)
             val bitmapDescriptor = BitmapDescriptorFactory.fromView(callout)
-            infoWindow = InfoWindow(bitmapDescriptor, marker?.position, -iconHeight, {
+            infoWindow = InfoWindow(bitmapDescriptor, marker?.position, -iconHeight) {
                 mapView?.emit(id, "onCalloutPress")
-            })
+            }
         }
     }
 
     private fun updateCustomInfoWindow() {
         callout?.let {
             if (it.width > 0 && it.height > 0) {
-                infoWindow = InfoWindow(bitmapDescriptorFrom(it), marker?.position, -iconHeight, {
+                infoWindow = InfoWindow(bitmapDescriptorFrom(it), marker?.position, -iconHeight) {
                     mapView?.emit(it.id, "onPress")
                     mapView?.emit(id, "onCalloutPress")
-                })
+                }
             }
         }
     }

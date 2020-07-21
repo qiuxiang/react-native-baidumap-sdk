@@ -115,4 +115,5 @@ export default class MapView extends Component<Props> {
   static HeatMap = HeatMap;
 }
 
+// @ts-ignore
 const BaiduMapView = requireNativeComponent("BaiduMapView", MapView);
