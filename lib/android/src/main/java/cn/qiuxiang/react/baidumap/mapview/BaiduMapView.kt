@@ -1,15 +1,12 @@
 package cn.qiuxiang.react.baidumap.mapview
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import cn.qiuxiang.react.baidumap.toLatLng
-import cn.qiuxiang.react.baidumap.toLatLngBounds
-import cn.qiuxiang.react.baidumap.toPoint
-import cn.qiuxiang.react.baidumap.toWritableMap
+import cn.qiuxiang.react.baidumap.*
 import com.baidu.mapapi.map.*
-import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode
 import com.baidu.mapapi.model.LatLng
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
@@ -46,9 +43,15 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         }
 
     init {
-        mapView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        map.setMyLocationConfiguration(MyLocationConfiguration(LocationMode.NORMAL, true, null))
-        super.addView(mapView)
+//        mapView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+//        map.setMyLocationConfiguration(MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, true, null))
+//        val view = TextView(context)
+//        view.text = "ffff"
+        addView(mapView)
+//        Handler().postDelayed({
+//            super.addView(mapView)
+//        }, 2000)
+//        LayoutInflater.from(context).inflate(R.layout.mapview, this)
 
         map.setOnMapLoadedCallback {
             emit(id, "onLoad")
@@ -63,13 +66,12 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         }
 
         map.setOnMapClickListener(object : BaiduMap.OnMapClickListener {
-            override fun onMapPoiClick(poi: MapPoi): Boolean {
+            override fun onMapPoiClick(poi: MapPoi) {
                 val data = poi.position.toWritableMap()
                 data.putString("name", poi.name)
                 data.putString("uid", poi.uid)
                 emit(id, "onClick", data)
                 map.hideInfoWindow()
-                return true
             }
 
             override fun onMapClick(latLng: LatLng) {
@@ -153,8 +155,8 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         val duration = args.getInt(1)
         val mapStatusBuilder = MapStatus.Builder()
 
-        if (target.hasKey("center")) {
-            mapStatusBuilder.target(target.getMap("center").toLatLng())
+        if (target!!.hasKey("center")) {
+            mapStatusBuilder.target(target.getMap("center")!!.toLatLng())
         }
 
         if (target.hasKey("zoomLevel")) {
@@ -170,13 +172,13 @@ class BaiduMapView(context: Context) : FrameLayout(context) {
         }
 
         if (target.hasKey("point")) {
-            val point = target.getMap("point").toPoint()
+            val point = target.getMap("point")!!.toPoint()
             mapStatusBuilder.target(map.projection.fromScreenLocation(point))
         }
 
         if (target.hasKey("region")) {
             setStatus(MapStatusUpdateFactory.newLatLngBounds(
-                target.getMap("region").toLatLngBounds()), duration)
+                    target.getMap("region")!!.toLatLngBounds()), duration)
         } else {
             setStatus(MapStatusUpdateFactory.newMapStatus(mapStatusBuilder.build()), duration)
         }

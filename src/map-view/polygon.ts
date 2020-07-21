@@ -6,6 +6,7 @@ import {
 import { number, arrayOf } from "prop-types";
 import { LatLngPropType } from "../prop-types";
 
+// @ts-ignore
 export default requireNativeComponent("BaiduMapPolygon", {
   propTypes: {
     ...ViewPropTypes,

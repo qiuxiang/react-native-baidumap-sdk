@@ -6,6 +6,7 @@ import {
 import { number } from "prop-types";
 import { LatLngPropType } from "../prop-types";
 
+// @ts-ignore
 export default requireNativeComponent("BaiduMapCircle", {
   propTypes: {
     ...ViewPropTypes,

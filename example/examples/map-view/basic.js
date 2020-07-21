@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { MapView } from "react-native-baidumap-sdk";
 
-export default class Basic extends Component {
-  static navigationOptions = { title: "Basic usage" };
+const Screen = () => {
+  return <MapView style={StyleSheet.absoluteFill} />;
+};
 
-  render() {
-    return <MapView style={StyleSheet.absoluteFill} />;
-  }
-}
+Screen.title = "Basic usage";
+
+export default Screen;

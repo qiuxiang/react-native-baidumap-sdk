@@ -1,9 +1,7 @@
 package cn.qiuxiang.react.baidumap.mapview
 
 import cn.qiuxiang.react.baidumap.toLatLng
-import cn.qiuxiang.react.baidumap.toLatLngList
 import cn.qiuxiang.react.baidumap.toPx
-import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext

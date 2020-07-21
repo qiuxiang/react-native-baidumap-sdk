@@ -1,6 +1,7 @@
 import { requireNativeComponent, ViewPropTypes } from "react-native";
 import { number, shape, arrayOf } from "prop-types";
 
+// @ts-ignore
 export default requireNativeComponent("BaiduMapHeatMap", {
   propTypes: {
     ...ViewPropTypes,
