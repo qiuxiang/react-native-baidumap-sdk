@@ -5,6 +5,7 @@
 ```bash
 yarn
 yarn start # 这会占用一个终端窗口
+./scripts/download-sdk.sh
 ```
 
 ## Android
