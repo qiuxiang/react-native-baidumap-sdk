@@ -1,8 +1,8 @@
 aliases:
   - &android
     components:
-      - build-tools-28.0.3
-      - android-28
+      - build-tools-29.0.3
+      - android-29
       - extra-android-m2repository
       - extra-android-support
   
@@ -30,87 +30,54 @@ jobs:
   include:
     - stage: "build test for example"
       language: android
-      jdk: oraclejdk8
-      dist: trusty
       android: *android
       before_cache:
         - rm ~/.gradle/caches/modules-2/modules-2.lock
       cache: *android-cache
       script:
         - nvm install node
-        - yarn
-        - yarn build
-        - cd android
-        - TERM=dumb ./gradlew build
+        - npm i && npm i typescript
+        - npm run build
+        - cd android && TERM=dumb ./gradlew build
         - ls -lh app/build/outputs/apk/debug
         - ls -lh app/build/outputs/apk/release
 
-    - stage: "build test for example"
-      language: objective-c
-      osx_image: xcode10.1
-      cache: *ios-cache
-      before_install:
-      script:
-        - nvm install node
-        - brew install yarn
-        - yarn
-        - yarn build
-        - cd ios
-        - pod install
-        - xcodebuild -workspace RNBaiduMap.xcworkspace -scheme RNBaiduMap -sdk iphonesimulator -quiet
+#    - stage: "build test for example"
+#      language: objective-c
+#      os: osx
+#      osx_image: xcode11.3
+#      cache: *ios-cache
+#      script:
+#        - npm i && npm i typescript
+#        - npm run build
+#        - cd ios && pod install && cd ..
+#        - npm run run-ios
 
     - stage: "build test for new project"
       language: android
-      jdk: oraclejdk8
       android: *android
       before_cache:
         - rm ~/.gradle/caches/modules-2/modules-2.lock
       cache: *android-cache
       script:
-        - *init-new-project
-        - react-native link
-        - cd android
-        - TERM=dumb ./gradlew build
+        - nvm install node
+        - npx react-native init app && cd app
+        - npm i react-native-amap3d@next
+        - cd android && TERM=dumb ./gradlew build
         - ls -lh app/build/outputs/apk/debug
         - ls -lh app/build/outputs/apk/release
 
     - stage: "build test for new project"
       language: objective-c
-      osx_image: xcode10.1
+      os: osx
+      osx_image: xcode11.3
       cache: *ios-cache
       script:
-        - brew install yarn
-        - *init-new-project
-        - cd ios
-        - |
-          cat << EOF > Podfile
-            platform :ios, '9.0'
-            target 'App' do
-              pod 'React', :path => '../node_modules/react-native', :subspecs => [
-                'Core',
-                'CxxBridge',
-                'DevSupport',
-                'RCTText',
-                'RCTNetwork',
-                'RCTWebSocket',
-                'RCTAnimation',
-              ]
-              pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
-              pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
-              pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
-              pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-              pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
-            end
-            post_install do |installer|
-              installer.pods_project.targets.each do |target|
-                if target.name == "React"
-                  target.remove_from_project
-                end
-              end
-            end
-          EOF
-        - pod install
-        - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
+        - npm i && npm i typescript
+        - npx react-native init app && cd app
+        - npm i react-native-amap3d@next
+        - cd ios && pod install && cd ..
+        - npx react-native run-ios
 
 stages:
   - "test js"
