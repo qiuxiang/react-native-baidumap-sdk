@@ -35,6 +35,7 @@ jobs:
         - rm ~/.gradle/caches/modules-2/modules-2.lock
       cache: *android-cache
       script:
+        - ./scripts/download-sdk.sh
         - nvm install node
         - npm i && npm i typescript
         - npm run build
