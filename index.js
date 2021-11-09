@@ -1,4 +1,4 @@
 import { AppRegistry } from "react-native";
-import App from "./example";
+import app from "./example";
 
-AppRegistry.registerComponent("RNBaiduMap", () => App);
+AppRegistry.registerComponent("example", () => app);

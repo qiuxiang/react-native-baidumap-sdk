@@ -1,54 +1,48 @@
 {
   "name": "react-native-baidumap-sdk",
-  "description": "React Native BaiduMap SDK for Android + iOS",
+  "version": "1.0.0",
+  "description": "react-native 高德地图组件，支持 Android + iOS",
+  "author": "7c00 <i@7c00.cc>",
+  "license": "MIT",
   "keywords": [
     "react-native",
+    "amap",
     "maps",
-    "mapview",
-    "location",
-    "baidumap"
+    "mapview"
   ],
-  "version": "0.7.0",
-  "author": "7c00 <i@7c00.cc>",
+  "main": "lib/src",
+  "files": [
+    "lib/src",
+    "lib/android/src",
+    "lib/android/build.gradle",
+    "lib/ios",
+    "react-native.config.js"
+  ],
+  "homepage": "https://github.com/qiuxiang/react-native-baidumap-sdk",
   "repository": {
     "type": "git",
     "url": "https://github.com/qiuxiang/react-native-baidumap-sdk"
   },
-  "license": "MIT",
-  "files": [
-    "lib/js",
-    "lib/ios",
-    "lib/android/src",
-    "lib/android/build.gradle",
-    "react-native.config.js"
-  ],
-  "main": "lib/js",
-  "types": "lib/js/index.d.ts",
   "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc",
-    "build-docs": "npx typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
-    "start": "npx react-native start",
-    "android": "npx react-native run-android",
-    "release-android": "npx react-native run-android --variant=release",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "release-android": "react-native run-android --variant=release",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
-    "ios": "npx react-native run-ios"
+    "ios": "react-native run-ios"
   },
   "dependencies": {
-    "supercluster": "^3.0.2"
+    "supercluster": "^7.1.4"
   },
   "devDependencies": {
-    "@react-native-community/masked-view": "^0.1.10",
-    "@react-navigation/native": "^5.5.1",
-    "@react-navigation/stack": "^5.5.1",
-    "@types/react-native": "^0.62.13",
-    "EventEmitter": "^1.0.0",
-    "react": "16.13.1",
-    "react-native": "^0.62.2",
-    "react-native-gesture-handler": "^1.6.1",
-    "react-native-reanimated": "^1.9.0",
-    "react-native-safe-area-context": "^3.0.3",
-    "react-native-screens": "^2.8.0"
+    "@react-native-picker/picker": "^2.1.0",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.0.11",
+    "@types/react-native": "^0.65.8",
+    "@types/supercluster": "^5.0.3",
+    "react": "17.0.2",
+    "react-native": "^0.66.1",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.8.0"
   },
   "prettier": {
     "printWidth": 100

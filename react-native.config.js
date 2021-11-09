@@ -2,8 +2,8 @@ module.exports = {
   dependency: {
     platforms: {
       ios: { project: "lib/ios/react-native-baidumap-sdk.podspec" },
-      android: { sourceDir: "lib/android" }
-    }
+      android: { sourceDir: "lib/android" },
+    },
   },
   dependencies: {
     "react-native-baidumap-sdk": {
@@ -12,10 +12,10 @@ module.exports = {
         ios: { podspecPath: __dirname + "/lib/ios/react-native-baidumap-sdk.podspec" },
         android: {
           sourceDir: __dirname + "/lib/android",
-          packageImportPath: "import cn.qiuxiang.react.baidumap.BaiduMapPackage;",
-          packageInstance: "new BaiduMapPackage()"
-        }
-      }
-    }
-  }
+          packageImportPath: "import qiuxiang.baidu_map.BaiduMapPackage;",
+          packageInstance: "new BaiduMapPackage()",
+        },
+      },
+    },
+  },
 };

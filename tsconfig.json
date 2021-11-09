@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "lib": ["es2015"],
+    "strict": true,
     "jsx": "react-native",
-    "outDir": "lib/js"
-  },
-  "files": ["src/index.ts"]
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "react-native-baidumap-sdk": ["lib/src"]
+    }
+  }
 }
