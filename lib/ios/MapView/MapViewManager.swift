@@ -1,5 +1,5 @@
-@objc(AMapViewManager)
-class AMapViewManager: RCTViewManager {
+@objc(BaiduMapViewManager)
+class BaiduMapViewManager: RCTViewManager {
   override class func requiresMainQueueSetup() -> Bool { false }
 
   override func view() -> UIView {
@@ -27,10 +27,10 @@ class AMapViewManager: RCTViewManager {
   }
 }
 
-class MapView: MAMapView, MAMapViewDelegate {
+class MapView: BMKMapView, BMKMapViewDelegate {
   var initialized = false
-  var overlayMap: [MABaseOverlay: Overlay] = [:]
-  var markerMap: [MAPointAnnotation: Marker] = [:]
+  var overlayMap: [NSObject: Overlay] = [:]
+  var markerMap: [BMKPointAnnotation: Marker] = [:]
 
   @objc var onLoad: RCTBubblingEventBlock = { _ in }
   @objc var onCameraMove: RCTBubblingEventBlock = { _ in }
@@ -41,54 +41,6 @@ class MapView: MAMapView, MAMapViewDelegate {
   @objc var onLocation: RCTBubblingEventBlock = { _ in }
   @objc var onCallback: RCTBubblingEventBlock = { _ in }
 
-  @objc func setMyLocationEnabled(_ enabled: Bool) {
-    showsUserLocation = enabled
-  }
-
-  @objc func setBuildingsEnabled(_ enabled: Bool) {
-    isShowsBuildings = enabled
-  }
-
-  @objc func setTrafficEnabled(_ enabled: Bool) {
-    isShowTraffic = enabled
-  }
-
-  @objc func setIndoorViewEnabled(_ enabled: Bool) {
-    isShowsIndoorMap = enabled
-  }
-
-  @objc func setCompassEnabled(_ enabled: Bool) {
-    showsCompass = enabled
-  }
-
-  @objc func setScaleControlsEnabled(_ enabled: Bool) {
-    showsScale = enabled
-  }
-
-  @objc func setScrollGesturesEnabled(_ enabled: Bool) {
-    isScrollEnabled = enabled
-  }
-
-  @objc func setZoomGesturesEnabled(_ enabled: Bool) {
-    isZoomEnabled = enabled
-  }
-
-  @objc func setRotateGesturesEnabled(_ enabled: Bool) {
-    isRotateEnabled = enabled
-  }
-
-  @objc func setTiltGesturesEnabled(_ enabled: Bool) {
-    isRotateCameraEnabled = enabled
-  }
-
-  @objc func setMinZoom(_ value: Double) {
-    minZoomLevel = value
-  }
-
-  @objc func setMaxZoom(_ value: Double) {
-    maxZoomLevel = value
-  }
-
   @objc func setInitialCameraPosition(_ json: NSDictionary) {
     if !initialized {
       initialized = true
@@ -97,12 +49,12 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   func moveCamera(position: NSDictionary, duration: Int = 0) {
-    let status = MAMapStatus()
-    status.zoomLevel = (position["zoom"] as? Double)?.cgFloat ?? zoomLevel
-    status.cameraDegree = (position["tilt"] as? Double)?.cgFloat ?? cameraDegree
-    status.rotationDegree = (position["bearing"] as? Double)?.cgFloat ?? rotationDegree
-    status.centerCoordinate = (position["target"] as? NSDictionary)?.coordinate ?? centerCoordinate
-    setMapStatus(status, animated: true, duration: Double(duration) / 1000)
+    let status = BMKMapStatus()
+    if let it = position["zoom"] as? Float { status.fLevel = it }
+    if let it = position["tilt"] as? Float { status.fOverlooking = it }
+    if let it = position["bearing"] as? Float { status.fRotation = it }
+    if let it = (position["target"] as? NSDictionary)?.coordinate { status.targetGeoPt = it }
+    setMapStatus(status, withAnimation: true, withAnimationTime: Int32(duration))
   }
 
   func call(id: Double, name: String, args: NSDictionary) {
@@ -120,10 +72,10 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   override func didAddSubview(_ subview: UIView) {
     if let overlay = (subview as? Overlay)?.getOverlay() {
-      overlayMap[overlay] = subview as? Overlay
+      overlayMap[overlay as! NSObject] = subview as? Overlay
       add(overlay)
     }
-    if let annotation = (subview as? Marker)?.annotation {
+    if let annotation = (subview as? Marker)?.annotation, markerMap[annotation] == nil {
       markerMap[annotation] = subview as? Marker
       addAnnotation(annotation)
     }
@@ -132,76 +84,68 @@ class MapView: MAMapView, MAMapViewDelegate {
   override func removeReactSubview(_ subview: UIView!) {
     super.removeReactSubview(subview)
     if let overlay = (subview as? Overlay)?.getOverlay() {
-      overlayMap.removeValue(forKey: overlay)
+      overlayMap.removeValue(forKey: overlay as! NSObject)
       remove(overlay)
     }
     if let annotation = (subview as? Marker)?.annotation {
       markerMap.removeValue(forKey: annotation)
+      removeAnnotations([annotation])
       removeAnnotation(annotation)
     }
   }
 
-  func mapView(_: MAMapView, rendererFor overlay: MAOverlay) -> MAOverlayRenderer? {
-    if let key = overlay as? MABaseOverlay {
-      return overlayMap[key]?.getRenderer()
+  func mapView(_: BMKMapView!, viewFor overlay: BMKOverlay!) -> BMKOverlayView! {
+    if let key = overlay as? NSObject {
+      return overlayMap[key]?.getView()
     }
     return nil
   }
 
-  func mapView(_: MAMapView!, viewFor annotation: MAAnnotation) -> MAAnnotationView? {
-    if let key = annotation as? MAPointAnnotation {
+  func mapView(_: BMKMapView!, viewFor annotation: BMKAnnotation!) -> BMKAnnotationView! {
+    if let key = annotation as? BMKPointAnnotation {
       return markerMap[key]?.getView()
     }
     return nil
   }
 
-  func mapView(_: MAMapView!, annotationView view: MAAnnotationView!, didChange newState: MAAnnotationViewDragState, fromOldState _: MAAnnotationViewDragState) {
-    if let key = view.annotation as? MAPointAnnotation {
+  func mapView(_: BMKMapView!, annotationView view: BMKAnnotationView!, didChangeDragState newState: UInt, fromOldState _: UInt) {
+    if let key = view.annotation as? BMKPointAnnotation {
       let market = markerMap[key]!
-      if newState == MAAnnotationViewDragState.starting {
+      if newState == BMKAnnotationViewDragStateStarting {
         market.onDragStart(nil)
       }
-      if newState == MAAnnotationViewDragState.dragging {
+      if newState == BMKAnnotationViewDragStateDragging {
         market.onDrag(nil)
       }
-      if newState == MAAnnotationViewDragState.ending {
+      if newState == BMKAnnotationViewDragStateEnding {
         market.onDragEnd(view.annotation.coordinate.json)
       }
     }
   }
 
-  func mapView(_: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
-    if let key = view.annotation as? MAPointAnnotation {
+  func mapView(_: BMKMapView!, click view: BMKAnnotationView!) {
+    if let key = view.annotation as? BMKPointAnnotation {
       markerMap[key]?.onPress(nil)
     }
   }
 
-  func mapInitComplete(_: MAMapView!) {
+  func mapViewDidFinishLoading(_: BMKMapView!) {
     onLoad(nil)
   }
 
-  func mapView(_: MAMapView!, didSingleTappedAt coordinate: CLLocationCoordinate2D) {
+  func mapView(_: BMKMapView!, onClickedMapBlank coordinate: CLLocationCoordinate2D) {
     onPress(coordinate.json)
   }
 
-  func mapView(_: MAMapView!, didTouchPois pois: [Any]!) {
-    let poi = pois[0] as! MATouchPoi
-    onPressPoi(["name": poi.name!, "id": poi.uid!, "position": poi.coordinate.json])
+  func mapView(_: BMKMapView!, onClickedMapPoi mapPoi: BMKMapPoi!) {
+    onPressPoi(["name": mapPoi.text!, "id": mapPoi.uid!, "position": mapPoi.pt.json])
   }
 
-  func mapView(_: MAMapView!, didLongPressedAt coordinate: CLLocationCoordinate2D) {
+  func mapview(_: BMKMapView!, onLongClick coordinate: CLLocationCoordinate2D) {
     onLongPress(coordinate.json)
   }
 
-  func mapViewRegionChanged(_: MAMapView!) {
-    onCameraMove(cameraEvent)
-  }
-
-  func mapView(_: MAMapView!, regionDidChangeAnimated _: Bool) {
+  func mapView(_: BMKMapView!, regionDidChangeAnimated _: Bool) {
     onCameraIdle(cameraEvent)
-  }
-
-  func mapView(_: MAMapView!, didUpdate userLocation: MAUserLocation!, updatingLocation _: Bool) {
-    onLocation(userLocation.json)
   }
 }

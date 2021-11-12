@@ -24,7 +24,7 @@ export default () => {
     BaiduMapSdk.init(
       Platform.select({
         android: "4x5T0eO4Koe4vtexjRdGLuRr1sOhu2YA",
-        ios: "186d3464209b74effa4d8391f441f14d",
+        ios: "6iBF0QeqRm9xCGozsVWQTUI8OPwVmhTD",
       })
     );
   }, []);

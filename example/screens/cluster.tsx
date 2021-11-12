@@ -19,7 +19,6 @@ export default class Clustering extends Component {
     return (
       <MapView
         ref={(ref) => (this.mapView = ref)}
-        onLoad={() => this.mapView?.moveCamera({ zoom: 10 }, 100)}
         onCameraIdle={({ nativeEvent }) => {
           this.status = nativeEvent;
           this.cluster?.update(nativeEvent);

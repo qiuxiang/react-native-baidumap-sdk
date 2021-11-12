@@ -1,6 +1,6 @@
 #import <React/RCTUIManager.h>
 
-@interface RCT_EXTERN_MODULE(AMapPolygonManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(BaiduMapPolygonManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(points, NSArray)
 RCT_EXPORT_VIEW_PROPERTY(strokeWidth, double)

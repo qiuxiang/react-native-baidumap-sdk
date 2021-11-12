@@ -1,29 +1,20 @@
-@objc(AMapHeatMapManager)
-class AMapHeatMapManager: RCTViewManager {
+@objc(BaiduMapHeatMapManager)
+class BaiduMapHeatMapManager: RCTViewManager {
   override class func requiresMainQueueSetup() -> Bool { false }
   override func view() -> UIView { HeatMap() }
 }
 
-class HeatMap: UIView, Overlay {
-  var overlay = MAHeatMapTileOverlay()
-  var renderer: MATileOverlayRenderer?
+class HeatMap: UIView {
+  var overlay = BMKHeatMap()
 
-  func getOverlay() -> MABaseOverlay { overlay }
-  func getRenderer() -> MAOverlayRenderer {
-    if renderer == nil {
-      renderer = MATileOverlayRenderer(tileOverlay: overlay)
-    }
-    return renderer!
-  }
-
-  @objc func setRadius(_ radius: Int) { overlay.radius = radius }
-  @objc func setOpacity(_ opacity: Double) { overlay.opacity = opacity }
+  @objc func setRadius(_ radius: Int32) { overlay.mRadius = radius }
+  @objc func setOpacity(_ opacity: Double) { overlay.mOpacity = opacity }
   @objc func setData(_ data: NSArray) {
-    overlay.data = data.map { it -> MAHeatMapNode in
-      let item = MAHeatMapNode()
-      item.coordinate = (it as! NSDictionary).coordinate
+    overlay.mData = NSMutableArray(array: data.map { it -> BMKHeatMapNode in
+      let item = BMKHeatMapNode()
+      item.pt = (it as! NSDictionary).coordinate
       item.intensity = 1
       return item
-    }
+    })
   }
 }

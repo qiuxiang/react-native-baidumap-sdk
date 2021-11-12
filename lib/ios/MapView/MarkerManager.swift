@@ -1,5 +1,5 @@
-@objc(AMapMarkerManager)
-class AMapMarkerManager: RCTViewManager {
+@objc(BaiduMapMarkerManager)
+class BaiduMapMarkerManager: RCTViewManager {
   override class func requiresMainQueueSetup() -> Bool { false }
 
   override func view() -> UIView {
@@ -21,14 +21,13 @@ class AMapMarkerManager: RCTViewManager {
 
 class Marker: UIView {
   var imageLoader: RCTImageLoader?
-  var view: MAAnnotationView?
-  var annotation = MAPointAnnotation()
+  var view: BMKAnnotationView?
+  var annotation = BMKPointAnnotation()
   var icon: UIImage?
   var iconView: UIView?
   var centerOffset: CGPoint?
 
   @objc var draggable = false { didSet { view?.isDraggable = draggable } }
-  @objc var zIndex = 1 { didSet { view?.zIndex = zIndex } }
 
   @objc var onPress: RCTDirectEventBlock = { _ in }
   @objc var onDragStart: RCTDirectEventBlock = { _ in }
@@ -79,14 +78,10 @@ class Marker: UIView {
     }
   }
 
-  func getView() -> MAAnnotationView {
+  func getView() -> BMKAnnotationView {
     if view == nil {
-      view = MAAnnotationView(annotation: annotation, reuseIdentifier: nil)
-      if icon == nil, iconView == nil {
-        view?.image = MAPinAnnotationView(annotation: annotation, reuseIdentifier: nil).image
-      }
+      view = BMKAnnotationView(annotation: annotation, reuseIdentifier: nil)
       view?.isDraggable = draggable
-      view?.zIndex = zIndex
       if centerOffset != nil {
         view?.centerOffset = centerOffset!
       }

@@ -1,16 +1,15 @@
-@objc(AMapPolylineManager)
-class AMapPolylineManager: RCTViewManager {
+@objc(BaiduMapPolylineManager)
+class BaiduMapPolylineManager: RCTViewManager {
   override class func requiresMainQueueSetup() -> Bool { false }
   override func view() -> UIView { Polyline() }
 }
 
 class Polyline: UIView, Overlay {
-  var overlay = MAMultiPolyline()
-  var renderer: MAMultiColoredPolylineRenderer?
+  var overlay = BMKPolyline()
+  var view: BMKPolylineView?
 
-  @objc var width = 1.0 { didSet { renderer?.lineWidth = width } }
-  @objc var color = UIColor.black { didSet { renderer?.strokeColor = color } }
-  @objc var gradient = false { didSet { renderer?.isGradient = gradient } }
+  @objc var width = 1.0 { didSet { view?.lineWidth = width } }
+  @objc var color = UIColor.black { didSet { view?.strokeColor = color } }
   @objc var dotted = false { didSet { setDotted() } }
 
   @objc func setPoints(_ points: NSArray) {
@@ -19,19 +18,18 @@ class Polyline: UIView, Overlay {
   }
 
   func setDotted() {
-    renderer?.lineDashType = dotted ? kMALineDashTypeDot : kMALineDashTypeNone
+    view?.lineDashType = dotted ? kBMKLineDashTypeDot : kBMKLineDashTypeNone
   }
 
-  func getOverlay() -> MABaseOverlay { overlay }
-  func getRenderer() -> MAOverlayRenderer {
-    if renderer == nil {
-      renderer = MAMultiColoredPolylineRenderer(multiPolyline: overlay)
-      renderer?.strokeColor = color
-      renderer?.lineWidth = width
-      renderer?.isGradient = gradient
-      renderer?.strokeColors = []
+  func getOverlay() -> BMKOverlay { overlay }
+  func getView() -> BMKOverlayView {
+    if view == nil {
+      view = BMKPolylineView(polyline: overlay)
+      view?.strokeColor = color
+      view?.lineWidth = width
+//      view?.colors = []
       setDotted()
     }
-    return renderer!
+    return view!
   }
 }

@@ -1,11 +1,10 @@
 #import <React/RCTUIManager.h>
 
-@interface RCT_EXTERN_MODULE(AMapMarkerManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(BaiduMapMarkerManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(latLng, CLLocationCoordinate2D)
 RCT_EXPORT_VIEW_PROPERTY(centerOffset, CGPoint)
 RCT_EXPORT_VIEW_PROPERTY(draggable, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(zIndex, int)
 RCT_EXPORT_VIEW_PROPERTY(icon, NSDictionary)
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)

@@ -1,6 +1,6 @@
 #import <React/RCTUIManager.h>
 
-@interface RCT_EXTERN_MODULE(AMapCircleManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(BaiduMapCircleManager, RCTViewManager)
 
 RCT_REMAP_VIEW_PROPERTY(center, circleCenter, CLLocationCoordinate2D)
 RCT_EXPORT_VIEW_PROPERTY(radius, double)

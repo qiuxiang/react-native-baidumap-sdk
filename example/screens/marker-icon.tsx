@@ -12,7 +12,7 @@ export default () => {
   }, []);
 
   return (
-    <MapView initialCameraPosition={{ zoom: 11.2 }}>
+    <MapView initialCameraPosition={{ zoom: 12 }}>
       <Marker
         position={{ latitude: 39.806901, longitude: 116.397972 }}
         onPress={() => alert("onPress")}

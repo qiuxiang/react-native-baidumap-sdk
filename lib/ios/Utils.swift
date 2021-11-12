@@ -14,23 +14,7 @@ extension CLLocationCoordinate2D {
   }
 }
 
-extension MAUserLocation {
-  var json: [String: Any] {
-    [
-      "coords": [
-        "latitude": coordinate.latitude,
-        "longitude": coordinate.longitude,
-        "altitude": location?.altitude ?? 0,
-        "heading": heading?.trueHeading,
-        "accuracy": location?.horizontalAccuracy ?? 0,
-        "speed": location?.speed ?? 0,
-      ],
-      "timestamp": NSDate().timeIntervalSince1970 * 1000,
-    ]
-  }
-}
-
-extension MACoordinateRegion {
+extension BMKCoordinateRegion {
   var json: [String: Any] {
     [
       "southwest": [
@@ -45,18 +29,18 @@ extension MACoordinateRegion {
   }
 }
 
-extension MAMapStatus {
+extension BMKMapStatus {
   var json: [String: Any] {
     [
-      "target": centerCoordinate.json,
-      "zoom": zoomLevel,
-      "bearing": rotationDegree,
-      "tilt": cameraDegree,
+      "target": targetGeoPt.json,
+      "zoom": fLevel,
+      "bearing": fRotation,
+      "tilt": fOverlooking,
     ]
   }
 }
 
-extension MAMapView {
+extension BMKMapView {
   var cameraEvent: [String: Any] {
     [
       "cameraPosition": getMapStatus().json,
@@ -65,15 +49,9 @@ extension MAMapView {
   }
 }
 
-extension Double {
-  var cgFloat: CGFloat {
-    CGFloat(self)
-  }
-}
-
 extension RCTConvert {
-  @objc static func MAMapType(_ json: Any) -> MAMapType {
-    MAMapKit.MAMapType(rawValue: json as! NSInteger)!
+  @objc static func BMKMapType(_ json: Any) -> BMKMapType {
+    BaiduMapAPI_Base.BMKMapType(rawValue: ((json as! UInt) + 1) % 3)!
   }
 }
 
@@ -94,7 +72,9 @@ extension RCTImageLoader {
       partialLoad: { _ in },
       completionBlock: { _, image in
         if image != nil {
-          callback(image!)
+          DispatchQueue.main.async {
+            callback(image!)
+          }
         }
       }
     )

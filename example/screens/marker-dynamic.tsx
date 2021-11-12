@@ -4,13 +4,17 @@ import { LatLng, MapView, Marker } from "react-native-baidumap-sdk";
 export default () => {
   const [markers, setMarkers] = React.useState(Array<LatLng>());
   React.useEffect(() => alert("点击地图添加 Marker，点击 Marker 移除"), []);
-  console.log(markers);
+  function addMarker(position: LatLng) {
+    if (
+      !markers.find((i) => position.latitude == i.latitude && position.longitude == i.longitude)
+    ) {
+      setMarkers([...markers, position]);
+    }
+  }
   return (
     <MapView
-      onPress={({ nativeEvent }) => {
-        console.log(nativeEvent);
-        setMarkers([...markers, nativeEvent]);
-      }}
+      onPress={({ nativeEvent }) => addMarker(nativeEvent)}
+      onPressPoi={({ nativeEvent }) => addMarker(nativeEvent.position)}
     >
       {markers.map((position) => (
         <Marker
