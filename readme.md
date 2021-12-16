@@ -1,3 +1,5 @@
+**项目暂停维护**
+
 # react-native-baidumap-sdk [![npm version][version-badge]][npm] [![build status][build-badge]][build]
 
 React Native BaiduMap SDK for Android + iOS.
